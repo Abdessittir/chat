@@ -4,6 +4,14 @@ import prisma from '../prisma/db';
 import crypto from 'crypto';
 
 const signin = async (req: Request, res: Response) => {
+    // crypto.pbkdf2(password, user!.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+    //     if (err) { return cb(err); }
+    //     if (!crypto.timingSafeEqual(user!.hashed_password, hashedPassword)) {
+    //       return cb(null, false, { message: 'Incorrect password.' });
+    //     }
+    //     return cb(null, user ?? undefined);
+    // });
+  
     try {
         const { email, password } = req.body;
         const user = await prisma.user.findUnique({
