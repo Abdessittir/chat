@@ -9,7 +9,7 @@
     "dev": "docker compose up",
     "stop": "docker compose down --volumes",
     "watch": "concurrently 'npm:build:r' 'npm:serve'",
-    "build:r": "./node_modules/.bin/esbuild ./frontend/*.tsx --watch=forever --bundle --outdir=./public/assests/"
+    "build:r": "node ./esbuild.mjs"
   },
   "keywords": [],
   "author": "",

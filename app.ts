@@ -1,12 +1,13 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { Server } from 'socket.io';
-import session from 'express-session';
+import session, { Session, SessionOptions } from 'express-session';
 import cookieParser from 'cookie-parser';
 
 import { createServer } from 'node:http';
 import { join } from 'node:path';
 
 import authRouter from './routes/auth';
+
 
 const app = express();
 const server = createServer(app);
@@ -17,18 +18,19 @@ io.on('connection', (socket) => {
 });
 
 
-const sess = {
+const sess: SessionOptions = {
     secret: 'keyboard cat',
     cookie: {
         secure: false,
+        sameSite: true,
     },
     saveUninitialized: true,
-    authenticated: false,
+    resave: true,
 }
   
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
+    sess.cookie!.secure = true // serve secure cookies
 }
   
 app.use(session(sess));
@@ -39,8 +41,21 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.use(authRouter);
 
-app.get('/', (req, res) => {
-    res.sendFile(join(__dirname, 'index.html'));
+app.get('/', (req: Request, res: Response) => {
+
+    if(!(req.session as any).user) {
+        return res.redirect('/signin');
+    }
+    res.sendFile(join(__dirname, './views/home.html'));
+});
+
+
+app.get('/signin', (req, res) => {
+    res.sendFile(join(__dirname, './views/signin.html'));
+});
+
+app.get('/signup', (req, res) => {
+    res.sendFile(join(__dirname, './views/signup.html'));
 });
 
 export { server, io };

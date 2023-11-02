@@ -41,8 +41,7 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
                 }
             });
 
-            req.session.user = user.id;
-            req.session.authenticated = true;
+            (req.session as any).user = user.id;
         } catch (err) {
             console.log(err);
         }
