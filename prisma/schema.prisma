@@ -19,7 +19,7 @@ model User {
   salt     Bytes
 
   messages Message[]
-  chats    Chat[]
+  chats    Chat[] @relation("UserChats")
 
   contacts Int[]
 }
@@ -42,6 +42,6 @@ model Chat {
   id       Int      @id @default(autoincrement())
   name     String
   messages Message[]
-  users    User[]
+  users    User[] @relation("UserChats")
 }
 
