@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Server } from 'socket.io';
-import session, { Session, SessionOptions } from 'express-session';
+import session, { SessionOptions } from 'express-session';
 import cookieParser from 'cookie-parser';
 
 import { createServer } from 'node:http';
@@ -51,10 +51,18 @@ app.get('/', (req: Request, res: Response) => {
 
 
 app.get('/signin', (req, res) => {
+
+    if((req.session as any).user) {
+        return res.redirect('/');
+    }
     res.sendFile(join(__dirname, './views/signin.html'));
 });
 
 app.get('/signup', (req, res) => {
+
+    if((req.session as any).user) {
+        return res.redirect('/');
+    }
     res.sendFile(join(__dirname, './views/signup.html'));
 });
 

@@ -6,7 +6,7 @@ import './app.css';
 const Greet = () => {
   return (
     <div>
-      <form>
+      <form action="/auth/signout" method="post">
         <button type="submit">sign out</button>
       </form>
     </div>

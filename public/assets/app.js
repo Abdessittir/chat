@@ -23512,7 +23512,7 @@
   var React = __toESM(require_react());
   var import_client = __toESM(require_client());
   var Greet = () => {
-    return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("form", null, /* @__PURE__ */ React.createElement("button", { type: "submit" }, "sign out")));
+    return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("form", { action: "/auth/signout", method: "post" }, /* @__PURE__ */ React.createElement("button", { type: "submit" }, "sign out")));
   };
   import_client.default.createRoot(document.getElementById("root")).render(
     /* @__PURE__ */ React.createElement(React.StrictMode, null, /* @__PURE__ */ React.createElement(Greet, null))

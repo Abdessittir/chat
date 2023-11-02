@@ -3,14 +3,7 @@ import prisma from '../prisma/db';
 
 import crypto from 'crypto';
 
-const signin = async (req: Request, res: Response) => {
-    // crypto.pbkdf2(password, user!.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-    //     if (err) { return cb(err); }
-    //     if (!crypto.timingSafeEqual(user!.hashed_password, hashedPassword)) {
-    //       return cb(null, false, { message: 'Incorrect password.' });
-    //     }
-    //     return cb(null, user ?? undefined);
-    // });
+const signin = async (req: Request, res: Response, next: NextFunction) => {
   
     try {
         const { email, password } = req.body;
@@ -19,8 +12,26 @@ const signin = async (req: Request, res: Response) => {
                 email,
             }
         });
+
+        if(!user) {
+            return res
+                    .status(404)
+                    .send({ message: `Can't find user with email ${user!.email}` });
+        }
+
+        crypto.pbkdf2(password, user!.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+            if (err) { return next(err); }
+            if (!crypto.timingSafeEqual(user!.hashed_password, hashedPassword)) {
+                return res
+                      .status(404)
+                      .send({ message: `Incorrect password` });
+            }
+
+            (req.session as any).user = user!.id;
+            res.status(200).redirect('/');
+        });
     } catch (err) {
-        console.log(err);
+        next(err);
     }
 }
 
@@ -31,7 +42,6 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
     crypto.pbkdf2(password, salt, 310000, 32, 'sha256', async (err, hashed_password) => {
         if (err) { return next(err); }
         try {
-            const hashed_password = password;
             const user = await prisma.user.create({
                 data: {
                     name,
@@ -42,10 +52,16 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
             });
 
             (req.session as any).user = user.id;
+            res.status(200).redirect('/');
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     });
 };
 
-export { signin, signup };
+const signout = (req: Request, res: Response, next: NextFunction) => {
+    req.session.destroy((err) => next(err));
+    res.redirect('/signin');
+};
+
+export { signin, signup, signout };

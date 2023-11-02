@@ -1085,7 +1085,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState(initialState) {
+          function useState2(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1887,7 +1887,7 @@
           exports.useMemo = useMemo;
           exports.useReducer = useReducer;
           exports.useRef = useRef;
-          exports.useState = useState;
+          exports.useState = useState2;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2383,9 +2383,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React2 = require_react();
+          var React4 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React4.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3990,7 +3990,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React2.Children.forEach(props.children, function(child) {
+                  React4.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12437,7 +12437,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React2.Component().refs;
+          var emptyRefsObject = new React4.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23509,13 +23509,94 @@
   });
 
   // frontend/signup.tsx
-  var React = __toESM(require_react());
+  var React3 = __toESM(require_react());
   var import_client = __toESM(require_client());
+
+  // frontend/components/Form/index.tsx
+  var import_react = __toESM(require_react());
+  var Form = ({ children, handleSubmit, url }) => {
+    return /* @__PURE__ */ import_react.default.createElement("form", { onSubmit: handleSubmit, action: url, method: "post" }, children);
+  };
+  var Form_default = Form;
+
+  // frontend/components/Input/index.tsx
+  var import_react2 = __toESM(require_react());
+  var Input = ({ label, options }) => {
+    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("label", null, label), /* @__PURE__ */ import_react2.default.createElement("input", { ...options }));
+  };
+  var Input_default = Input;
+
+  // frontend/signup.tsx
   var SignUp = () => {
-    return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", null, "SignUp"));
+    const [state, setState] = React3.useState({
+      name: "",
+      email: "",
+      password: ""
+    });
+    const handleChange = (event) => {
+      setState((prev) => ({
+        ...prev,
+        [event.target.name]: event.target.value
+      }));
+    };
+    const handleSubmit = (event) => {
+      if (!state.name || !state.email || !state.password) {
+        event.preventDefault();
+      }
+    };
+    return /* @__PURE__ */ React3.createElement("div", null, /* @__PURE__ */ React3.createElement("h1", null, "SignUp"), /* @__PURE__ */ React3.createElement(Form_default, { handleSubmit, url: "/auth/signup" }, /* @__PURE__ */ React3.createElement(
+      Input_default,
+      {
+        label: "name",
+        options: {
+          type: "text",
+          name: "name",
+          placeholder: "Your name",
+          value: state.name,
+          onChange: handleChange
+        }
+      }
+    ), /* @__PURE__ */ React3.createElement(
+      Input_default,
+      {
+        label: "email",
+        options: {
+          type: "email",
+          name: "email",
+          placeholder: "Your email",
+          value: state.email,
+          onChange: handleChange
+        }
+      }
+    ), /* @__PURE__ */ React3.createElement(
+      Input_default,
+      {
+        label: "password",
+        options: {
+          type: "password",
+          name: "password",
+          placeholder: "Your password",
+          value: state.password,
+          onChange: handleChange
+        }
+      }
+    ), /* @__PURE__ */ React3.createElement(
+      Input_default,
+      {
+        label: "",
+        options: {
+          type: "submit",
+          name: "submit",
+          placeholder: "",
+          value: "SignUp",
+          onChange: () => {
+          }
+        }
+      }
+    )), /* @__PURE__ */ React3.createElement("a", { href: "/signin" }, "SignIn"));
   };
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ React.createElement(React.StrictMode, null, /* @__PURE__ */ React.createElement(SignUp, null))
+    /* @__PURE__ */ React3.createElement(React3.StrictMode, null, /* @__PURE__ */ React3.createElement(SignUp, null))
   );
 })();
 /*! Bundled license information:
