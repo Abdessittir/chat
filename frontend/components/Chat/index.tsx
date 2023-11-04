@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-type Chat = {
+export type ChatType = {
     id: string | number,
     name: string,
 };
 
-const Chat = ({ chat }: { chat: Chat }) => {
+const Chat = ({ chat }: { chat: ChatType }) => {
     return (
         <li>
             <h3>{chat.name}</h3>
         </li>
     );
 };
-export default Chat;
+
+type ChatState = {
+    chats: ChatType[],
+    pending: boolean,
+};
+
+const Chats = () => {
+
+    const [state, setState] = useState<ChatState>({
+        chats: [],
+        pending: true,
+    });
+
+    return (
+        <ul>
+            {
+                state.chats.map(chat => (
+                    <Chat chat={chat} />
+                ))
+            }
+        </ul>
+    );
+};
+export default Chats;

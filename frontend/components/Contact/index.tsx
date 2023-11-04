@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-type Contact = {
+export type ContactType = {
     id: string | number,
     email: string,
     name: string,
 };
 
-const Contact = ({ contact }:{ contact: Contact}) => {
+const Contact = ({ contact }:{ contact: ContactType}) => {
     return (
         <li>
             <h3>{contact.name}</h3>
@@ -14,3 +14,27 @@ const Contact = ({ contact }:{ contact: Contact}) => {
         </li>
     );
 };
+
+type ContactState = {
+    contacts: ContactType[],
+    pending: boolean,
+};
+
+const Contacts = () => {
+    const [state, setState] = useState<ContactState>({
+        contacts: [],
+        pending: true,
+    });
+
+    return (
+        <ul>
+            {
+                state.contacts.map(contact => (
+                    <Contact contact={contact} />
+                ))
+            }
+        </ul>
+    );
+};
+
+export default Contacts;
