@@ -1,20 +1,19 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createPortal } from 'react-dom';
 
 import './app.css';
+import Portal from './components/Portal';
 
-const Greet = () => {
+export const App = () => {
   return (
     <div>
-      <form action="/auth/signout" method="post">
-        <button type="submit">sign out</button>
-      </form>
     </div>
   );
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <Greet />
+      <App />
     </React.StrictMode>,
 );
