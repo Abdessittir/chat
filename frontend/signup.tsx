@@ -5,12 +5,15 @@ import './app.css';
 
 import Form from './components/Form';
 import Input from './components/Input';
+import request, { Response } from './service/request';
+import Alert from './components/Alert';
 
 const SignUp = () => {
   const [state, setState] = React.useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    error: '',
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,16 +23,34 @@ const SignUp = () => {
     }))
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if(!state.name || !state.email || !state.password) {
-      event.preventDefault();
+    }
+
+    const response: Response = await request(
+      '/auth/signup',
+      {
+        method: 'post',
+        body: JSON.stringify(state),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    if(!response.success) {
+      setState(prev => ({
+        ...prev,
+        error: response.error
+      }))
     }
   };
 
   return (
     <div>
       <h1>SignUp</h1>
-      <Form handleSubmit={handleSubmit} url="/auth/signup">
+      <Form handleSubmit={handleSubmit}>
         <Input
            label="name"
            options={{
@@ -72,6 +93,13 @@ const SignUp = () => {
         />
       </Form>
       <a href="/signin">SignIn</a>
+      {state.error && (
+        <Alert
+          message={state.error}
+          type='error'
+          clear={() => setState(prev => ({ ...prev, error: '' }))}
+        />
+      )}
     </div>
   );
 };

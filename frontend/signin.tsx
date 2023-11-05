@@ -5,11 +5,14 @@ import './app.css';
 
 import Form from './components/Form';
 import Input from './components/Input';
+import request, { Response } from './service/request';
+import Alert from './components/Alert';
 
 const SignIn = () => {
   const [state, setState] = React.useState({
     email: '',
-    password: ''
+    password: '',
+    error: '',    
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,16 +22,35 @@ const SignIn = () => {
     }))
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if(!state.email || !state.password) {
-      event.preventDefault();
+      
+    }
+
+    const response: Response = await request(
+      '/auth/signin',
+      {
+        method: 'post',
+        body: JSON.stringify(state),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    if(!response.success) {
+      setState(prev => ({
+        ...prev,
+        error: response.error
+      }))
     }
   };
 
   return (
     <div>
       <h1>SignIn</h1>
-      <Form handleSubmit={handleSubmit} url="/auth/signin">
+      <Form handleSubmit={handleSubmit}>
         <Input
            label="email"
            options={{
@@ -36,7 +58,8 @@ const SignIn = () => {
             name: 'email',
             placeholder: 'Your email',
             value: state.email,
-            onChange: handleChange
+            onChange: handleChange,
+            required: true,
            }}
         />
         <Input
@@ -46,7 +69,8 @@ const SignIn = () => {
             name: 'password',
             placeholder: 'Your password',
             value: state.password,
-            onChange: handleChange
+            onChange: handleChange,
+            required: true,
            }}
         />
         <Input
@@ -56,11 +80,18 @@ const SignIn = () => {
             name: 'submit',
             placeholder: '',
             value: 'SignIn',
-            onChange: () => {}
+            onChange: () => {},
            }}
         />
       </Form>
       <a href="/signup">SignUp</a>
+      {state.error && (
+        <Alert
+          message={state.error}
+          type='error'
+          clear={() => setState(prev => ({ ...prev, error: '' }))}
+        />
+      )}
     </div>
   );
 };
