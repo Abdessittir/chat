@@ -16,7 +16,11 @@ const signin = async (req: Request, res: Response, next: NextFunction) => {
         if(!user) {
             return res
                     .status(404)
-                    .send({ message: `Can't find user with email ${user!.email}` });
+                    .send({
+                        succes: false,
+                        error: `Can't find user with email ${email}`,
+                        data: null,
+                    });
         }
 
         crypto.pbkdf2(password, user!.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
@@ -24,12 +28,16 @@ const signin = async (req: Request, res: Response, next: NextFunction) => {
             if (!crypto.timingSafeEqual(user!.hashed_password, hashedPassword)) {
                 return res
                       .status(404)
-                      .send({ message: `Incorrect password` });
+                      .send({
+                        success: false,
+                        error: `Incorrect password`,
+                        data: null
+                      });
             }
-
             (req.session as any).user = user!.id;
             res.status(200).redirect('/');
         });
+
     } catch (err) {
         next(err);
     }
