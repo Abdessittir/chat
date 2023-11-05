@@ -785,7 +785,7 @@
             }
             return children;
           }
-          function createContext(defaultValue) {
+          function createContext2(defaultValue) {
             var context = {
               $$typeof: REACT_CONTEXT_TYPE,
               // As a workaround to support multiple concurrent renderers, we categorize
@@ -1071,7 +1071,7 @@
             }
             return dispatcher;
           }
-          function useContext(Context) {
+          function useContext2(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1085,13 +1085,13 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState(initialState) {
+          function useState3(initialState2) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useState(initialState);
+            return dispatcher.useState(initialState2);
           }
-          function useReducer(reducer, initialArg, init) {
+          function useReducer2(reducer2, initialArg, init) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useReducer(reducer, initialArg, init);
+            return dispatcher.useReducer(reducer2, initialArg, init);
           }
           function useRef(initialValue) {
             var dispatcher = resolveDispatcher();
@@ -1865,7 +1865,7 @@
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext;
+          exports.createContext = createContext2;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
@@ -1876,7 +1876,7 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback;
-          exports.useContext = useContext;
+          exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect;
@@ -1885,9 +1885,9 @@
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect;
           exports.useMemo = useMemo;
-          exports.useReducer = useReducer;
+          exports.useReducer = useReducer2;
           exports.useRef = useRef;
-          exports.useState = useState;
+          exports.useState = useState3;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2383,9 +2383,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React2 = require_react();
+          var React10 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React10.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3990,7 +3990,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React2.Children.forEach(props.children, function(child) {
+                  React10.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12437,7 +12437,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React2.Component().refs;
+          var emptyRefsObject = new React10.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -14231,34 +14231,34 @@
           function basicStateReducer(state, action) {
             return typeof action === "function" ? action(state) : action;
           }
-          function mountReducer(reducer, initialArg, init) {
+          function mountReducer(reducer2, initialArg, init) {
             var hook = mountWorkInProgressHook();
-            var initialState;
+            var initialState2;
             if (init !== void 0) {
-              initialState = init(initialArg);
+              initialState2 = init(initialArg);
             } else {
-              initialState = initialArg;
+              initialState2 = initialArg;
             }
-            hook.memoizedState = hook.baseState = initialState;
+            hook.memoizedState = hook.baseState = initialState2;
             var queue = {
               pending: null,
               interleaved: null,
               lanes: NoLanes,
               dispatch: null,
-              lastRenderedReducer: reducer,
-              lastRenderedState: initialState
+              lastRenderedReducer: reducer2,
+              lastRenderedState: initialState2
             };
             hook.queue = queue;
             var dispatch = queue.dispatch = dispatchReducerAction.bind(null, currentlyRenderingFiber$1, queue);
             return [hook.memoizedState, dispatch];
           }
-          function updateReducer(reducer, initialArg, init) {
+          function updateReducer(reducer2, initialArg, init) {
             var hook = updateWorkInProgressHook();
             var queue = hook.queue;
             if (queue === null) {
               throw new Error("Should have a queue. This is likely a bug in React. Please file an issue.");
             }
-            queue.lastRenderedReducer = reducer;
+            queue.lastRenderedReducer = reducer2;
             var current2 = currentHook;
             var baseQueue = current2.baseQueue;
             var pendingQueue = queue.pending;
@@ -14320,7 +14320,7 @@
                     newState = update.eagerState;
                   } else {
                     var action = update.action;
-                    newState = reducer(newState, action);
+                    newState = reducer2(newState, action);
                   }
                 }
                 update = update.next;
@@ -14353,13 +14353,13 @@
             var dispatch = queue.dispatch;
             return [hook.memoizedState, dispatch];
           }
-          function rerenderReducer(reducer, initialArg, init) {
+          function rerenderReducer(reducer2, initialArg, init) {
             var hook = updateWorkInProgressHook();
             var queue = hook.queue;
             if (queue === null) {
               throw new Error("Should have a queue. This is likely a bug in React. Please file an issue.");
             }
-            queue.lastRenderedReducer = reducer;
+            queue.lastRenderedReducer = reducer2;
             var dispatch = queue.dispatch;
             var lastRenderPhaseUpdate = queue.pending;
             var newState = hook.memoizedState;
@@ -14369,7 +14369,7 @@
               var update = firstRenderPhaseUpdate;
               do {
                 var action = update.action;
-                newState = reducer(newState, action);
+                newState = reducer2(newState, action);
                 update = update.next;
               } while (update !== firstRenderPhaseUpdate);
               if (!objectIs(newState, hook.memoizedState)) {
@@ -14528,28 +14528,28 @@
               scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
             }
           }
-          function mountState(initialState) {
+          function mountState(initialState2) {
             var hook = mountWorkInProgressHook();
-            if (typeof initialState === "function") {
-              initialState = initialState();
+            if (typeof initialState2 === "function") {
+              initialState2 = initialState2();
             }
-            hook.memoizedState = hook.baseState = initialState;
+            hook.memoizedState = hook.baseState = initialState2;
             var queue = {
               pending: null,
               interleaved: null,
               lanes: NoLanes,
               dispatch: null,
               lastRenderedReducer: basicStateReducer,
-              lastRenderedState: initialState
+              lastRenderedState: initialState2
             };
             hook.queue = queue;
             var dispatch = queue.dispatch = dispatchSetState.bind(null, currentlyRenderingFiber$1, queue);
             return [hook.memoizedState, dispatch];
           }
-          function updateState(initialState) {
+          function updateState(initialState2) {
             return updateReducer(basicStateReducer);
           }
-          function rerenderState(initialState) {
+          function rerenderState(initialState2) {
             return rerenderReducer(basicStateReducer);
           }
           function pushEffect(tag, create, destroy, deps) {
@@ -15049,13 +15049,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init);
+                  return mountReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15065,13 +15065,13 @@
                 mountHookTypesDev();
                 return mountRef(initialValue);
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountState(initialState);
+                  return mountState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15153,13 +15153,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init);
+                  return mountReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15169,13 +15169,13 @@
                 updateHookTypesDev();
                 return mountRef(initialValue);
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountState(initialState);
+                  return mountState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15257,13 +15257,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateReducer(reducer, initialArg, init);
+                  return updateReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15273,13 +15273,13 @@
                 updateHookTypesDev();
                 return updateRef();
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateState(initialState);
+                  return updateState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15361,13 +15361,13 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnRerenderInDEV;
                 try {
-                  return rerenderReducer(reducer, initialArg, init);
+                  return rerenderReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15377,13 +15377,13 @@
                 updateHookTypesDev();
                 return updateRef();
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnRerenderInDEV;
                 try {
-                  return rerenderState(initialState);
+                  return rerenderState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15473,14 +15473,14 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init);
+                  return mountReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15491,14 +15491,14 @@
                 mountHookTypesDev();
                 return mountRef(initialValue);
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountState(initialState);
+                  return mountState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15594,14 +15594,14 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateReducer(reducer, initialArg, init);
+                  return updateReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15612,14 +15612,14 @@
                 updateHookTypesDev();
                 return updateRef();
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateState(initialState);
+                  return updateState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15715,14 +15715,14 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer2, initialArg, init) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return rerenderReducer(reducer, initialArg, init);
+                  return rerenderReducer(reducer2, initialArg, init);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15733,14 +15733,14 @@
                 updateHookTypesDev();
                 return updateRef();
               },
-              useState: function(initialState) {
+              useState: function(initialState2) {
                 currentHookNameInDev = "useState";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return rerenderState(initialState);
+                  return rerenderState(initialState2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -23509,13 +23509,214 @@
   });
 
   // frontend/app.tsx
-  var React = __toESM(require_react());
+  var React9 = __toESM(require_react());
   var import_client = __toESM(require_client());
-  var Greet = () => {
-    return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("form", { action: "/auth/signout", method: "post" }, /* @__PURE__ */ React.createElement("button", { type: "submit" }, "sign out")));
+
+  // frontend/components/Sidebar/index.tsx
+  var import_react5 = __toESM(require_react());
+
+  // frontend/components/Chat/index.tsx
+  var import_react2 = __toESM(require_react());
+
+  // frontend/context/index.tsx
+  var import_react = __toESM(require_react());
+
+  // frontend/context/actionTypes.ts
+  var CHAT_PORTAL = "";
+  var CONTACT_PORTAL = "";
+
+  // frontend/context/index.tsx
+  var initialState = {
+    contacts: [],
+    chats: [],
+    chatId: null,
+    addChat: false,
+    addContact: false,
+    user: {
+      id: 0,
+      name: "",
+      email: "",
+      photo: ""
+    }
+  };
+  var StateContext = (0, import_react.createContext)({ state: initialState });
+  function useAppState(selector) {
+    return selector((0, import_react.useContext)(StateContext).state);
+  }
+  function useDispatch() {
+    return (0, import_react.useContext)(StateContext).dispatch;
+  }
+  function reducer(state, action) {
+    switch (action.type) {
+      case CHAT_PORTAL:
+        return { ...state, addChat: true, addContact: false };
+      case CONTACT_PORTAL:
+        return { ...state, addChat: false, addContact: true };
+      default:
+        return initialState;
+    }
+  }
+  function StateProvider({ children }) {
+    const [state, dispatch] = (0, import_react.useReducer)(reducer, initialState);
+    return /* @__PURE__ */ import_react.default.createElement(StateContext.Provider, { value: { state, dispatch } }, children);
+  }
+
+  // frontend/components/Chat/index.tsx
+  var Chat = ({ chat }) => {
+    return /* @__PURE__ */ import_react2.default.createElement("li", null, /* @__PURE__ */ import_react2.default.createElement("h3", null, chat.name));
+  };
+  var Chats = () => {
+    const chats = useAppState((state) => state.chats);
+    return /* @__PURE__ */ import_react2.default.createElement("ul", null, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { chat })));
+  };
+  var Chat_default = Chats;
+
+  // frontend/components/Contact/index.tsx
+  var import_react3 = __toESM(require_react());
+  var Contact = ({ contact }) => {
+    return /* @__PURE__ */ import_react3.default.createElement("li", null, /* @__PURE__ */ import_react3.default.createElement("h3", null, contact.name), /* @__PURE__ */ import_react3.default.createElement("h4", null, contact.email));
+  };
+  var Contacts = () => {
+    const contacts = useAppState((state) => state.contacts);
+    return /* @__PURE__ */ import_react3.default.createElement("ul", null, contacts.map((contact) => /* @__PURE__ */ import_react3.default.createElement(Contact, { contact })));
+  };
+  var Contact_default = Contacts;
+
+  // frontend/components/AddButton/index.tsx
+  var import_react4 = __toESM(require_react());
+  var AddButton = ({ showPortal, text }) => {
+    return /* @__PURE__ */ import_react4.default.createElement("button", { type: "button", onClick: showPortal }, text);
+  };
+  var AddButton_default = AddButton;
+
+  // frontend/components/Sidebar/index.tsx
+  var Sidebar = () => {
+    const [state, setState] = (0, import_react5.useState)({
+      default: true,
+      pending: true
+    });
+    const dispatch = useDispatch();
+    const show = () => {
+      let action = {
+        type: CHAT_PORTAL
+      };
+      if (!state.default) {
+        action.type = CONTACT_PORTAL;
+      }
+      dispatch(action);
+    };
+    const Items = state.default ? /* @__PURE__ */ import_react5.default.createElement(Chat_default, null) : /* @__PURE__ */ import_react5.default.createElement(Contact_default, null);
+    return /* @__PURE__ */ import_react5.default.createElement("aside", null, /* @__PURE__ */ import_react5.default.createElement("h2", null, state.default ? "Chats" : "Contacts"), Items, /* @__PURE__ */ import_react5.default.createElement(
+      AddButton_default,
+      {
+        text: state.default ? "Add Chat" : "Add Contact",
+        showPortal: show
+      }
+    ));
+  };
+  var Sidebar_default = Sidebar;
+
+  // frontend/components/Portal/index.tsx
+  var import_react8 = __toESM(require_react());
+
+  // frontend/components/Form/index.tsx
+  var import_react6 = __toESM(require_react());
+  var Form = ({ children, handleSubmit }) => {
+    return /* @__PURE__ */ import_react6.default.createElement("form", { onSubmit: handleSubmit }, children);
+  };
+  var Form_default = Form;
+
+  // frontend/components/Input/index.tsx
+  var import_react7 = __toESM(require_react());
+  var Input = ({ label, options }) => {
+    return /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement("label", null, label), /* @__PURE__ */ import_react7.default.createElement("input", { ...options }));
+  };
+  var Input_default = Input;
+
+  // frontend/components/Portal/index.tsx
+  var AddContact = () => {
+    const [state, setState] = (0, import_react8.useState)({
+      email: ""
+    });
+    const handleSubmit = (event) => {
+    };
+    const handleChange = (event) => {
+    };
+    return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react8.default.createElement(
+      Input_default,
+      {
+        label: "Email",
+        options: {
+          type: "email",
+          name: "email",
+          value: state.email,
+          onChange: handleChange,
+          placeholder: "Contact email"
+        }
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      Input_default,
+      {
+        label: "",
+        options: {
+          type: "submit",
+          name: "submit",
+          placeholder: "",
+          value: "Add Contact",
+          onChange: () => {
+          }
+        }
+      }
+    )));
+  };
+  var AddChat = () => {
+    const [state, setState] = (0, import_react8.useState)({
+      name: ""
+    });
+    const handleSubmit = (event) => {
+    };
+    const handleChange = (event) => {
+    };
+    return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react8.default.createElement(
+      Input_default,
+      {
+        label: "Chat",
+        options: {
+          type: "text",
+          name: "name",
+          value: state.name,
+          onChange: handleChange,
+          placeholder: "Chat Name"
+        }
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      Input_default,
+      {
+        label: "",
+        options: {
+          type: "submit",
+          name: "submit",
+          placeholder: "",
+          value: "Add Chat",
+          onChange: () => {
+          }
+        }
+      }
+    )));
+  };
+  var Portal = () => {
+    const addChat = useAppState((state) => state.addChat);
+    const addContact = useAppState((state) => state.addContact);
+    return /* @__PURE__ */ import_react8.default.createElement("div", null, addContact && /* @__PURE__ */ import_react8.default.createElement(AddContact, null), addChat && /* @__PURE__ */ import_react8.default.createElement(AddChat, null));
+  };
+  var Portal_default = Portal;
+
+  // frontend/app.tsx
+  var App = () => {
+    return /* @__PURE__ */ React9.createElement("div", null, /* @__PURE__ */ React9.createElement(Sidebar_default, null), /* @__PURE__ */ React9.createElement(Portal_default, null));
   };
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ React.createElement(React.StrictMode, null, /* @__PURE__ */ React.createElement(Greet, null))
+    /* @__PURE__ */ React9.createElement(React9.StrictMode, null, /* @__PURE__ */ React9.createElement(StateProvider, null, /* @__PURE__ */ React9.createElement(App, null)))
   );
 })();
 /*! Bundled license information:

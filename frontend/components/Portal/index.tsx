@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import Form from '../Form';
 import Input from '../Input';
-
-type FormComponent = React.ReactElement<any, React.JSXElementConstructor<typeof Form>>;
-
-const Portal = ({ children } : { children: FormComponent }) => {
-    return (
-        <div>
-            {children}
-        </div>
-    );
-};
+import { useAppState } from '../../context';
 
 const AddContact = () => {
     const [state, setState] = useState({
@@ -21,8 +12,8 @@ const AddContact = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
     return (
-        <Portal>
-            <Form handleSubmit={handleSubmit} url=''>
+        <div>
+            <Form handleSubmit={handleSubmit}>
                 <Input
                    label='Email'
                    options={{
@@ -44,7 +35,7 @@ const AddContact = () => {
                     }}
                 />
             </Form>
-        </Portal>
+        </div>
     );
 };
 
@@ -57,8 +48,8 @@ const AddChat = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
     return (
-        <Portal>
-            <Form handleSubmit={handleSubmit} url=''>
+        <div>
+            <Form handleSubmit={handleSubmit}>
                 <Input
                    label='Chat'
                    options={{
@@ -75,13 +66,25 @@ const AddChat = () => {
                         type: 'submit',
                         name: 'submit',
                         placeholder: '',
-                        value: 'Add Contact',
+                        value: 'Add Chat',
                         onChange: () => { }
                     }}
                 />
             </Form>
-        </Portal>
+        </div>
     );
 };
 
-export default { AddContact, AddChat };
+
+const Portal = () => {
+    const addChat = useAppState(state => state.addChat);
+    const addContact = useAppState(state => state.addContact);
+    return (
+        <div>
+            {addContact && <AddContact />}
+            {addChat && <AddChat />}
+        </div>
+    );
+};
+
+export default Portal;

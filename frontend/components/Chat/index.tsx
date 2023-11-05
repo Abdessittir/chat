@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
-
-export type ChatType = {
-    id: string | number,
-    name: string,
-};
+import React from 'react';
+import { ChatType, useAppState } from '../../context';
 
 const Chat = ({ chat }: { chat: ChatType }) => {
     return (
@@ -13,22 +9,14 @@ const Chat = ({ chat }: { chat: ChatType }) => {
     );
 };
 
-type ChatState = {
-    chats: ChatType[],
-    pending: boolean,
-};
-
 const Chats = () => {
 
-    const [state, setState] = useState<ChatState>({
-        chats: [],
-        pending: true,
-    });
+    const chats = useAppState(state => state.chats);
 
     return (
         <ul>
             {
-                state.chats.map(chat => (
+                chats.map((chat: ChatType) => (
                     <Chat chat={chat} />
                 ))
             }

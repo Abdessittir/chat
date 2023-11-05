@@ -2383,9 +2383,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React4 = require_react();
+          var React5 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React4.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React5.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3990,7 +3990,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React4.Children.forEach(props.children, function(child) {
+                  React5.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12437,7 +12437,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React4.Component().refs;
+          var emptyRefsObject = new React5.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23509,13 +23509,13 @@
   });
 
   // frontend/signin.tsx
-  var React3 = __toESM(require_react());
+  var React4 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // frontend/components/Form/index.tsx
   var import_react = __toESM(require_react());
-  var Form = ({ children, handleSubmit, url }) => {
-    return /* @__PURE__ */ import_react.default.createElement("form", { onSubmit: handleSubmit, action: url, method: "post" }, children);
+  var Form = ({ children, handleSubmit }) => {
+    return /* @__PURE__ */ import_react.default.createElement("form", { onSubmit: handleSubmit }, children);
   };
   var Form_default = Form;
 
@@ -23526,11 +23526,35 @@
   };
   var Input_default = Input;
 
+  // frontend/service/request.ts
+  async function request(url, options) {
+    try {
+      const res = await fetch(url, options);
+      const data = res.json();
+      return data;
+    } catch (err) {
+      return {
+        success: false,
+        error: err.message,
+        data: null
+      };
+    }
+  }
+  var request_default = request;
+
+  // frontend/components/Alert/index.tsx
+  var import_react3 = __toESM(require_react());
+  var Alert = ({ message, type, clear }) => {
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react3.default.createElement("button", { type: "button", onClick: clear }, "clear"));
+  };
+  var Alert_default = Alert;
+
   // frontend/signin.tsx
   var SignIn = () => {
-    const [state, setState] = React3.useState({
+    const [state, setState] = React4.useState({
       email: "",
-      password: ""
+      password: "",
+      error: ""
     });
     const handleChange = (event) => {
       setState((prev) => ({
@@ -23538,12 +23562,28 @@
         [event.target.name]: event.target.value
       }));
     };
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
       if (!state.email || !state.password) {
-        event.preventDefault();
+      }
+      const response = await request_default(
+        "/auth/signin",
+        {
+          method: "post",
+          body: JSON.stringify(state),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      if (!response.success) {
+        setState((prev) => ({
+          ...prev,
+          error: response.error
+        }));
       }
     };
-    return /* @__PURE__ */ React3.createElement("div", null, /* @__PURE__ */ React3.createElement("h1", null, "SignIn"), /* @__PURE__ */ React3.createElement(Form_default, { handleSubmit, url: "/auth/signin" }, /* @__PURE__ */ React3.createElement(
+    return /* @__PURE__ */ React4.createElement("div", null, /* @__PURE__ */ React4.createElement("h1", null, "SignIn"), /* @__PURE__ */ React4.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React4.createElement(
       Input_default,
       {
         label: "email",
@@ -23552,10 +23592,11 @@
           name: "email",
           placeholder: "Your email",
           value: state.email,
-          onChange: handleChange
+          onChange: handleChange,
+          required: true
         }
       }
-    ), /* @__PURE__ */ React3.createElement(
+    ), /* @__PURE__ */ React4.createElement(
       Input_default,
       {
         label: "password",
@@ -23564,10 +23605,11 @@
           name: "password",
           placeholder: "Your password",
           value: state.password,
-          onChange: handleChange
+          onChange: handleChange,
+          required: true
         }
       }
-    ), /* @__PURE__ */ React3.createElement(
+    ), /* @__PURE__ */ React4.createElement(
       Input_default,
       {
         label: "",
@@ -23580,10 +23622,17 @@
           }
         }
       }
-    )), /* @__PURE__ */ React3.createElement("a", { href: "/signup" }, "SignUp"));
+    )), /* @__PURE__ */ React4.createElement("a", { href: "/signup" }, "SignUp"), state.error && /* @__PURE__ */ React4.createElement(
+      Alert_default,
+      {
+        message: state.error,
+        type: "error",
+        clear: () => setState((prev) => ({ ...prev, error: "" }))
+      }
+    ));
   };
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ React3.createElement(React3.StrictMode, null, /* @__PURE__ */ React3.createElement(SignIn, null))
+    /* @__PURE__ */ React4.createElement(React4.StrictMode, null, /* @__PURE__ */ React4.createElement(SignIn, null))
   );
 })();
 /*! Bundled license information:

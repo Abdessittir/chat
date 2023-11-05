@@ -5,11 +5,11 @@ import Input from '../Input';
 type Inputs = React.ReactElement<any, React.JSXElementConstructor<typeof Input>>[];
 
 const Form = (
-    { children, handleSubmit, url }
-    : { children: Inputs, handleSubmit: (event: React.FormEvent) => void, url: string }
+    { children, handleSubmit }
+    : { children: Inputs, handleSubmit: (event: React.FormEvent) => void}
 ) => {
     return (
-        <form onSubmit={handleSubmit} action={url} method="post" >
+        <form onSubmit={handleSubmit}>
             {children}
         </form>
     );

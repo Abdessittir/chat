@@ -5,7 +5,8 @@ type Options = {
     name: string,
     placeholder: string,
     value: string,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    required?: boolean,
 };
 
 const Input = ({ label, options }:{ label: string, options: Options }) => {

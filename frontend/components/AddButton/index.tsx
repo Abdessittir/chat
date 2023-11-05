@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AddButton = () => {
+const AddButton = ({ showPortal, text }) => {
     return (
-        <button></button>
+        <button type="button" onClick={showPortal}>{text}</button>
     )
 }
 

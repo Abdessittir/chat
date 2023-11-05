@@ -1,10 +1,5 @@
-import React, { useState } from 'react';
-
-export type ContactType = {
-    id: string | number,
-    email: string,
-    name: string,
-};
+import React from 'react';
+import { ContactType, useAppState } from '../../context';
 
 const Contact = ({ contact }:{ contact: ContactType}) => {
     return (
@@ -15,21 +10,12 @@ const Contact = ({ contact }:{ contact: ContactType}) => {
     );
 };
 
-type ContactState = {
-    contacts: ContactType[],
-    pending: boolean,
-};
-
 const Contacts = () => {
-    const [state, setState] = useState<ContactState>({
-        contacts: [],
-        pending: true,
-    });
-
+    const contacts = useAppState(state => state.contacts);
     return (
         <ul>
             {
-                state.contacts.map(contact => (
+                contacts.map((contact: ContactType) => (
                     <Contact contact={contact} />
                 ))
             }

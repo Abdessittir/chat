@@ -66,4 +66,11 @@ app.get('/signup', (req, res) => {
     res.sendFile(join(__dirname, './views/signup.html'));
 });
 
+import prisma from './prisma/db';
+async function main() {
+    const users = await prisma.user.findMany();
+    console.log(users);
+}
+
+main();
 export { server, io };
