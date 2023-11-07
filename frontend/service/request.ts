@@ -2,7 +2,7 @@
 type Options = {
     method: string,
     body?: string
-    headers: any,
+    headers?: any,
 };
 
 

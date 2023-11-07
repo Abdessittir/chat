@@ -35,7 +35,11 @@ const signin = async (req: Request, res: Response, next: NextFunction) => {
                       });
             }
             (req.session as any).user = user!.id;
-            res.status(200).redirect('/');
+            res.status(200).send({
+                success: true,
+                error: null,
+                data: null
+            });
         });
 
     } catch (err) {
@@ -60,7 +64,11 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
             });
 
             (req.session as any).user = user.id;
-            res.status(200).redirect('/');
+            res.status(201).send({
+                success: true,
+                error: null,
+                data: null
+            });
         } catch (err) {
             next(err);
         }
@@ -69,7 +77,11 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
 
 const signout = (req: Request, res: Response, next: NextFunction) => {
     req.session.destroy((err) => next(err));
-    res.redirect('/signin');
+    res.status(200).send({
+        success: true,
+        error: null,
+        data: null
+    });
 };
 
 export { signin, signup, signout };

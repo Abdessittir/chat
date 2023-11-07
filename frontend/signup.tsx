@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom/client';
+import { useNavigate } from 'react-router-dom';
 
 import './app.css';
 
@@ -15,6 +15,7 @@ const SignUp = () => {
     password: '',
     error: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState(prev => ({
@@ -39,7 +40,9 @@ const SignUp = () => {
       }
     );
 
-    if(!response.success) {
+    if(response.success) {
+      navigate('/');
+    } else {
       setState(prev => ({
         ...prev,
         error: response.error
@@ -104,8 +107,4 @@ const SignUp = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-      <SignUp />
-    </React.StrictMode>,
-);
+export default SignUp;

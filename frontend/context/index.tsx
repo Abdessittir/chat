@@ -1,10 +1,13 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
 import { App } from '../app';
 import {
     CHAT_PORTAL,
-    CONTACT_PORTAL
+    CONTACT_PORTAL,
+    SET_USER,
 } from './actionTypes';
+import request from '../service/request';
+import { useNavigate } from 'react-router-dom';
 
 
 export type UserType = {
@@ -44,9 +47,10 @@ type StateType = {
     contacts: ContactType[],
     chats: ChatType[],
     chatId: number | null,
-    user: UserType,
+    user: UserType | null,
     addChat: boolean,
     addContact: boolean,
+    userPending: boolean
 };
 
 type Action = {
@@ -62,12 +66,8 @@ const initialState: StateType = {
     chatId: null,
     addChat: false,
     addContact: false,
-    user: {
-        id: 0,
-        name: '',
-        email: '',
-        photo: '',
-    }
+    user: null,
+    userPending: true
 };
 
 type AppState = {
@@ -89,6 +89,8 @@ export function useDispatch() {
 
 function reducer(state: StateType, action: Action): StateType {
     switch(action.type) {
+        case SET_USER:
+            return { ...state, userPending: false, user: action.payload };
         case CHAT_PORTAL:
             return { ...state, addChat: true, addContact: false };
         case CONTACT_PORTAL:
@@ -101,6 +103,24 @@ function reducer(state: StateType, action: Action): StateType {
 type App = React.ReactElement<any, React.JSXElementConstructor<typeof App>>;
 export default function StateProvider({ children }: { children: App }) {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const navigate = useNavigate();
+
+    async function fetchUser() {
+        const response = await request(
+            '/user/profile',
+            {
+                method: 'get',
+            },
+        );
+        if(response.success) {
+            dispatch({ type: SET_USER, payload: response.data.user });
+        } else {
+            navigate('/signin');
+        }
+    }
+    useEffect(() => {
+        fetchUser();
+    }, []);
     return (
         <StateContext.Provider value={{ state, dispatch }}>
             {children}
