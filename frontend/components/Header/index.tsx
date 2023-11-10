@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppState } from '../../context';
 import UserInfo from '../UserInfo';
 
+import './styles.css';
+
 const Header = () => {
     const user = useAppState(state => state.user);
-    const url = user?.photo ?? '';
+    const [showInfo, setShowInfo] = useState(false);
+    const url = user?.photo ?? '../assets/person.png';
     return (
-        <header>
+        <header className="header">
             <h1>Chat App</h1>
-            <div>
+            <div
+              onClick={() => setShowInfo(prev => !prev)}
+              className="avatar"
+            >
                 <img
                    src={url}
                    alt={user?.name}
                 />
             </div>
-            <UserInfo user={user} />
+            {showInfo && <UserInfo user={user} />}
         </header>
     );
 };

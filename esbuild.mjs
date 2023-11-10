@@ -1,4 +1,4 @@
-import * as esbuild from 'esbuild'
+import * as esbuild from 'esbuild';
 
 let ctx = await esbuild.context({
   entryPoints: ['./frontend/app.tsx'],

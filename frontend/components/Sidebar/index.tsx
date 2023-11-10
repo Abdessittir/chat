@@ -10,30 +10,30 @@ import {
 
 
 const Sidebar = () => {
-    const [state, setState] = useState({
-        default: true,
-        pending: true
-    });
+    const [defaultView, setDefaultView] = useState(true);
 
     const dispatch = useDispatch();
     const show = () => {
         let action = {
             type: CHAT_PORTAL,
         };
-        if(!state.default) {
+        if(!defaultView) {
             action.type = CONTACT_PORTAL;      
         }
         dispatch(action);
     };
 
-    const Items = state.default ? <Chats /> : <Contacts />
+    const Items = defaultView ? <Chats /> : <Contacts />
 
     return (
         <aside>
-            <h2>{state.default ? 'Chats' : 'Contacts'}</h2>
+            <div>
+                <h2 onClick={() => setDefaultView(true)}>Chats</h2>
+                <h2 onClick={() => setDefaultView(false)}>Contacts</h2>
+            </div>
             {Items}
             <AddButton
-              text={state.default ? 'Add Chat' : 'Add Contact'}
+              text={defaultView ? 'Add Chat' : 'Add Contact'}
               showPortal={show}
             />
         </aside>
