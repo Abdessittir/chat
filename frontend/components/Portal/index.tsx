@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import Form from '../Form';
 import Input from '../Input';
-import { useAppState } from '../../context';
+import { useAppState, useDispatch } from '../../context';
+import './index.css';
+import { CLOSE_PORTAL } from '../../context/actionTypes';
 
 const AddContact = () => {
     const [state, setState] = useState({
         email: '',
     });
+    const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent) => {};
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
     return (
-        <div>
+        <div className="form_container">
+            <button
+              className="close_portal"
+              onClick={() => dispatch({ type: CLOSE_PORTAL })}
+            >close</button>
+            <h2>Add Contact</h2>
             <Form handleSubmit={handleSubmit}>
                 <Input
                    label='Email'
@@ -43,12 +51,18 @@ const AddChat = () => {
     const [state, setState] = useState({
         name: '',
     });
+    const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent) => {};
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
     return (
-        <div>
+        <div className="form_container">
+            <button
+              className="close_portal"
+              onClick={() => dispatch({ type: CLOSE_PORTAL })}
+            >close</button>
+            <h2>Add Chat</h2>
             <Form handleSubmit={handleSubmit}>
                 <Input
                    label='Chat'
@@ -79,8 +93,10 @@ const AddChat = () => {
 const Portal = () => {
     const addChat = useAppState(state => state.addChat);
     const addContact = useAppState(state => state.addContact);
+
+    if(!addChat && !addContact) return null;
     return (
-        <div>
+        <div className="portal">
             {addContact && <AddContact />}
             {addChat && <AddChat />}
         </div>

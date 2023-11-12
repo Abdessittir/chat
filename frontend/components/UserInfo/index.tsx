@@ -18,7 +18,7 @@ const UserInfo = ({ user }: { user: { name: string, email: string } }) => {
         <div className="user_info">
             <p>{user?.name}</p>
             <p>{user?.email}</p>
-            <button type="button" onClick={handleClick}>
+            <button className="logout_btn" type="button" onClick={handleClick}>
                 Logout
             </button>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChatType, useAppState } from '../../context';
+import './index.css';
 
 const Chat = ({ chat }: { chat: ChatType }) => {
     return (
@@ -14,7 +15,7 @@ const Chats = () => {
     const chats = useAppState(state => state.chats);
 
     return (
-        <ul>
+        <ul className="list">
             {
                 chats.map((chat: ChatType) => (
                     <Chat chat={chat} />

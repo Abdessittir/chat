@@ -1,14 +1,148 @@
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap";
+
 /* frontend/app.css */
 * {
-  color: blue;
+  margin: 0;
+  background-color: rgb(14, 58, 14);
+  color: white;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+.app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* frontend/components/Chat/index.css */
+.list {
+  flex: 1;
+}
+
+/* frontend/components/Sidebar/index.css */
+.sidebar {
+  height: calc(100vh - 60px);
+  width: 100vw;
+  border-right: 1px solid lightgray;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar_titles {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.sidebar_titles h2 {
+  cursor: pointer;
+  padding: 15px;
+  opacity: 0.7;
+}
+.sidebar_titles .selected {
+  opacity: 1;
+}
+.chats_title {
+  border-right: 1px solid lightgray;
+}
+.contacts_title {
+  border-left: 1px solid lightgray;
+}
+.add_btn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* frontend/components/Form/index.css */
+
+/* frontend/components/Input/index.css */
+.input_container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 100%;
+}
+.input_container input {
+  width: 90%;
+  margin-left: 5px;
+  padding: 10px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* frontend/components/Portal/index.css */
+.portal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form_container {
+  width: 90%;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 10px;
+  position: relative;
+}
+.close_portal {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+}
+.close_portal:hover {
+  opacity: 0.7;
 }
 
 /* frontend/components/UserInfo/styles.css */
+.user_info {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: lightgray;
+  color: rgb(14, 58, 14);
+  border-radius: 5px;
+  padding: 15px;
+  z-index: 10;
+}
+.user_info * {
+  background-color: lightgray;
+  color: rgb(14, 58, 14);
+  padding: 10px;
+  transition: 0.2s;
+  border-radius: 5px;
+}
+.user_info *:hover {
+  background-color: rgba(14, 58, 14, 0.5);
+  color: white;
+}
+.user_info .logout_btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+}
 
 /* frontend/components/Header/styles.css */
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+  height: 60px;
 }
 .avatar {
   cursor: pointer;
+  position: relative;
 }

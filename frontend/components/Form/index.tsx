@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Input from '../Input';
+import './index.css';
 
 type Inputs = React.ReactElement<any, React.JSXElementConstructor<typeof Input>>[];
 
@@ -9,7 +10,7 @@ const Form = (
     : { children: Inputs, handleSubmit: (event: React.FormEvent) => void}
 ) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
             {children}
         </form>
     );

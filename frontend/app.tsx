@@ -21,7 +21,7 @@ export const App = () => {
   if(userPending) return <h1>pending...</h1>;
 
   return (
-    <div>
+    <div className="app">
       <Header />
       <Sidebar />
       <Portal />

@@ -19,8 +19,8 @@ const Header = () => {
                    src={url}
                    alt={user?.name}
                 />
+                {showInfo && <UserInfo user={user} />}
             </div>
-            {showInfo && <UserInfo user={user} />}
         </header>
     );
 };

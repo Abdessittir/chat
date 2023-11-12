@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContactType, useAppState } from '../../context';
+import '../Chat/index.css';
 
 const Contact = ({ contact }:{ contact: ContactType}) => {
     return (
@@ -13,7 +14,7 @@ const Contact = ({ contact }:{ contact: ContactType}) => {
 const Contacts = () => {
     const contacts = useAppState(state => state.contacts);
     return (
-        <ul>
+        <ul className="list">
             {
                 contacts.map((contact: ContactType) => (
                     <Contact contact={contact} />

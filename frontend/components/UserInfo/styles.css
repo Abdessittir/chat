@@ -1,0 +1,31 @@
+.user_info {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: lightgray;
+    color: rgb(14, 58, 14);
+    border-radius: 5px;
+    padding: 15px;
+    z-index: 10;
+}
+
+.user_info * {
+    background-color: lightgray;
+    color: rgb(14, 58, 14);
+    padding: 10px;
+    transition: 0.2s;
+    border-radius: 5px;
+}
+
+.user_info *:hover {
+    background-color: rgba(14, 58, 14, 0.5);
+    color: white;
+}
+
+.user_info .logout_btn {
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}

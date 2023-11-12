@@ -2383,9 +2383,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React17 = require_react();
+          var React16 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React17.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3990,7 +3990,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React17.Children.forEach(props.children, function(child) {
+                  React16.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12437,7 +12437,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React17.Component().refs;
+          var emptyRefsObject = new React16.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23509,7 +23509,7 @@
   });
 
   // frontend/app.tsx
-  var import_react12 = __toESM(require_react());
+  var import_react11 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/react-router-dom/dist/index.js
@@ -27695,7 +27695,7 @@
   }
 
   // frontend/components/Sidebar/index.tsx
-  var import_react5 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
 
   // frontend/components/Chat/index.tsx
   var import_react2 = __toESM(require_react());
@@ -27707,6 +27707,7 @@
   var CHAT_PORTAL = "chat-portal";
   var CONTACT_PORTAL = "contact-portal";
   var SET_USER = "load-user";
+  var CLOSE_PORTAL = "close-portal";
 
   // frontend/service/request.ts
   async function request(url, options) {
@@ -27749,6 +27750,8 @@
         return { ...state, addChat: true, addContact: false };
       case CONTACT_PORTAL:
         return { ...state, addChat: false, addContact: true };
+      case CLOSE_PORTAL:
+        return { ...state, addChat: false, addContact: false };
       default:
         return initialState;
     }
@@ -27781,7 +27784,7 @@
   };
   var Chats = () => {
     const chats = useAppState((state) => state.chats);
-    return /* @__PURE__ */ import_react2.default.createElement("ul", null, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { chat })));
+    return /* @__PURE__ */ import_react2.default.createElement("ul", { className: "list" }, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { chat })));
   };
   var Chat_default = Chats;
 
@@ -27792,20 +27795,13 @@
   };
   var Contacts = () => {
     const contacts = useAppState((state) => state.contacts);
-    return /* @__PURE__ */ import_react3.default.createElement("ul", null, contacts.map((contact) => /* @__PURE__ */ import_react3.default.createElement(Contact, { contact })));
+    return /* @__PURE__ */ import_react3.default.createElement("ul", { className: "list" }, contacts.map((contact) => /* @__PURE__ */ import_react3.default.createElement(Contact, { contact })));
   };
   var Contact_default = Contacts;
 
-  // frontend/components/AddButton/index.tsx
-  var import_react4 = __toESM(require_react());
-  var AddButton = ({ showPortal, text }) => {
-    return /* @__PURE__ */ import_react4.default.createElement("button", { type: "button", onClick: showPortal }, text);
-  };
-  var AddButton_default = AddButton;
-
   // frontend/components/Sidebar/index.tsx
   var Sidebar = () => {
-    const [defaultView, setDefaultView] = (0, import_react5.useState)(true);
+    const [defaultView, setDefaultView] = (0, import_react4.useState)(true);
     const dispatch = useDispatch();
     const show = () => {
       let action = {
@@ -27816,44 +27812,60 @@
       }
       dispatch(action);
     };
-    const Items = defaultView ? /* @__PURE__ */ import_react5.default.createElement(Chat_default, null) : /* @__PURE__ */ import_react5.default.createElement(Contact_default, null);
-    return /* @__PURE__ */ import_react5.default.createElement("aside", null, /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement("h2", { onClick: () => setDefaultView(true) }, "Chats"), /* @__PURE__ */ import_react5.default.createElement("h2", { onClick: () => setDefaultView(false) }, "Contacts")), Items, /* @__PURE__ */ import_react5.default.createElement(
-      AddButton_default,
+    const Items = defaultView ? /* @__PURE__ */ import_react4.default.createElement(Chat_default, null) : /* @__PURE__ */ import_react4.default.createElement(Contact_default, null);
+    return /* @__PURE__ */ import_react4.default.createElement("aside", { className: "sidebar" }, /* @__PURE__ */ import_react4.default.createElement("div", { className: "sidebar_titles" }, /* @__PURE__ */ import_react4.default.createElement(
+      "h2",
       {
-        text: defaultView ? "Add Chat" : "Add Contact",
-        showPortal: show
-      }
-    ));
+        onClick: () => setDefaultView(true),
+        className: `chats_title ${defaultView ? "selected" : ""}`
+      },
+      "Chats"
+    ), /* @__PURE__ */ import_react4.default.createElement(
+      "h2",
+      {
+        onClick: () => setDefaultView(false),
+        className: `contacts_title ${!defaultView ? "selected" : ""}`
+      },
+      "Contacts"
+    )), Items, /* @__PURE__ */ import_react4.default.createElement("button", { className: "add_btn", type: "button", onClick: show }, defaultView ? "Add Chat" : "Add Contact"));
   };
   var Sidebar_default = Sidebar;
 
   // frontend/components/Portal/index.tsx
-  var import_react8 = __toESM(require_react());
+  var import_react7 = __toESM(require_react());
 
   // frontend/components/Form/index.tsx
-  var import_react6 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
   var Form2 = ({ children, handleSubmit }) => {
-    return /* @__PURE__ */ import_react6.default.createElement("form", { onSubmit: handleSubmit }, children);
+    return /* @__PURE__ */ import_react5.default.createElement("form", { className: "form", onSubmit: handleSubmit }, children);
   };
   var Form_default = Form2;
 
   // frontend/components/Input/index.tsx
-  var import_react7 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
   var Input = ({ label, options }) => {
-    return /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement("label", null, label), /* @__PURE__ */ import_react7.default.createElement("input", { ...options }));
+    return /* @__PURE__ */ import_react6.default.createElement("div", { className: "input_container" }, /* @__PURE__ */ import_react6.default.createElement("label", null, label), /* @__PURE__ */ import_react6.default.createElement("input", { ...options }));
   };
   var Input_default = Input;
 
   // frontend/components/Portal/index.tsx
   var AddContact = () => {
-    const [state, setState] = (0, import_react8.useState)({
+    const [state, setState] = (0, import_react7.useState)({
       email: ""
     });
+    const dispatch = useDispatch();
     const handleSubmit = (event) => {
     };
     const handleChange = (event) => {
     };
-    return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "close_portal",
+        onClick: () => dispatch({ type: CLOSE_PORTAL })
+      },
+      "close"
+    ), /* @__PURE__ */ import_react7.default.createElement("h2", null, "Add Contact"), /* @__PURE__ */ import_react7.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react7.default.createElement(
       Input_default,
       {
         label: "Email",
@@ -27865,7 +27877,7 @@
           placeholder: "Contact email"
         }
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), /* @__PURE__ */ import_react7.default.createElement(
       Input_default,
       {
         label: "",
@@ -27881,14 +27893,22 @@
     )));
   };
   var AddChat = () => {
-    const [state, setState] = (0, import_react8.useState)({
+    const [state, setState] = (0, import_react7.useState)({
       name: ""
     });
+    const dispatch = useDispatch();
     const handleSubmit = (event) => {
     };
     const handleChange = (event) => {
     };
-    return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "close_portal",
+        onClick: () => dispatch({ type: CLOSE_PORTAL })
+      },
+      "close"
+    ), /* @__PURE__ */ import_react7.default.createElement("h2", null, "Add Chat"), /* @__PURE__ */ import_react7.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react7.default.createElement(
       Input_default,
       {
         label: "Chat",
@@ -27900,7 +27920,7 @@
           placeholder: "Chat Name"
         }
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), /* @__PURE__ */ import_react7.default.createElement(
       Input_default,
       {
         label: "",
@@ -27918,23 +27938,25 @@
   var Portal = () => {
     const addChat = useAppState((state) => state.addChat);
     const addContact = useAppState((state) => state.addContact);
-    return /* @__PURE__ */ import_react8.default.createElement("div", null, addContact && /* @__PURE__ */ import_react8.default.createElement(AddContact, null), addChat && /* @__PURE__ */ import_react8.default.createElement(AddChat, null));
+    if (!addChat && !addContact)
+      return null;
+    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "portal" }, addContact && /* @__PURE__ */ import_react7.default.createElement(AddContact, null), addChat && /* @__PURE__ */ import_react7.default.createElement(AddChat, null));
   };
   var Portal_default = Portal;
 
   // frontend/signin.tsx
-  var React12 = __toESM(require_react());
+  var React11 = __toESM(require_react());
 
   // frontend/components/Alert/index.tsx
-  var import_react9 = __toESM(require_react());
+  var import_react8 = __toESM(require_react());
   var Alert = ({ message, type, clear }) => {
-    return /* @__PURE__ */ import_react9.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react9.default.createElement("button", { type: "button", onClick: clear }, "clear"));
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react8.default.createElement("button", { type: "button", onClick: clear }, "clear"));
   };
   var Alert_default = Alert;
 
   // frontend/signin.tsx
   var SignIn = () => {
-    const [state, setState] = React12.useState({
+    const [state, setState] = React11.useState({
       email: "",
       password: "",
       error: ""
@@ -27969,7 +27991,7 @@
         }));
       }
     };
-    return /* @__PURE__ */ React12.createElement("div", null, /* @__PURE__ */ React12.createElement("h1", null, "SignIn"), /* @__PURE__ */ React12.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React12.createElement(
+    return /* @__PURE__ */ React11.createElement("div", null, /* @__PURE__ */ React11.createElement("h1", null, "SignIn"), /* @__PURE__ */ React11.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React11.createElement(
       Input_default,
       {
         label: "email",
@@ -27982,7 +28004,7 @@
           required: true
         }
       }
-    ), /* @__PURE__ */ React12.createElement(
+    ), /* @__PURE__ */ React11.createElement(
       Input_default,
       {
         label: "password",
@@ -27995,7 +28017,7 @@
           required: true
         }
       }
-    ), /* @__PURE__ */ React12.createElement(
+    ), /* @__PURE__ */ React11.createElement(
       Input_default,
       {
         label: "",
@@ -28008,7 +28030,7 @@
           }
         }
       }
-    )), /* @__PURE__ */ React12.createElement("a", { href: "/signup" }, "SignUp"), state.error && /* @__PURE__ */ React12.createElement(
+    )), /* @__PURE__ */ React11.createElement("a", { href: "/signup" }, "SignUp"), state.error && /* @__PURE__ */ React11.createElement(
       Alert_default,
       {
         message: state.error,
@@ -28020,9 +28042,9 @@
   var signin_default = SignIn;
 
   // frontend/signup.tsx
-  var React13 = __toESM(require_react());
+  var React12 = __toESM(require_react());
   var SignUp = () => {
-    const [state, setState] = React13.useState({
+    const [state, setState] = React12.useState({
       name: "",
       email: "",
       password: "",
@@ -28058,7 +28080,7 @@
         }));
       }
     };
-    return /* @__PURE__ */ React13.createElement("div", null, /* @__PURE__ */ React13.createElement("h1", null, "SignUp"), /* @__PURE__ */ React13.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React13.createElement(
+    return /* @__PURE__ */ React12.createElement("div", null, /* @__PURE__ */ React12.createElement("h1", null, "SignUp"), /* @__PURE__ */ React12.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React12.createElement(
       Input_default,
       {
         label: "name",
@@ -28070,7 +28092,7 @@
           onChange: handleChange
         }
       }
-    ), /* @__PURE__ */ React13.createElement(
+    ), /* @__PURE__ */ React12.createElement(
       Input_default,
       {
         label: "email",
@@ -28082,7 +28104,7 @@
           onChange: handleChange
         }
       }
-    ), /* @__PURE__ */ React13.createElement(
+    ), /* @__PURE__ */ React12.createElement(
       Input_default,
       {
         label: "password",
@@ -28094,7 +28116,7 @@
           onChange: handleChange
         }
       }
-    ), /* @__PURE__ */ React13.createElement(
+    ), /* @__PURE__ */ React12.createElement(
       Input_default,
       {
         label: "",
@@ -28107,7 +28129,7 @@
           }
         }
       }
-    )), /* @__PURE__ */ React13.createElement("a", { href: "/signin" }, "SignIn"), state.error && /* @__PURE__ */ React13.createElement(
+    )), /* @__PURE__ */ React12.createElement("a", { href: "/signin" }, "SignIn"), state.error && /* @__PURE__ */ React12.createElement(
       Alert_default,
       {
         message: state.error,
@@ -28119,10 +28141,10 @@
   var signup_default = SignUp;
 
   // frontend/components/Header/index.tsx
-  var import_react11 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
 
   // frontend/components/UserInfo/index.tsx
-  var import_react10 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
   var UserInfo = ({ user }) => {
     const navigate = useNavigate();
     const handleClick = async () => {
@@ -28132,29 +28154,30 @@
       );
       navigate("/signin");
     };
-    return /* @__PURE__ */ import_react10.default.createElement("div", { className: "user_info" }, /* @__PURE__ */ import_react10.default.createElement("p", null, user?.name), /* @__PURE__ */ import_react10.default.createElement("p", null, user?.email), /* @__PURE__ */ import_react10.default.createElement("button", { type: "button", onClick: handleClick }, "Logout"));
+    return /* @__PURE__ */ import_react9.default.createElement("div", { className: "user_info" }, /* @__PURE__ */ import_react9.default.createElement("p", null, user?.name), /* @__PURE__ */ import_react9.default.createElement("p", null, user?.email), /* @__PURE__ */ import_react9.default.createElement("button", { className: "logout_btn", type: "button", onClick: handleClick }, "Logout"));
   };
   var UserInfo_default = UserInfo;
 
   // frontend/components/Header/index.tsx
   var Header = () => {
     const user = useAppState((state) => state.user);
-    const [showInfo, setShowInfo] = (0, import_react11.useState)(false);
+    const [showInfo, setShowInfo] = (0, import_react10.useState)(false);
     const url = user?.photo ?? "../assets/person.png";
-    return /* @__PURE__ */ import_react11.default.createElement("header", { className: "header" }, /* @__PURE__ */ import_react11.default.createElement("h1", null, "Chat App"), /* @__PURE__ */ import_react11.default.createElement(
+    return /* @__PURE__ */ import_react10.default.createElement("header", { className: "header" }, /* @__PURE__ */ import_react10.default.createElement("h1", null, "Chat App"), /* @__PURE__ */ import_react10.default.createElement(
       "div",
       {
         onClick: () => setShowInfo((prev) => !prev),
         className: "avatar"
       },
-      /* @__PURE__ */ import_react11.default.createElement(
+      /* @__PURE__ */ import_react10.default.createElement(
         "img",
         {
           src: url,
           alt: user?.name
         }
-      )
-    ), showInfo && /* @__PURE__ */ import_react11.default.createElement(UserInfo_default, { user }));
+      ),
+      showInfo && /* @__PURE__ */ import_react10.default.createElement(UserInfo_default, { user })
+    ));
   };
   var Header_default = Header;
 
@@ -28164,25 +28187,25 @@
       (state) => ({ user: state.user, userPending: state.userPending })
     );
     if (userPending)
-      return /* @__PURE__ */ import_react12.default.createElement("h1", null, "pending...");
-    return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Header_default, null), /* @__PURE__ */ import_react12.default.createElement(Sidebar_default, null), /* @__PURE__ */ import_react12.default.createElement(Portal_default, null));
+      return /* @__PURE__ */ import_react11.default.createElement("h1", null, "pending...");
+    return /* @__PURE__ */ import_react11.default.createElement("div", { className: "app" }, /* @__PURE__ */ import_react11.default.createElement(Header_default, null), /* @__PURE__ */ import_react11.default.createElement(Sidebar_default, null), /* @__PURE__ */ import_react11.default.createElement(Portal_default, null));
   };
   var router = createBrowserRouter([
     {
       path: "/",
-      element: /* @__PURE__ */ import_react12.default.createElement(StateProvider, null, /* @__PURE__ */ import_react12.default.createElement(App, null))
+      element: /* @__PURE__ */ import_react11.default.createElement(StateProvider, null, /* @__PURE__ */ import_react11.default.createElement(App, null))
     },
     {
       path: "/signin",
-      element: /* @__PURE__ */ import_react12.default.createElement(signin_default, null)
+      element: /* @__PURE__ */ import_react11.default.createElement(signin_default, null)
     },
     {
       path: "/signup",
-      element: /* @__PURE__ */ import_react12.default.createElement(signup_default, null)
+      element: /* @__PURE__ */ import_react11.default.createElement(signup_default, null)
     }
   ]);
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ import_react12.default.createElement(import_react12.default.StrictMode, null, /* @__PURE__ */ import_react12.default.createElement(RouterProvider, { router }))
+    /* @__PURE__ */ import_react11.default.createElement(import_react11.default.StrictMode, null, /* @__PURE__ */ import_react11.default.createElement(RouterProvider, { router }))
   );
 })();
 /*! Bundled license information:

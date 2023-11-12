@@ -5,6 +5,7 @@ import {
     CHAT_PORTAL,
     CONTACT_PORTAL,
     SET_USER,
+    CLOSE_PORTAL,
 } from './actionTypes';
 import request from '../service/request';
 import { useNavigate } from 'react-router-dom';
@@ -95,6 +96,8 @@ function reducer(state: StateType, action: Action): StateType {
             return { ...state, addChat: true, addContact: false };
         case CONTACT_PORTAL:
             return { ...state, addChat: false, addContact: true};
+        case CLOSE_PORTAL:
+            return { ...state, addChat: false, addContact: false };
         default:
             return initialState;
     }

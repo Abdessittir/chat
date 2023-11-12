@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 type Options = {
     type: string,
@@ -11,7 +12,7 @@ type Options = {
 
 const Input = ({ label, options }:{ label: string, options: Options }) => {
     return (
-        <div>
+        <div className="input_container">
             <label>{label}</label>
             <input {...options} />
         </div>
