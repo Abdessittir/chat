@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 const Alert = (
     { message, type, clear }
@@ -7,7 +8,9 @@ const Alert = (
     return (
         <div className={type}>
             {message}
-            <button type="button" onClick={clear}>clear</button>
+            <button className="clear_alert" type="button" onClick={clear}>
+                clear
+            </button>
         </div>
     );
 }

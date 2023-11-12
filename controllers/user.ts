@@ -47,4 +47,48 @@ const getProfile = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export { getChats, getProfile };
+const addContact = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email } = req.body;
+        const contact = await prisma.user.findUnique({
+            where: {
+                email,
+            }
+        });
+
+        if(!contact) {
+            return res.status(400).send({
+                success: false,
+                error: `Can't find user with email ${email}`,
+                data: null
+            });
+        }
+
+        const user = await prisma.user.update({
+            where: {
+                id: (req.session as any).user
+            },
+            data: {
+               contacts: {
+                push: contact?.id
+               } 
+            }
+        });
+
+        res.status(201).send({
+            success: true,
+            error: null,
+            data: {
+                contact: {
+                    id: contact?.id,
+                    email: contact?.email,
+                    name: contact?.name
+                }
+            }
+        });
+    } catch(err) {
+        next(err);
+    }
+};
+
+export { getChats, getProfile, addContact };

@@ -27708,6 +27708,7 @@
   var CONTACT_PORTAL = "contact-portal";
   var SET_USER = "load-user";
   var CLOSE_PORTAL = "close-portal";
+  var ADD_CONTACT = "add-contact";
 
   // frontend/service/request.ts
   async function request(url, options) {
@@ -27752,6 +27753,8 @@
         return { ...state, addChat: false, addContact: true };
       case CLOSE_PORTAL:
         return { ...state, addChat: false, addContact: false };
+      case ADD_CONTACT:
+        return { ...state, contacts: [...state.contacts, action.payload] };
       default:
         return initialState;
     }
@@ -27832,7 +27835,7 @@
   var Sidebar_default = Sidebar;
 
   // frontend/components/Portal/index.tsx
-  var import_react7 = __toESM(require_react());
+  var import_react8 = __toESM(require_react());
 
   // frontend/components/Form/index.tsx
   var import_react5 = __toESM(require_react());
@@ -27848,24 +27851,65 @@
   };
   var Input_default = Input;
 
+  // frontend/components/Alert/index.tsx
+  var import_react7 = __toESM(require_react());
+  var Alert = ({ message, type, clear }) => {
+    return /* @__PURE__ */ import_react7.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react7.default.createElement("button", { className: "clear_alert", type: "button", onClick: clear }, "clear"));
+  };
+  var Alert_default = Alert;
+
   // frontend/components/Portal/index.tsx
   var AddContact = () => {
-    const [state, setState] = (0, import_react7.useState)({
-      email: ""
+    const [state, setState] = (0, import_react8.useState)({
+      email: "",
+      alertType: "",
+      message: "",
+      disabled: false
     });
     const dispatch = useDispatch();
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      setState((prev) => ({ ...prev, disabled: true }));
+      const response = await request_default("/user/add_contact", {
+        method: "put",
+        body: JSON.stringify({
+          email: state.email
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.success) {
+        setState((prev) => ({
+          ...prev,
+          alertType: "success",
+          message: "Contact added!",
+          disabled: false
+        }));
+        dispatch({
+          type: ADD_CONTACT,
+          payload: response.data.contact
+        });
+      } else {
+        setState((prev) => ({
+          ...prev,
+          alertType: "error",
+          message: response.error,
+          disabled: false
+        }));
+      }
     };
     const handleChange = (event) => {
+      setState((prev) => ({ ...prev, [event.target.name]: event.target.value }));
     };
-    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react7.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react8.default.createElement(
       "button",
       {
         className: "close_portal",
         onClick: () => dispatch({ type: CLOSE_PORTAL })
       },
       "close"
-    ), /* @__PURE__ */ import_react7.default.createElement("h2", null, "Add Contact"), /* @__PURE__ */ import_react7.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react8.default.createElement("h2", null, "Add Contact"), /* @__PURE__ */ import_react8.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react8.default.createElement(
       Input_default,
       {
         label: "Email",
@@ -27877,7 +27921,7 @@
           placeholder: "Contact email"
         }
       }
-    ), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react8.default.createElement(
       Input_default,
       {
         label: "",
@@ -27887,13 +27931,21 @@
           placeholder: "",
           value: "Add Contact",
           onChange: () => {
-          }
+          },
+          disabled: state.disabled
         }
       }
-    )));
+    )), state.alertType && /* @__PURE__ */ import_react8.default.createElement(
+      Alert_default,
+      {
+        type: state.alertType,
+        message: state.message,
+        clear: () => setState((prev) => ({ ...prev, alertType: "", message: "" }))
+      }
+    ));
   };
   var AddChat = () => {
-    const [state, setState] = (0, import_react7.useState)({
+    const [state, setState] = (0, import_react8.useState)({
       name: ""
     });
     const dispatch = useDispatch();
@@ -27901,14 +27953,14 @@
     };
     const handleChange = (event) => {
     };
-    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react7.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react8.default.createElement(
       "button",
       {
         className: "close_portal",
         onClick: () => dispatch({ type: CLOSE_PORTAL })
       },
       "close"
-    ), /* @__PURE__ */ import_react7.default.createElement("h2", null, "Add Chat"), /* @__PURE__ */ import_react7.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react8.default.createElement("h2", null, "Add Chat"), /* @__PURE__ */ import_react8.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react8.default.createElement(
       Input_default,
       {
         label: "Chat",
@@ -27920,7 +27972,7 @@
           placeholder: "Chat Name"
         }
       }
-    ), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react8.default.createElement(
       Input_default,
       {
         label: "",
@@ -27940,21 +27992,12 @@
     const addContact = useAppState((state) => state.addContact);
     if (!addChat && !addContact)
       return null;
-    return /* @__PURE__ */ import_react7.default.createElement("div", { className: "portal" }, addContact && /* @__PURE__ */ import_react7.default.createElement(AddContact, null), addChat && /* @__PURE__ */ import_react7.default.createElement(AddChat, null));
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "portal" }, addContact && /* @__PURE__ */ import_react8.default.createElement(AddContact, null), addChat && /* @__PURE__ */ import_react8.default.createElement(AddChat, null));
   };
   var Portal_default = Portal;
 
   // frontend/signin.tsx
   var React11 = __toESM(require_react());
-
-  // frontend/components/Alert/index.tsx
-  var import_react8 = __toESM(require_react());
-  var Alert = ({ message, type, clear }) => {
-    return /* @__PURE__ */ import_react8.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react8.default.createElement("button", { type: "button", onClick: clear }, "clear"));
-  };
-  var Alert_default = Alert;
-
-  // frontend/signin.tsx
   var SignIn = () => {
     const [state, setState] = React11.useState({
       email: "",

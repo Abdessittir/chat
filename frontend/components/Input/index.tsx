@@ -8,6 +8,7 @@ type Options = {
     value: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     required?: boolean,
+    disabled?: boolean
 };
 
 const Input = ({ label, options }:{ label: string, options: Options }) => {
