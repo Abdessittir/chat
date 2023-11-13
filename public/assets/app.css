@@ -60,6 +60,8 @@
   flex-direction: column;
   margin: 10px;
   width: 100%;
+  position: relative;
+  padding-left: 10px;
 }
 .input_container input {
   width: 90%;

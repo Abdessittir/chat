@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { Server } from 'socket.io';
 import session, { SessionOptions } from 'express-session';
 import cookieParser from 'cookie-parser';
@@ -24,6 +24,7 @@ const sess: SessionOptions = {
     cookie: {
         secure: false,
         sameSite: true,
+        maxAge: 3600000 * 24 // 24 hours 
     },
     saveUninitialized: true,
     resave: true,
@@ -42,6 +43,13 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.use(authRouter);
 app.use(userRouter);
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    res.status(500).send({
+        success: false,
+        error: err.message,
+        data: null,
+    });
+});
 
 app.get('*', (req: Request, res: Response) => {
     res.sendFile(join(__dirname, './views/home.html'));

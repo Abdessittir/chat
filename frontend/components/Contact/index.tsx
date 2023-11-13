@@ -17,7 +17,7 @@ const Contacts = () => {
         <ul className="list">
             {
                 contacts.map((contact: ContactType) => (
-                    <Contact contact={contact} />
+                    <Contact key={contact.id} contact={contact} />
                 ))
             }
         </ul>

@@ -20,8 +20,12 @@ const getProfile = async (req: Request, res: Response, next: NextFunction) => {
         const user = await prisma.user.findUnique({
             where: {
                 id: (req.session as any).user
+            },
+            include: {
+                chats: true
             }
         });
+
         if(!user) {
             res.status(404).send({
                 success: false,
@@ -29,6 +33,14 @@ const getProfile = async (req: Request, res: Response, next: NextFunction) => {
                 data: null
             });
         }
+
+        const contacts = await prisma.user.findMany({
+            where: {
+                id: {
+                    in: user?.contacts
+                }
+            }
+        });
 
         res.status(200).send({
             success: true,
@@ -39,7 +51,9 @@ const getProfile = async (req: Request, res: Response, next: NextFunction) => {
                     name: user?.name,
                     email: user?.email,
                     photo: user?.photo
-                } 
+                },
+                chats: user?.chats.map(chat => ({ id: chat.id, name: chat.name })),
+                contacts
             }
         });
     } catch(err) {
@@ -90,5 +104,6 @@ const addContact = async (req: Request, res: Response, next: NextFunction) => {
         next(err);
     }
 };
+
 
 export { getChats, getProfile, addContact };

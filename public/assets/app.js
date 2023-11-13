@@ -27746,7 +27746,13 @@
   function reducer(state, action) {
     switch (action.type) {
       case SET_USER:
-        return { ...state, userPending: false, user: action.payload };
+        return {
+          ...state,
+          userPending: false,
+          user: action.payload.user,
+          chats: action.payload.chats,
+          contacts: action.payload.contacts
+        };
       case CHAT_PORTAL:
         return { ...state, addChat: true, addContact: false };
       case CONTACT_PORTAL:
@@ -27762,21 +27768,28 @@
   function StateProvider({ children }) {
     const [state, dispatch] = (0, import_react.useReducer)(reducer, initialState);
     const navigate = useNavigate();
-    async function fetchUser() {
-      const response = await request_default(
+    async function fetchData() {
+      const profile = await request_default(
         "/user/profile",
         {
           method: "get"
         }
       );
-      if (response.success) {
-        dispatch({ type: SET_USER, payload: response.data.user });
+      if (profile.success) {
+        dispatch({
+          type: SET_USER,
+          payload: {
+            user: profile.data.user,
+            contacts: profile.data.contacts,
+            chats: profile.data.chats
+          }
+        });
       } else {
         navigate("/signin");
       }
     }
     (0, import_react.useEffect)(() => {
-      fetchUser();
+      fetchData();
     }, []);
     return /* @__PURE__ */ import_react.default.createElement(StateContext.Provider, { value: { state, dispatch } }, children);
   }
@@ -27787,7 +27800,7 @@
   };
   var Chats = () => {
     const chats = useAppState((state) => state.chats);
-    return /* @__PURE__ */ import_react2.default.createElement("ul", { className: "list" }, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { chat })));
+    return /* @__PURE__ */ import_react2.default.createElement("ul", { className: "list" }, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { key: chat.id, chat })));
   };
   var Chat_default = Chats;
 
@@ -27798,7 +27811,7 @@
   };
   var Contacts = () => {
     const contacts = useAppState((state) => state.contacts);
-    return /* @__PURE__ */ import_react3.default.createElement("ul", { className: "list" }, contacts.map((contact) => /* @__PURE__ */ import_react3.default.createElement(Contact, { contact })));
+    return /* @__PURE__ */ import_react3.default.createElement("ul", { className: "list" }, contacts.map((contact) => /* @__PURE__ */ import_react3.default.createElement(Contact, { key: contact.id, contact })));
   };
   var Contact_default = Contacts;
 
@@ -27945,13 +27958,27 @@
     ));
   };
   var AddChat = () => {
-    const [state, setState] = (0, import_react8.useState)({
-      name: ""
-    });
+    const contacts = useAppState((state) => state.contacts);
+    const user = useAppState((state) => state.user);
+    const [name, setName] = (0, import_react8.useState)("");
+    const [userIds, setUserIds] = (0, import_react8.useState)([user.id]);
     const dispatch = useDispatch();
     const handleSubmit = (event) => {
+      event.preventDefault();
+      if (!name || userIds.length <= 0)
+        return;
     };
-    const handleChange = (event) => {
+    const ChangeName = (event) => {
+      setName(event.target.value);
+    };
+    const changeUsers = (id) => {
+      setUserIds((prev) => {
+        if (prev.includes(id)) {
+          return prev.filter((item) => item !== id);
+        } else {
+          return [...prev, id];
+        }
+      });
     };
     return /* @__PURE__ */ import_react8.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react8.default.createElement(
       "button",
@@ -27967,12 +27994,24 @@
         options: {
           type: "text",
           name: "name",
-          value: state.name,
-          onChange: handleChange,
+          value: name,
+          onChange: ChangeName,
           placeholder: "Chat Name"
         }
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), contacts.map((contact) => /* @__PURE__ */ import_react8.default.createElement(
+      Input_default,
+      {
+        key: contact.id,
+        label: contact.email,
+        options: {
+          type: "checkbox",
+          name: contact.name,
+          value: contact.id,
+          onChange: () => changeUsers(contact.id)
+        }
+      }
+    )), /* @__PURE__ */ import_react8.default.createElement(
       Input_default,
       {
         label: "",
@@ -28226,8 +28265,8 @@
 
   // frontend/app.tsx
   var App = () => {
-    const { user, userPending } = useAppState(
-      (state) => ({ user: state.user, userPending: state.userPending })
+    const { userPending } = useAppState(
+      (state) => state.userPending
     );
     if (userPending)
       return /* @__PURE__ */ import_react11.default.createElement("h1", null, "pending...");

@@ -92,7 +92,13 @@ export function useDispatch() {
 function reducer(state: StateType, action: Action): StateType {
     switch(action.type) {
         case SET_USER:
-            return { ...state, userPending: false, user: action.payload };
+            return {
+                ...state,
+                userPending: false,
+                user: action.payload.user,
+                chats: action.payload.chats,
+                contacts: action.payload.contacts
+            };
         case CHAT_PORTAL:
             return { ...state, addChat: true, addContact: false };
         case CONTACT_PORTAL:
@@ -111,21 +117,29 @@ export default function StateProvider({ children }: { children: App }) {
     const [state, dispatch] = useReducer(reducer, initialState);
     const navigate = useNavigate();
 
-    async function fetchUser() {
-        const response = await request(
+    async function fetchData() {
+        const profile = await request(
             '/user/profile',
             {
                 method: 'get',
             },
         );
-        if(response.success) {
-            dispatch({ type: SET_USER, payload: response.data.user });
+        if(profile.success) {
+            dispatch({
+                type: SET_USER,
+                payload: {
+                    user: profile.data.user,
+                    contacts: profile.data.contacts,
+                    chats: profile.data.chats
+                }
+            });
         } else {
             navigate('/signin');
         }
     }
+
     useEffect(() => {
-        fetchUser();
+        fetchData();
     }, []);
     return (
         <StateContext.Provider value={{ state, dispatch }}>

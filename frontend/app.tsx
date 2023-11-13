@@ -14,8 +14,8 @@ import SignUp from './signup';
 import Header from './components/Header';
 
 export const App = () => {
-  const {user, userPending} = useAppState(
-    state => ({user: state.user, userPending: state.userPending})
+  const {userPending} = useAppState(
+    state => state.userPending
   );
 
   if(userPending) return <h1>pending...</h1>;

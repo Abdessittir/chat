@@ -18,7 +18,7 @@ const Chats = () => {
         <ul className="list">
             {
                 chats.map((chat: ChatType) => (
-                    <Chat chat={chat} />
+                    <Chat key={chat.id} chat={chat} />
                 ))
             }
         </ul>

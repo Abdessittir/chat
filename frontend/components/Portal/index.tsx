@@ -96,13 +96,31 @@ const AddContact = () => {
 };
 
 const AddChat = () => {
-    const [state, setState] = useState({
-        name: '',
-    });
+    const contacts = useAppState(state => state.contacts);
+    const user = useAppState(state => state.user);
+
+    const [name, setName] = useState('');
+    const [userIds, setUserIds] = useState<number[] | string[]>([ user.id ]);
     const dispatch = useDispatch();
 
-    const handleSubmit = (event: React.FormEvent) => {};
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        if(!name || userIds.length <= 0) return;
+    };
+
+    const ChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    };
+
+    const changeUsers = (id: string | number) => {
+        setUserIds((prev: any[]) => {
+            if(prev.includes(id)) {
+                return prev.filter(item => item !== id);
+            } else  {
+                return [...prev, id];
+            }
+        });
+    };
 
     return (
         <div className="form_container">
@@ -117,11 +135,25 @@ const AddChat = () => {
                    options={{
                     type: 'text',
                     name: 'name',
-                    value: state.name,
-                    onChange: handleChange,
+                    value: name,
+                    onChange: ChangeName,
                     placeholder: 'Chat Name',
                    }}
                 />
+                {
+                    contacts.map(contact => (
+                        <Input
+                           key={contact.id}
+                           label={contact.email}
+                           options={{
+                            type: 'checkbox',
+                            name: contact.name,
+                            value: contact.id,
+                            onChange: () => changeUsers(contact.id)
+                           }}
+                        />
+                    ))
+                }
                 <Input
                     label=''
                     options={{
