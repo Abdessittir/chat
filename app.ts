@@ -8,6 +8,7 @@ import { join } from 'node:path';
 
 import authRouter from './routes/auth';
 import userRouter from './routes/user';
+import seed from './prisma/seed';
 
 
 const app = express();
@@ -55,11 +56,6 @@ app.get('*', (req: Request, res: Response) => {
     res.sendFile(join(__dirname, './views/home.html'));
 });
 
-import prisma from './prisma/db';
-async function main() {
-    const users = await prisma.user.findMany();
-    console.log(users);
-}
+seed();
 
-main();
 export { server, io };

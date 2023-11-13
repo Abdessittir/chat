@@ -1,0 +1,17 @@
+.checkbox_container {
+    width: 90%;
+    margin: 10px auto;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.checkbox_container label {
+    cursor: pointer;
+}
+
+.checkbox_container input {
+    margin-left: 5px;
+}

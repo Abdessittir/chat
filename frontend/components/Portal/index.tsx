@@ -6,6 +6,7 @@ import './index.css';
 import { ADD_CONTACT, CLOSE_PORTAL } from '../../context/actionTypes';
 import request from '../../service/request';
 import Alert from '../Alert';
+import CheckBox from '../CheckBox';
 
 const AddContact = () => {
     const [state, setState] = useState({
@@ -115,12 +116,14 @@ const AddChat = () => {
     const changeUsers = (id: string | number) => {
         setUserIds((prev: any[]) => {
             if(prev.includes(id)) {
+                console.log('found')
                 return prev.filter(item => item !== id);
             } else  {
                 return [...prev, id];
             }
         });
     };
+
 
     return (
         <div className="form_container">
@@ -142,14 +145,14 @@ const AddChat = () => {
                 />
                 {
                     contacts.map(contact => (
-                        <Input
+                        <CheckBox
                            key={contact.id}
                            label={contact.email}
                            options={{
                             type: 'checkbox',
                             name: contact.name,
                             value: contact.id,
-                            onChange: () => changeUsers(contact.id)
+                            onChange: () => changeUsers(contact.id),
                            }}
                         />
                     ))
