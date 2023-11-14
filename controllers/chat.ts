@@ -8,7 +8,7 @@ const createChat = async (req: Request, res: Response, next: NextFunction) => {
             data: {
                 name,
                 users: {
-                    connect: userIds
+                    connect: userIds.map((userId: number) => ({ id: userId }))
                 }
             },
         });

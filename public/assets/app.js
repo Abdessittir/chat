@@ -27709,6 +27709,7 @@
   var SET_USER = "load-user";
   var CLOSE_PORTAL = "close-portal";
   var ADD_CONTACT = "add-contact";
+  var ADD_CHAT = "add-chat";
 
   // frontend/service/request.ts
   async function request(url, options) {
@@ -27761,6 +27762,8 @@
         return { ...state, addChat: false, addContact: false };
       case ADD_CONTACT:
         return { ...state, contacts: [...state.contacts, action.payload] };
+      case ADD_CHAT:
+        return { ...state, chats: [...state.chats, action.payload] };
       default:
         return initialState;
     }
@@ -27900,12 +27903,12 @@
         }
       });
       if (response.success) {
-        setState((prev) => ({
-          ...prev,
+        setState({
+          email: "",
           alertType: "success",
           message: "Contact added!",
           disabled: false
-        }));
+        });
         dispatch({
           type: ADD_CONTACT,
           payload: response.data.contact
@@ -27969,9 +27972,38 @@
     const user = useAppState((state) => state.user);
     const [name, setName] = (0, import_react9.useState)("");
     const [userIds, setUserIds] = (0, import_react9.useState)([user.id]);
+    const [alert, setAlert] = (0, import_react9.useState)({
+      type: "",
+      message: ""
+    });
     const dispatch = useDispatch();
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
+      const response = await request_default(
+        "/chat/new",
+        {
+          method: "post",
+          body: JSON.stringify({ name, userIds }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      if (response.success) {
+        setAlert({
+          type: "success",
+          message: "Chat added!"
+        });
+        dispatch({
+          type: ADD_CHAT,
+          payload: response.data.chat
+        });
+      } else {
+        setAlert({
+          type: "error",
+          message: response.error
+        });
+      }
     };
     const ChangeName = (event) => {
       setName(event.target.value);
@@ -28029,7 +28061,14 @@
           disabled: !name || userIds.length <= 1
         }
       }
-    )));
+    )), alert.type && /* @__PURE__ */ import_react9.default.createElement(
+      Alert_default,
+      {
+        type: alert.type,
+        message: alert.message,
+        clear: () => setAlert({ type: "", message: "" })
+      }
+    ));
   };
   var Portal = () => {
     const addChat = useAppState((state) => state.addChat);

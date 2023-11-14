@@ -8,7 +8,7 @@ import { join } from 'node:path';
 
 import authRouter from './routes/auth';
 import userRouter from './routes/user';
-import seed from './prisma/seed';
+import chatRouter from './routes/chat';
 
 
 const app = express();
@@ -44,6 +44,7 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.use(authRouter);
 app.use(userRouter);
+app.use(chatRouter);
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send({
         success: false,
@@ -56,6 +57,5 @@ app.get('*', (req: Request, res: Response) => {
     res.sendFile(join(__dirname, './views/home.html'));
 });
 
-seed();
 
 export { server, io };

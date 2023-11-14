@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "npx prisma migrate dev --name init",
+    "seed": "ts-node ./prisma/seed.ts",
     "serve": "nodemon --exec ts-node server.ts",
     "dev": "docker compose up",
     "stop": "docker compose down --volumes",

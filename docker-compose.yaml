@@ -9,7 +9,7 @@ services:
       - POSTGRES_DB=chats
   app:
     image: node:20-alpine
-    command: sh -c "sleep 3; yarn install; yarn run migrate; yarn run watch"
+    command: sh -c "sleep 3; yarn install; yarn run migrate; yarn run seed; yarn run watch"
     ports:
       - 8080:8080
     working_dir: /app

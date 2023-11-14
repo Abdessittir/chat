@@ -3,7 +3,7 @@ import Form from '../Form';
 import Input from '../Input';
 import { useAppState, useDispatch } from '../../context';
 import './index.css';
-import { ADD_CONTACT, CLOSE_PORTAL } from '../../context/actionTypes';
+import { ADD_CHAT, ADD_CONTACT, CLOSE_PORTAL } from '../../context/actionTypes';
 import request from '../../service/request';
 import Alert from '../Alert';
 import CheckBox from '../CheckBox';
@@ -32,12 +32,12 @@ const AddContact = () => {
         });
 
         if(response.success) {
-            setState(prev => ({
-                ...prev,
+            setState({
+                email: '',
                 alertType: 'success',
                 message: 'Contact added!',
                 disabled: false,
-            }));
+            });
             dispatch({
                 type: ADD_CONTACT,
                 payload: response.data.contact
@@ -102,11 +102,40 @@ const AddChat = () => {
 
     const [name, setName] = useState('');
     const [userIds, setUserIds] = useState<number[]>([user.id]);
+    const [alert, setAlert] = useState({
+        type: '',
+        message: '',
+    });
     const dispatch = useDispatch();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        
+        const response = await request(
+            '/chat/new',
+            {
+                method: 'post',
+                body: JSON.stringify({name, userIds}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        if(response.success) {
+            setAlert({
+                type: 'success',
+                message: 'Chat added!'
+            });
+            dispatch({
+                type: ADD_CHAT,
+                payload: response.data.chat
+            });
+        } else {
+            setAlert({
+                type: 'error',
+                message: response.error
+            });
+        }
     };
 
     const ChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,6 +196,13 @@ const AddChat = () => {
                     }}
                 />
             </Form>
+            {
+                alert.type && <Alert
+                   type={alert.type}
+                   message={alert.message}
+                   clear={() => setAlert({ type: '', message: ''})}
+                />
+            }
         </div>
     );
 };
