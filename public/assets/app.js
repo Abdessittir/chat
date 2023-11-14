@@ -27874,7 +27874,7 @@
   // frontend/components/CheckBox/index.tsx
   var import_react8 = __toESM(require_react());
   var CheckBox = ({ label, options }) => {
-    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "checkbox_container", onClick: options.onChange }, /* @__PURE__ */ import_react8.default.createElement("label", { onClick: options.onChange }, label), /* @__PURE__ */ import_react8.default.createElement("input", { ...options }));
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "checkbox_container" }, /* @__PURE__ */ import_react8.default.createElement("label", { onClick: options.onChange }, label), /* @__PURE__ */ import_react8.default.createElement("input", { ...options }));
   };
   var CheckBox_default = CheckBox;
 
@@ -27972,21 +27972,16 @@
     const dispatch = useDispatch();
     const handleSubmit = (event) => {
       event.preventDefault();
-      if (!name || userIds.length <= 0)
-        return;
     };
     const ChangeName = (event) => {
       setName(event.target.value);
     };
     const changeUsers = (id) => {
-      setUserIds((prev) => {
-        if (prev.includes(id)) {
-          console.log("found");
-          return prev.filter((item) => item !== id);
-        } else {
-          return [...prev, id];
-        }
-      });
+      if (userIds.includes(id)) {
+        setUserIds((prev) => prev.filter((item) => item !== id));
+      } else {
+        setUserIds((prev) => [...prev, id]);
+      }
     };
     return /* @__PURE__ */ import_react9.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react9.default.createElement(
       "button",
@@ -28014,9 +28009,10 @@
         label: contact.email,
         options: {
           type: "checkbox",
-          name: contact.name,
+          name: contact.id,
           value: contact.id,
-          onChange: () => changeUsers(contact.id)
+          onChange: () => changeUsers(contact.id),
+          checked: userIds.includes(contact.id)
         }
       }
     )), /* @__PURE__ */ import_react9.default.createElement(
@@ -28029,7 +28025,8 @@
           placeholder: "",
           value: "Add Chat",
           onChange: () => {
-          }
+          },
+          disabled: !name || userIds.length <= 1
         }
       }
     )));

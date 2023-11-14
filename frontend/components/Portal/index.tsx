@@ -101,27 +101,24 @@ const AddChat = () => {
     const user = useAppState(state => state.user);
 
     const [name, setName] = useState('');
-    const [userIds, setUserIds] = useState<number[] | string[]>([ user.id ]);
+    const [userIds, setUserIds] = useState<number[]>([user.id]);
     const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if(!name || userIds.length <= 0) return;
+        
     };
 
     const ChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     };
 
-    const changeUsers = (id: string | number) => {
-        setUserIds((prev: any[]) => {
-            if(prev.includes(id)) {
-                console.log('found')
-                return prev.filter(item => item !== id);
-            } else  {
-                return [...prev, id];
-            }
-        });
+    const changeUsers = (id: number) => {
+        if(userIds.includes(id)) {
+            setUserIds(prev => prev.filter(item => item !== id));
+        } else {
+            setUserIds(prev => ([...prev, id]));
+        }
     };
 
 
@@ -150,9 +147,10 @@ const AddChat = () => {
                            label={contact.email}
                            options={{
                             type: 'checkbox',
-                            name: contact.name,
+                            name: contact.id,
                             value: contact.id,
                             onChange: () => changeUsers(contact.id),
+                            checked: userIds.includes(contact.id)
                            }}
                         />
                     ))
@@ -164,7 +162,8 @@ const AddChat = () => {
                         name: 'submit',
                         placeholder: '',
                         value: 'Add Chat',
-                        onChange: () => { }
+                        onChange: () => { },
+                        disabled: !name || userIds.length <= 1
                     }}
                 />
             </Form>

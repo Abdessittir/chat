@@ -1,7 +1,6 @@
 .checkbox_container {
     width: 90%;
     margin: 10px auto;
-    padding: 5px;
     cursor: pointer;
     display: flex;
     justify-content: flex-end;
@@ -10,6 +9,7 @@
 
 .checkbox_container label {
     cursor: pointer;
+    padding: 5px;
 }
 
 .checkbox_container input {

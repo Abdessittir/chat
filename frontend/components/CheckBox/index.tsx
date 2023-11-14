@@ -6,6 +6,7 @@ type Options = {
     name: string,
     value: string | number,
     onChange: () => void,
+    checked?: boolean
 };
 
 const CheckBox = (
@@ -13,7 +14,7 @@ const CheckBox = (
     :{ label: string, options: Options,}
 ) => {
     return (
-        <div className="checkbox_container" onClick={options.onChange}>
+        <div className="checkbox_container">
             <label onClick={options.onChange}>{label}</label>
             <input {...options} />
         </div>
