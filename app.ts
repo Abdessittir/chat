@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
 
     socket.on('client-message', ({ message, chatUsers, chatId }) => {
         socket.to(chatId).emit('server-message', message);
-        chatUsers.forEach(userId => {
+        chatUsers.forEach((userId: string) => {
             socket.to(userId).emit('notification', chatId);
         });
     });

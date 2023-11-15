@@ -199,3 +199,18 @@
   cursor: pointer;
   position: relative;
 }
+
+/* frontend/components/ChatRoom/index.css */
+.chatroom {
+  height: calc(100vh - 60px);
+  width: 100vw;
+  z-index: 9;
+  position: absolute;
+  top: 60px;
+  right: 0;
+}
+@media (min-width: 768px) {
+  .chatroom {
+    width: calc(100vw - 350px);
+  }
+}

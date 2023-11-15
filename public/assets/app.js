@@ -9,6 +9,10 @@
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
       for (let key of __getOwnPropNames(from))
@@ -300,31 +304,31 @@
           function isArray(a) {
             return isArrayImpl(a);
           }
-          function typeName(value) {
+          function typeName(value2) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              var type = hasToStringTag && value2[Symbol.toStringTag] || value2.constructor.name || "Object";
               return type;
             }
           }
-          function willCoercionThrow(value) {
+          function willCoercionThrow(value2) {
             {
               try {
-                testStringCoercion(value);
+                testStringCoercion(value2);
                 return false;
               } catch (e) {
                 return true;
               }
             }
           }
-          function testStringCoercion(value) {
-            return "" + value;
+          function testStringCoercion(value2) {
+            return "" + value2;
           }
-          function checkKeyStringCoercion(value) {
+          function checkKeyStringCoercion(value2) {
             {
-              if (willCoercionThrow(value)) {
-                error("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
@@ -472,7 +476,7 @@
               }
             }
           }
-          var ReactElement = function(type, key, ref, self, source, owner, props) {
+          var ReactElement = function(type, key, ref, self2, source, owner, props) {
             var element = {
               // This tag allows us to uniquely identify this as a React Element
               $$typeof: REACT_ELEMENT_TYPE,
@@ -496,7 +500,7 @@
                 configurable: false,
                 enumerable: false,
                 writable: false,
-                value: self
+                value: self2
               });
               Object.defineProperty(element, "_source", {
                 configurable: false,
@@ -516,7 +520,7 @@
             var props = {};
             var key = null;
             var ref = null;
-            var self = null;
+            var self2 = null;
             var source = null;
             if (config != null) {
               if (hasValidRef(config)) {
@@ -531,7 +535,7 @@
                 }
                 key = "" + config.key;
               }
-              self = config.__self === void 0 ? null : config.__self;
+              self2 = config.__self === void 0 ? null : config.__self;
               source = config.__source === void 0 ? null : config.__source;
               for (propName in config) {
                 if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
@@ -544,8 +548,8 @@
               props.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
-              for (var i = 0; i < childrenLength; i++) {
-                childArray[i] = arguments[i + 2];
+              for (var i2 = 0; i2 < childrenLength; i2++) {
+                childArray[i2] = arguments[i2 + 2];
               }
               {
                 if (Object.freeze) {
@@ -573,7 +577,7 @@
                 }
               }
             }
-            return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
+            return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
           }
           function cloneAndReplaceKey(oldElement, newKey) {
             var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
@@ -587,7 +591,7 @@
             var props = assign({}, element.props);
             var key = element.key;
             var ref = element.ref;
-            var self = element._self;
+            var self2 = element._self;
             var source = element._source;
             var owner = element._owner;
             if (config != null) {
@@ -620,17 +624,17 @@
               props.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
-              for (var i = 0; i < childrenLength; i++) {
-                childArray[i] = arguments[i + 2];
+              for (var i2 = 0; i2 < childrenLength; i2++) {
+                childArray[i2] = arguments[i2 + 2];
               }
               props.children = childArray;
             }
-            return ReactElement(element.type, key, ref, self, source, owner, props);
+            return ReactElement(element.type, key, ref, self2, source, owner, props);
           }
           function isValidElement2(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
-          var SEPARATOR = ".";
+          var SEPARATOR2 = ".";
           var SUBSEPARATOR = ":";
           function escape(key) {
             var escapeRegex = /[=:]/g;
@@ -682,7 +686,7 @@
             if (invokeCallback) {
               var _child = children;
               var mappedChild = callback(_child);
-              var childKey = nameSoFar === "" ? SEPARATOR + getElementKey(_child, 0) : nameSoFar;
+              var childKey = nameSoFar === "" ? SEPARATOR2 + getElementKey(_child, 0) : nameSoFar;
               if (isArray(mappedChild)) {
                 var escapedChildKey = "";
                 if (childKey != null) {
@@ -717,11 +721,11 @@
             var child;
             var nextName;
             var subtreeCount = 0;
-            var nextNamePrefix = nameSoFar === "" ? SEPARATOR : nameSoFar + SUBSEPARATOR;
+            var nextNamePrefix = nameSoFar === "" ? SEPARATOR2 : nameSoFar + SUBSEPARATOR;
             if (isArray(children)) {
-              for (var i = 0; i < children.length; i++) {
-                child = children[i];
-                nextName = nextNamePrefix + getElementKey(child, i);
+              for (var i2 = 0; i2 < children.length; i2++) {
+                child = children[i2];
+                nextName = nextNamePrefix + getElementKey(child, i2);
                 subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
               }
             } else {
@@ -774,7 +778,7 @@
               forEachFunc.apply(this, arguments);
             }, forEachContext);
           }
-          function toArray(children) {
+          function toArray2(children) {
             return mapChildren(children, function(child) {
               return child;
             }) || [];
@@ -1033,7 +1037,7 @@
             }
             return false;
           }
-          function memo(type, compare) {
+          function memo2(type, compare) {
             {
               if (!isValidElementType(type)) {
                 error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -1085,7 +1089,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState8(initialState2) {
+          function useState9(initialState2) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState2);
           }
@@ -1109,11 +1113,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback3(callback, deps) {
+          function useCallback4(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo3(create, deps) {
+          function useMemo4(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1121,19 +1125,19 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useImperativeHandle(ref, create, deps);
           }
-          function useDebugValue(value, formatterFn) {
+          function useDebugValue(value2, formatterFn) {
             {
               var dispatcher = resolveDispatcher();
-              return dispatcher.useDebugValue(value, formatterFn);
+              return dispatcher.useDebugValue(value2, formatterFn);
             }
           }
           function useTransition() {
             var dispatcher = resolveDispatcher();
             return dispatcher.useTransition();
           }
-          function useDeferredValue(value) {
+          function useDeferredValue(value2) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useDeferredValue(value);
+            return dispatcher.useDeferredValue(value2);
           }
           function useId() {
             var dispatcher = resolveDispatcher();
@@ -1404,7 +1408,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values, location2, componentName, element) {
             {
               var has = Function.call.bind(hasOwnProperty);
               for (var typeSpecName in typeSpecs) {
@@ -1412,23 +1416,23 @@
                   var error$1 = void 0;
                   try {
                     if (typeof typeSpecs[typeSpecName] !== "function") {
-                      var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                      var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location2, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
                   if (error$1 && !(error$1 instanceof Error)) {
                     setCurrentlyValidatingElement(element);
-                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location, typeSpecName, typeof error$1);
+                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location2, typeSpecName, typeof error$1);
                     setCurrentlyValidatingElement(null);
                   }
                   if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error("Failed %s type: %s", location, error$1.message);
+                    error("Failed %s type: %s", location2, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -1509,8 +1513,8 @@
               return;
             }
             if (isArray(node)) {
-              for (var i = 0; i < node.length; i++) {
-                var child = node[i];
+              for (var i2 = 0; i2 < node.length; i2++) {
+                var child = node[i2];
                 if (isValidElement2(child)) {
                   validateExplicitKey(child, parentType);
                 }
@@ -1566,8 +1570,8 @@
           function validateFragmentProps(fragment) {
             {
               var keys = Object.keys(fragment.props);
-              for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
+              for (var i2 = 0; i2 < keys.length; i2++) {
+                var key = keys[i2];
                 if (key !== "children" && key !== "key") {
                   setCurrentlyValidatingElement$1(fragment);
                   error("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", key);
@@ -1615,8 +1619,8 @@
               return element;
             }
             if (validType) {
-              for (var i = 2; i < arguments.length; i++) {
-                validateChildKeys(arguments[i], type);
+              for (var i2 = 2; i2 < arguments.length; i2++) {
+                validateChildKeys(arguments[i2], type);
               }
             }
             if (type === REACT_FRAGMENT_TYPE) {
@@ -1650,8 +1654,8 @@
           }
           function cloneElementWithValidation(element, props, children) {
             var newElement = cloneElement.apply(this, arguments);
-            for (var i = 2; i < arguments.length; i++) {
-              validateChildKeys(arguments[i], newElement.type);
+            for (var i2 = 2; i2 < arguments.length; i2++) {
+              validateChildKeys(arguments[i2], newElement.type);
             }
             validatePropTypes(newElement);
             return newElement;
@@ -1828,17 +1832,17 @@
             {
               if (!isFlushing) {
                 isFlushing = true;
-                var i = 0;
+                var i2 = 0;
                 try {
-                  for (; i < queue.length; i++) {
-                    var callback = queue[i];
+                  for (; i2 < queue.length; i2++) {
+                    var callback = queue[i2];
                     do {
                       callback = callback(true);
                     } while (callback !== null);
                   }
                   queue.length = 0;
                 } catch (error2) {
-                  queue = queue.slice(i + 1);
+                  queue = queue.slice(i2 + 1);
                   throw error2;
                 } finally {
                   isFlushing = false;
@@ -1853,7 +1857,7 @@
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
-            toArray,
+            toArray: toArray2,
             only: onlyChild
           };
           exports.Children = Children2;
@@ -1872,10 +1876,10 @@
           exports.forwardRef = forwardRef2;
           exports.isValidElement = isValidElement2;
           exports.lazy = lazy;
-          exports.memo = memo;
+          exports.memo = memo2;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback3;
+          exports.useCallback = useCallback4;
           exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
@@ -1884,10 +1888,10 @@
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect3;
-          exports.useMemo = useMemo3;
+          exports.useMemo = useMemo4;
           exports.useReducer = useReducer2;
           exports.useRef = useRef3;
-          exports.useState = useState8;
+          exports.useState = useState9;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -1944,8 +1948,8 @@
             }
             return first;
           }
-          function siftUp(heap, node, i) {
-            var index = i;
+          function siftUp(heap, node, i2) {
+            var index = i2;
             while (index > 0) {
               var parentIndex = index - 1 >>> 1;
               var parent = heap[parentIndex];
@@ -1958,17 +1962,17 @@
               }
             }
           }
-          function siftDown(heap, node, i) {
-            var index = i;
-            var length = heap.length;
-            var halfLength = length >>> 1;
+          function siftDown(heap, node, i2) {
+            var index = i2;
+            var length2 = heap.length;
+            var halfLength = length2 >>> 1;
             while (index < halfLength) {
               var leftIndex = (index + 1) * 2 - 1;
               var left = heap[leftIndex];
               var rightIndex = leftIndex + 1;
               var right = heap[rightIndex];
               if (compare(left, node) < 0) {
-                if (rightIndex < length && compare(right, left) < 0) {
+                if (rightIndex < length2 && compare(right, left) < 0) {
                   heap[index] = right;
                   heap[rightIndex] = node;
                   index = rightIndex;
@@ -1977,7 +1981,7 @@
                   heap[leftIndex] = node;
                   index = leftIndex;
                 }
-              } else if (rightIndex < length && compare(right, node) < 0) {
+              } else if (rightIndex < length2 && compare(right, node) < 0) {
                 heap[index] = right;
                 heap[rightIndex] = node;
                 index = rightIndex;
@@ -2383,9 +2387,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React17 = require_react();
+          var React19 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React17.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -2484,77 +2488,77 @@
                 possibleRegistrationNames.ondblclick = registrationName;
               }
             }
-            for (var i = 0; i < dependencies.length; i++) {
-              allNativeEvents.add(dependencies[i]);
+            for (var i2 = 0; i2 < dependencies.length; i2++) {
+              allNativeEvents.add(dependencies[i2]);
             }
           }
           var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
           var hasOwnProperty = Object.prototype.hasOwnProperty;
-          function typeName(value) {
+          function typeName(value2) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              var type = hasToStringTag && value2[Symbol.toStringTag] || value2.constructor.name || "Object";
               return type;
             }
           }
-          function willCoercionThrow(value) {
+          function willCoercionThrow(value2) {
             {
               try {
-                testStringCoercion(value);
+                testStringCoercion(value2);
                 return false;
               } catch (e) {
                 return true;
               }
             }
           }
-          function testStringCoercion(value) {
-            return "" + value;
+          function testStringCoercion(value2) {
+            return "" + value2;
           }
-          function checkAttributeStringCoercion(value, attributeName) {
+          function checkAttributeStringCoercion(value2, attributeName) {
             {
-              if (willCoercionThrow(value)) {
-                error("The provided `%s` attribute is an unsupported type %s. This value must be coerced to a string before before using it here.", attributeName, typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("The provided `%s` attribute is an unsupported type %s. This value must be coerced to a string before before using it here.", attributeName, typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
-          function checkKeyStringCoercion(value) {
+          function checkKeyStringCoercion(value2) {
             {
-              if (willCoercionThrow(value)) {
-                error("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
-          function checkPropStringCoercion(value, propName) {
+          function checkPropStringCoercion(value2, propName) {
             {
-              if (willCoercionThrow(value)) {
-                error("The provided `%s` prop is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("The provided `%s` prop is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
-          function checkCSSPropertyStringCoercion(value, propName) {
+          function checkCSSPropertyStringCoercion(value2, propName) {
             {
-              if (willCoercionThrow(value)) {
-                error("The provided `%s` CSS property is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("The provided `%s` CSS property is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
-          function checkHtmlStringCoercion(value) {
+          function checkHtmlStringCoercion(value2) {
             {
-              if (willCoercionThrow(value)) {
-                error("The provided HTML markup uses a value of unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("The provided HTML markup uses a value of unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
-          function checkFormFieldValueStringCoercion(value) {
+          function checkFormFieldValueStringCoercion(value2) {
             {
-              if (willCoercionThrow(value)) {
-                error("Form field values (value, checked, defaultValue, or defaultChecked props) must be strings, not %s. This value must be coerced to a string before before using it here.", typeName(value));
-                return testStringCoercion(value);
+              if (willCoercionThrow(value2)) {
+                error("Form field values (value, checked, defaultValue, or defaultChecked props) must be strings, not %s. This value must be coerced to a string before before using it here.", typeName(value2));
+                return testStringCoercion(value2);
               }
             }
           }
@@ -2599,11 +2603,11 @@
             }
             return false;
           }
-          function shouldRemoveAttributeWithWarning(name, value, propertyInfo, isCustomComponentTag) {
+          function shouldRemoveAttributeWithWarning(name, value2, propertyInfo, isCustomComponentTag) {
             if (propertyInfo !== null && propertyInfo.type === RESERVED) {
               return false;
             }
-            switch (typeof value) {
+            switch (typeof value2) {
               case "function":
               case "symbol":
                 return true;
@@ -2622,11 +2626,11 @@
                 return false;
             }
           }
-          function shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag) {
-            if (value === null || typeof value === "undefined") {
+          function shouldRemoveAttribute(name, value2, propertyInfo, isCustomComponentTag) {
+            if (value2 === null || typeof value2 === "undefined") {
               return true;
             }
-            if (shouldRemoveAttributeWithWarning(name, value, propertyInfo, isCustomComponentTag)) {
+            if (shouldRemoveAttributeWithWarning(name, value2, propertyInfo, isCustomComponentTag)) {
               return true;
             }
             if (isCustomComponentTag) {
@@ -2635,13 +2639,13 @@
             if (propertyInfo !== null) {
               switch (propertyInfo.type) {
                 case BOOLEAN:
-                  return !value;
+                  return !value2;
                 case OVERLOADED_BOOLEAN:
-                  return value === false;
+                  return value2 === false;
                 case NUMERIC:
-                  return isNaN(value);
+                  return isNaN(value2);
                 case POSITIVE_NUMERIC:
-                  return isNaN(value) || value < 1;
+                  return isNaN(value2) || value2 < 1;
               }
             }
             return false;
@@ -3045,11 +3049,11 @@
           });
           var isJavaScriptProtocol = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i;
           var didWarn = false;
-          function sanitizeURL(url) {
+          function sanitizeURL(url2) {
             {
-              if (!didWarn && isJavaScriptProtocol.test(url)) {
+              if (!didWarn && isJavaScriptProtocol.test(url2)) {
                 didWarn = true;
-                error("A future version of React will block javascript: URLs as a security precaution. Use event handlers instead if you can. If you need to generate unsafe HTML try using dangerouslySetInnerHTML instead. React was passed %s.", JSON.stringify(url));
+                error("A future version of React will block javascript: URLs as a security precaution. Use event handlers instead if you can. If you need to generate unsafe HTML try using dangerouslySetInnerHTML instead. React was passed %s.", JSON.stringify(url2));
               }
             }
           }
@@ -3069,17 +3073,17 @@
                 var stringValue = null;
                 if (propertyInfo.type === OVERLOADED_BOOLEAN) {
                   if (node.hasAttribute(attributeName)) {
-                    var value = node.getAttribute(attributeName);
-                    if (value === "") {
+                    var value2 = node.getAttribute(attributeName);
+                    if (value2 === "") {
                       return true;
                     }
                     if (shouldRemoveAttribute(name, expected, propertyInfo, false)) {
-                      return value;
+                      return value2;
                     }
-                    if (value === "" + expected) {
+                    if (value2 === "" + expected) {
                       return expected;
                     }
-                    return value;
+                    return value2;
                   }
                 } else if (node.hasAttribute(attributeName)) {
                   if (shouldRemoveAttribute(name, expected, propertyInfo, false)) {
@@ -3108,34 +3112,34 @@
               if (!node.hasAttribute(name)) {
                 return expected === void 0 ? void 0 : null;
               }
-              var value = node.getAttribute(name);
+              var value2 = node.getAttribute(name);
               {
                 checkAttributeStringCoercion(expected, name);
               }
-              if (value === "" + expected) {
+              if (value2 === "" + expected) {
                 return expected;
               }
-              return value;
+              return value2;
             }
           }
-          function setValueForProperty(node, name, value, isCustomComponentTag) {
+          function setValueForProperty(node, name, value2, isCustomComponentTag) {
             var propertyInfo = getPropertyInfo(name);
             if (shouldIgnoreAttribute(name, propertyInfo, isCustomComponentTag)) {
               return;
             }
-            if (shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag)) {
-              value = null;
+            if (shouldRemoveAttribute(name, value2, propertyInfo, isCustomComponentTag)) {
+              value2 = null;
             }
             if (isCustomComponentTag || propertyInfo === null) {
               if (isAttributeNameSafe(name)) {
                 var _attributeName = name;
-                if (value === null) {
+                if (value2 === null) {
                   node.removeAttribute(_attributeName);
                 } else {
                   {
-                    checkAttributeStringCoercion(value, name);
+                    checkAttributeStringCoercion(value2, name);
                   }
-                  node.setAttribute(_attributeName, "" + value);
+                  node.setAttribute(_attributeName, "" + value2);
                 }
               }
               return;
@@ -3143,28 +3147,28 @@
             var mustUseProperty = propertyInfo.mustUseProperty;
             if (mustUseProperty) {
               var propertyName = propertyInfo.propertyName;
-              if (value === null) {
+              if (value2 === null) {
                 var type = propertyInfo.type;
                 node[propertyName] = type === BOOLEAN ? false : "";
               } else {
-                node[propertyName] = value;
+                node[propertyName] = value2;
               }
               return;
             }
             var attributeName = propertyInfo.attributeName, attributeNamespace = propertyInfo.attributeNamespace;
-            if (value === null) {
+            if (value2 === null) {
               node.removeAttribute(attributeName);
             } else {
               var _type = propertyInfo.type;
               var attributeValue;
-              if (_type === BOOLEAN || _type === OVERLOADED_BOOLEAN && value === true) {
+              if (_type === BOOLEAN || _type === OVERLOADED_BOOLEAN && value2 === true) {
                 attributeValue = "";
               } else {
                 {
                   {
-                    checkAttributeStringCoercion(value, attributeName);
+                    checkAttributeStringCoercion(value2, attributeName);
                   }
-                  attributeValue = "" + value;
+                  attributeValue = "" + value2;
                 }
                 if (propertyInfo.sanitizeURL) {
                   sanitizeURL(attributeValue.toString());
@@ -3682,21 +3686,21 @@
               isRendering = rendering;
             }
           }
-          function toString(value) {
-            return "" + value;
+          function toString2(value2) {
+            return "" + value2;
           }
-          function getToStringValue(value) {
-            switch (typeof value) {
+          function getToStringValue(value2) {
+            switch (typeof value2) {
               case "boolean":
               case "number":
               case "string":
               case "undefined":
-                return value;
+                return value2;
               case "object":
                 {
-                  checkFormFieldValueStringCoercion(value);
+                  checkFormFieldValueStringCoercion(value2);
                 }
-                return value;
+                return value2;
               default:
                 return "";
             }
@@ -3732,16 +3736,16 @@
             node._valueTracker = null;
           }
           function getValueFromNode(node) {
-            var value = "";
+            var value2 = "";
             if (!node) {
-              return value;
+              return value2;
             }
             if (isCheckable(node)) {
-              value = node.checked ? "true" : "false";
+              value2 = node.checked ? "true" : "false";
             } else {
-              value = node.value;
+              value2 = node.value;
             }
-            return value;
+            return value2;
           }
           function trackValueOnNode(node) {
             var valueField = isCheckable(node) ? "checked" : "value";
@@ -3759,12 +3763,12 @@
               get: function() {
                 return get2.call(this);
               },
-              set: function(value) {
+              set: function(value2) {
                 {
-                  checkFormFieldValueStringCoercion(value);
+                  checkFormFieldValueStringCoercion(value2);
                 }
-                currentValue = "" + value;
-                set2.call(this, value);
+                currentValue = "" + value2;
+                set2.call(this, value2);
               }
             });
             Object.defineProperty(node, valueField, {
@@ -3774,11 +3778,11 @@
               getValue: function() {
                 return currentValue;
               },
-              setValue: function(value) {
+              setValue: function(value2) {
                 {
-                  checkFormFieldValueStringCoercion(value);
+                  checkFormFieldValueStringCoercion(value2);
                 }
-                currentValue = "" + value;
+                currentValue = "" + value2;
               },
               stopTracking: function() {
                 detachTracker(node);
@@ -3880,17 +3884,17 @@
               }
             }
             updateChecked(element, props);
-            var value = getToStringValue(props.value);
+            var value2 = getToStringValue(props.value);
             var type = props.type;
-            if (value != null) {
+            if (value2 != null) {
               if (type === "number") {
-                if (value === 0 && node.value === "" || // We explicitly want to coerce to number here if possible.
+                if (value2 === 0 && node.value === "" || // We explicitly want to coerce to number here if possible.
                 // eslint-disable-next-line
-                node.value != value) {
-                  node.value = toString(value);
+                node.value != value2) {
+                  node.value = toString2(value2);
                 }
-              } else if (node.value !== toString(value)) {
-                node.value = toString(value);
+              } else if (node.value !== toString2(value2)) {
+                node.value = toString2(value2);
               }
             } else if (type === "submit" || type === "reset") {
               node.removeAttribute("value");
@@ -3898,7 +3902,7 @@
             }
             {
               if (props.hasOwnProperty("value")) {
-                setDefaultValue(node, props.type, value);
+                setDefaultValue(node, props.type, value2);
               } else if (props.hasOwnProperty("defaultValue")) {
                 setDefaultValue(node, props.type, getToStringValue(props.defaultValue));
               }
@@ -3917,7 +3921,7 @@
               if (isButton && (props.value === void 0 || props.value === null)) {
                 return;
               }
-              var initialValue = toString(node._wrapperState.initialValue);
+              var initialValue = toString2(node._wrapperState.initialValue);
               if (!isHydrating2) {
                 {
                   if (initialValue !== node.value) {
@@ -3957,8 +3961,8 @@
                 checkAttributeStringCoercion(name, "name");
               }
               var group = queryRoot.querySelectorAll("input[name=" + JSON.stringify("" + name) + '][type="radio"]');
-              for (var i = 0; i < group.length; i++) {
-                var otherNode = group[i];
+              for (var i2 = 0; i2 < group.length; i2++) {
+                var otherNode = group[i2];
                 if (otherNode === rootNode || otherNode.form !== rootNode.form) {
                   continue;
                 }
@@ -3971,15 +3975,15 @@
               }
             }
           }
-          function setDefaultValue(node, type, value) {
+          function setDefaultValue(node, type, value2) {
             if (
               // Focused number inputs synchronize on blur. See ChangeEventPlugin.js
               type !== "number" || getActiveElement(node.ownerDocument) !== node
             ) {
-              if (value == null) {
-                node.defaultValue = toString(node._wrapperState.initialValue);
-              } else if (node.defaultValue !== toString(value)) {
-                node.defaultValue = toString(value);
+              if (value2 == null) {
+                node.defaultValue = toString2(node._wrapperState.initialValue);
+              } else if (node.defaultValue !== toString2(value2)) {
+                node.defaultValue = toString2(value2);
               }
             }
           }
@@ -3990,7 +3994,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React17.Children.forEach(props.children, function(child) {
+                  React19.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -4017,7 +4021,7 @@
           }
           function postMountWrapper$1(element, props) {
             if (props.value != null) {
-              element.setAttribute("value", toString(getToStringValue(props.value)));
+              element.setAttribute("value", toString2(getToStringValue(props.value)));
             }
           }
           var isArrayImpl = Array.isArray;
@@ -4039,8 +4043,8 @@
           function checkSelectPropTypes(props) {
             {
               checkControlledValueProps("select", props);
-              for (var i = 0; i < valuePropNames.length; i++) {
-                var propName = valuePropNames[i];
+              for (var i2 = 0; i2 < valuePropNames.length; i2++) {
+                var propName = valuePropNames[i2];
                 if (props[propName] == null) {
                   continue;
                 }
@@ -4058,8 +4062,8 @@
             if (multiple) {
               var selectedValues = propValue;
               var selectedValue = {};
-              for (var i = 0; i < selectedValues.length; i++) {
-                selectedValue["$" + selectedValues[i]] = true;
+              for (var i2 = 0; i2 < selectedValues.length; i2++) {
+                selectedValue["$" + selectedValues[i2]] = true;
               }
               for (var _i = 0; _i < options2.length; _i++) {
                 var selected = selectedValue.hasOwnProperty("$" + options2[_i].value);
@@ -4071,7 +4075,7 @@
                 }
               }
             } else {
-              var _selectedValue = toString(getToStringValue(propValue));
+              var _selectedValue = toString2(getToStringValue(propValue));
               var defaultSelected = null;
               for (var _i2 = 0; _i2 < options2.length; _i2++) {
                 if (options2[_i2].value === _selectedValue) {
@@ -4113,9 +4117,9 @@
           function postMountWrapper$2(element, props) {
             var node = element;
             node.multiple = !!props.multiple;
-            var value = props.value;
-            if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+            var value2 = props.value;
+            if (value2 != null) {
+              updateOptions(node, !!props.multiple, value2, false);
             } else if (props.defaultValue != null) {
               updateOptions(node, !!props.multiple, props.defaultValue, true);
             }
@@ -4124,9 +4128,9 @@
             var node = element;
             var wasMultiple = node._wrapperState.wasMultiple;
             node._wrapperState.wasMultiple = !!props.multiple;
-            var value = props.value;
-            if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+            var value2 = props.value;
+            if (value2 != null) {
+              updateOptions(node, !!props.multiple, value2, false);
             } else if (wasMultiple !== !!props.multiple) {
               if (props.defaultValue != null) {
                 updateOptions(node, !!props.multiple, props.defaultValue, true);
@@ -4137,9 +4141,9 @@
           }
           function restoreControlledState$1(element, props) {
             var node = element;
-            var value = props.value;
-            if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+            var value2 = props.value;
+            if (value2 != null) {
+              updateOptions(node, !!props.multiple, value2, false);
             }
           }
           var didWarnValDefaultVal = false;
@@ -4151,7 +4155,7 @@
             var hostProps = assign({}, props, {
               value: void 0,
               defaultValue: void 0,
-              children: toString(node._wrapperState.initialValue)
+              children: toString2(node._wrapperState.initialValue)
             });
             return hostProps;
           }
@@ -4195,10 +4199,10 @@
           }
           function updateWrapper$1(element, props) {
             var node = element;
-            var value = getToStringValue(props.value);
+            var value2 = getToStringValue(props.value);
             var defaultValue = getToStringValue(props.defaultValue);
-            if (value != null) {
-              var newValue = toString(value);
+            if (value2 != null) {
+              var newValue = toString2(value2);
               if (newValue !== node.value) {
                 node.value = newValue;
               }
@@ -4207,7 +4211,7 @@
               }
             }
             if (defaultValue != null) {
-              node.defaultValue = toString(defaultValue);
+              node.defaultValue = toString2(defaultValue);
             }
           }
           function postMountWrapper$3(element, props) {
@@ -4392,18 +4396,18 @@
               isUnitlessNumber[prefixKey(prefix2, prop)] = isUnitlessNumber[prop];
             });
           });
-          function dangerousStyleValue(name, value, isCustomProperty) {
-            var isEmpty = value == null || typeof value === "boolean" || value === "";
+          function dangerousStyleValue(name, value2, isCustomProperty) {
+            var isEmpty = value2 == null || typeof value2 === "boolean" || value2 === "";
             if (isEmpty) {
               return "";
             }
-            if (!isCustomProperty && typeof value === "number" && value !== 0 && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) {
-              return value + "px";
+            if (!isCustomProperty && typeof value2 === "number" && value2 !== 0 && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) {
+              return value2 + "px";
             }
             {
-              checkCSSPropertyStringCoercion(value, name);
+              checkCSSPropertyStringCoercion(value2, name);
             }
-            return ("" + value).trim();
+            return ("" + value2).trim();
           }
           var uppercasePattern = /([A-Z])/g;
           var msPattern = /^ms-/;
@@ -4447,40 +4451,40 @@
               warnedStyleNames[name] = true;
               error("Unsupported vendor-prefixed style property %s. Did you mean %s?", name, name.charAt(0).toUpperCase() + name.slice(1));
             };
-            var warnStyleValueWithSemicolon = function(name, value) {
-              if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
+            var warnStyleValueWithSemicolon = function(name, value2) {
+              if (warnedStyleValues.hasOwnProperty(value2) && warnedStyleValues[value2]) {
                 return;
               }
-              warnedStyleValues[value] = true;
-              error(`Style property values shouldn't contain a semicolon. Try "%s: %s" instead.`, name, value.replace(badStyleValueWithSemicolonPattern, ""));
+              warnedStyleValues[value2] = true;
+              error(`Style property values shouldn't contain a semicolon. Try "%s: %s" instead.`, name, value2.replace(badStyleValueWithSemicolonPattern, ""));
             };
-            var warnStyleValueIsNaN = function(name, value) {
+            var warnStyleValueIsNaN = function(name, value2) {
               if (warnedForNaNValue) {
                 return;
               }
               warnedForNaNValue = true;
               error("`NaN` is an invalid value for the `%s` css style property.", name);
             };
-            var warnStyleValueIsInfinity = function(name, value) {
+            var warnStyleValueIsInfinity = function(name, value2) {
               if (warnedForInfinityValue) {
                 return;
               }
               warnedForInfinityValue = true;
               error("`Infinity` is an invalid value for the `%s` css style property.", name);
             };
-            warnValidStyle = function(name, value) {
+            warnValidStyle = function(name, value2) {
               if (name.indexOf("-") > -1) {
                 warnHyphenatedStyleName(name);
               } else if (badVendoredStyleNamePattern.test(name)) {
                 warnBadVendoredStyleName(name);
-              } else if (badStyleValueWithSemicolonPattern.test(value)) {
-                warnStyleValueWithSemicolon(name, value);
+              } else if (badStyleValueWithSemicolonPattern.test(value2)) {
+                warnStyleValueWithSemicolon(name, value2);
               }
-              if (typeof value === "number") {
-                if (isNaN(value)) {
-                  warnStyleValueIsNaN(name, value);
-                } else if (!isFinite(value)) {
-                  warnStyleValueIsInfinity(name, value);
+              if (typeof value2 === "number") {
+                if (isNaN(value2)) {
+                  warnStyleValueIsNaN(name, value2);
+                } else if (!isFinite(value2)) {
+                  warnStyleValueIsInfinity(name, value2);
                 }
               }
             };
@@ -4528,15 +4532,15 @@
               }
             }
           }
-          function isValueEmpty(value) {
-            return value == null || typeof value === "boolean" || value === "";
+          function isValueEmpty(value2) {
+            return value2 == null || typeof value2 === "boolean" || value2 === "";
           }
           function expandShorthandMap(styles) {
             var expanded = {};
             for (var key in styles) {
               var longhands = shorthandToLonghand[key] || [key];
-              for (var i = 0; i < longhands.length; i++) {
-                expanded[longhands[i]] = key;
+              for (var i2 = 0; i2 < longhands.length; i2++) {
+                expanded[longhands[i2]] = key;
               }
             }
             return expanded;
@@ -5264,7 +5268,7 @@
             var INVALID_EVENT_NAME_REGEX = /^on[^A-Z]/;
             var rARIA$1 = new RegExp("^(aria)-[" + ATTRIBUTE_NAME_CHAR + "]*$");
             var rARIACamel$1 = new RegExp("^(aria)[A-Z][" + ATTRIBUTE_NAME_CHAR + "]*$");
-            validateProperty$1 = function(tagName, name, value, eventRegistry) {
+            validateProperty$1 = function(tagName, name, value2, eventRegistry) {
               if (hasOwnProperty.call(warnedProperties$1, name) && warnedProperties$1[name]) {
                 return true;
               }
@@ -5310,12 +5314,12 @@
                 warnedProperties$1[name] = true;
                 return true;
               }
-              if (lowerCasedName === "is" && value !== null && value !== void 0 && typeof value !== "string") {
-                error("Received a `%s` for a string attribute `is`. If this is expected, cast the value to a string.", typeof value);
+              if (lowerCasedName === "is" && value2 !== null && value2 !== void 0 && typeof value2 !== "string") {
+                error("Received a `%s` for a string attribute `is`. If this is expected, cast the value to a string.", typeof value2);
                 warnedProperties$1[name] = true;
                 return true;
               }
-              if (typeof value === "number" && isNaN(value)) {
+              if (typeof value2 === "number" && isNaN(value2)) {
                 error("Received NaN for the `%s` attribute. If this is expected, cast the value to a string.", name);
                 warnedProperties$1[name] = true;
                 return true;
@@ -5334,11 +5338,11 @@
                 warnedProperties$1[name] = true;
                 return true;
               }
-              if (typeof value === "boolean" && shouldRemoveAttributeWithWarning(name, value, propertyInfo, false)) {
-                if (value) {
-                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.', value, name, name, value, name);
+              if (typeof value2 === "boolean" && shouldRemoveAttributeWithWarning(name, value2, propertyInfo, false)) {
+                if (value2) {
+                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.', value2, name, name, value2, name);
                 } else {
-                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.\n\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.', value, name, name, value, name, name, name);
+                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.\n\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.', value2, name, name, value2, name, name, name);
                 }
                 warnedProperties$1[name] = true;
                 return true;
@@ -5346,12 +5350,12 @@
               if (isReserved) {
                 return true;
               }
-              if (shouldRemoveAttributeWithWarning(name, value, propertyInfo, false)) {
+              if (shouldRemoveAttributeWithWarning(name, value2, propertyInfo, false)) {
                 warnedProperties$1[name] = true;
                 return false;
               }
-              if ((value === "false" || value === "true") && propertyInfo !== null && propertyInfo.type === BOOLEAN) {
-                error("Received the string `%s` for the boolean attribute `%s`. %s Did you mean %s={%s}?", value, name, value === "false" ? "The browser will interpret it as a truthy value." : 'Although this works, it will not work as expected if you pass the string "false".', name, value);
+              if ((value2 === "false" || value2 === "true") && propertyInfo !== null && propertyInfo.type === BOOLEAN) {
+                error("Received the string `%s` for the boolean attribute `%s`. %s Did you mean %s={%s}?", value2, name, value2 === "false" ? "The browser will interpret it as a truthy value." : 'Although this works, it will not work as expected if you pass the string "false".', name, value2);
                 warnedProperties$1[name] = true;
                 return true;
               }
@@ -5458,8 +5462,8 @@
             restoreQueue = null;
             restoreStateOfTarget(target);
             if (queuedTargets) {
-              for (var i = 0; i < queuedTargets.length; i++) {
-                restoreStateOfTarget(queuedTargets[i]);
+              for (var i2 = 0; i2 < queuedTargets.length; i2++) {
+                restoreStateOfTarget(queuedTargets[i2]);
               }
             }
           }
@@ -5675,8 +5679,8 @@
           function has(key) {
             return key._reactInternals !== void 0;
           }
-          function set(key, value) {
-            key._reactInternals = value;
+          function set(key, value2) {
+            key._reactInternals = value2;
           }
           var NoFlags = (
             /*                      */
@@ -6147,14 +6151,14 @@
           }
           function getLaneLabelMap() {
             {
-              var map = /* @__PURE__ */ new Map();
+              var map2 = /* @__PURE__ */ new Map();
               var lane = 1;
               for (var index2 = 0; index2 < TotalLanes; index2++) {
                 var label = getLabelForLane(lane);
-                map.set(lane, label);
+                map2.set(lane, label);
                 lane *= 2;
               }
-              return map;
+              return map2;
             }
           }
           function markCommitStarted(lanes) {
@@ -6828,7 +6832,7 @@
           }
           function createLaneMap(initial) {
             var laneMap = [];
-            for (var i = 0; i < TotalLanes; i++) {
+            for (var i2 = 0; i2 < TotalLanes; i2++) {
               laneMap.push(initial);
             }
             return laneMap;
@@ -7212,14 +7216,14 @@
               target,
               priority: updatePriority
             };
-            var i = 0;
-            for (; i < queuedExplicitHydrationTargets.length; i++) {
-              if (!isHigherEventPriority(updatePriority, queuedExplicitHydrationTargets[i].priority)) {
+            var i2 = 0;
+            for (; i2 < queuedExplicitHydrationTargets.length; i2++) {
+              if (!isHigherEventPriority(updatePriority, queuedExplicitHydrationTargets[i2].priority)) {
                 break;
               }
             }
-            queuedExplicitHydrationTargets.splice(i, 0, queuedTarget);
-            if (i === 0) {
+            queuedExplicitHydrationTargets.splice(i2, 0, queuedTarget);
+            if (i2 === 0) {
               attemptExplicitHydrationTarget(queuedTarget);
             }
           }
@@ -7251,9 +7255,9 @@
             }
             return true;
           }
-          function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map) {
+          function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map2) {
             if (attemptReplayContinuousQueuedEvent(queuedEvent)) {
-              map.delete(key);
+              map2.delete(key);
             }
           }
           function replayUnblockedEvents() {
@@ -7282,8 +7286,8 @@
           function retryIfBlockedOn(unblocked) {
             if (queuedDiscreteEvents.length > 0) {
               scheduleCallbackIfUnblocked(queuedDiscreteEvents[0], unblocked);
-              for (var i = 1; i < queuedDiscreteEvents.length; i++) {
-                var queuedEvent = queuedDiscreteEvents[i];
+              for (var i2 = 1; i2 < queuedDiscreteEvents.length; i2++) {
+                var queuedEvent = queuedDiscreteEvents[i2];
                 if (queuedEvent.blockedOn === unblocked) {
                   queuedEvent.blockedOn = null;
                 }
@@ -8075,11 +8079,11 @@
                 hasSpaceKeypress = true;
                 return SPACEBAR_CHAR;
               case "textInput":
-                var chars = nativeEvent.data;
-                if (chars === SPACEBAR_CHAR && hasSpaceKeypress) {
+                var chars2 = nativeEvent.data;
+                if (chars2 === SPACEBAR_CHAR && hasSpaceKeypress) {
                   return null;
                 }
-                return chars;
+                return chars2;
               default:
                 return null;
             }
@@ -8087,10 +8091,10 @@
           function getFallbackBeforeInputChars(domEventName, nativeEvent) {
             if (isComposing) {
               if (domEventName === "compositionend" || !canUseCompositionEvent && isFallbackCompositionEnd(domEventName, nativeEvent)) {
-                var chars = getData();
+                var chars2 = getData();
                 reset();
                 isComposing = false;
-                return chars;
+                return chars2;
               }
               return null;
             }
@@ -8113,13 +8117,13 @@
             }
           }
           function extractBeforeInputEvent(dispatchQueue, domEventName, targetInst, nativeEvent, nativeEventTarget) {
-            var chars;
+            var chars2;
             if (canUseTextInputEvent) {
-              chars = getNativeBeforeInputChars(domEventName, nativeEvent);
+              chars2 = getNativeBeforeInputChars(domEventName, nativeEvent);
             } else {
-              chars = getFallbackBeforeInputChars(domEventName, nativeEvent);
+              chars2 = getFallbackBeforeInputChars(domEventName, nativeEvent);
             }
-            if (!chars) {
+            if (!chars2) {
               return null;
             }
             var listeners = accumulateTwoPhaseListeners(targetInst, "onBeforeInput");
@@ -8129,7 +8133,7 @@
                 event,
                 listeners
               });
-              event.data = chars;
+              event.data = chars2;
             }
           }
           function extractEvents(dispatchQueue, domEventName, targetInst, nativeEvent, nativeEventTarget, eventSystemFlags, targetContainer) {
@@ -8396,8 +8400,8 @@
             if (keysA.length !== keysB.length) {
               return false;
             }
-            for (var i = 0; i < keysA.length; i++) {
-              var currentKey = keysA[i];
+            for (var i2 = 0; i2 < keysA.length; i2++) {
+              var currentKey = keysA[i2];
               if (!hasOwnProperty.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey])) {
                 return false;
               }
@@ -8453,7 +8457,7 @@
             return getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset);
           }
           function getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset) {
-            var length = 0;
+            var length2 = 0;
             var start = -1;
             var end = -1;
             var indexWithinAnchor = 0;
@@ -8465,13 +8469,13 @@
                 var next = null;
                 while (true) {
                   if (node === anchorNode && (anchorOffset === 0 || node.nodeType === TEXT_NODE)) {
-                    start = length + anchorOffset;
+                    start = length2 + anchorOffset;
                   }
                   if (node === focusNode && (focusOffset === 0 || node.nodeType === TEXT_NODE)) {
-                    end = length + focusOffset;
+                    end = length2 + focusOffset;
                   }
                   if (node.nodeType === TEXT_NODE) {
-                    length += node.nodeValue.length;
+                    length2 += node.nodeValue.length;
                   }
                   if ((next = node.firstChild) === null) {
                     break;
@@ -8484,10 +8488,10 @@
                     break outer;
                   }
                   if (parentNode === anchorNode && ++indexWithinAnchor === anchorOffset) {
-                    start = length;
+                    start = length2;
                   }
                   if (parentNode === focusNode && ++indexWithinFocus === focusOffset) {
-                    end = length;
+                    end = length2;
                   }
                   if ((next = node.nextSibling) !== null) {
                     break;
@@ -8512,9 +8516,9 @@
               return;
             }
             var selection = win.getSelection();
-            var length = node.textContent.length;
-            var start = Math.min(offsets.start, length);
-            var end = offsets.end === void 0 ? start : Math.min(offsets.end, length);
+            var length2 = node.textContent.length;
+            var start = Math.min(offsets.start, length2);
+            var end = offsets.end === void 0 ? start : Math.min(offsets.end, length2);
             if (!selection.extend && start > end) {
               var temp = end;
               end = start;
@@ -8614,8 +8618,8 @@
               if (typeof priorFocusedElem.focus === "function") {
                 priorFocusedElem.focus();
               }
-              for (var i = 0; i < ancestors.length; i++) {
-                var info = ancestors[i];
+              for (var i2 = 0; i2 < ancestors.length; i2++) {
+                var info = ancestors[i2];
                 info.element.scrollLeft = info.left;
                 info.element.scrollTop = info.top;
               }
@@ -8780,8 +8784,8 @@
             registerTwoPhaseEvent(reactName, [domEventName]);
           }
           function registerSimpleEvents() {
-            for (var i = 0; i < simpleEventPluginEvents.length; i++) {
-              var eventName = simpleEventPluginEvents[i];
+            for (var i2 = 0; i2 < simpleEventPluginEvents.length; i2++) {
+              var eventName = simpleEventPluginEvents[i2];
               var domEventName = eventName.toLowerCase();
               var capitalizedEvent = eventName[0].toUpperCase() + eventName.slice(1);
               registerSimpleEvent(domEventName, "on" + capitalizedEvent);
@@ -8925,8 +8929,8 @@
           function processDispatchQueueItemsInOrder(event, dispatchListeners, inCapturePhase) {
             var previousInstance;
             if (inCapturePhase) {
-              for (var i = dispatchListeners.length - 1; i >= 0; i--) {
-                var _dispatchListeners$i = dispatchListeners[i], instance = _dispatchListeners$i.instance, currentTarget = _dispatchListeners$i.currentTarget, listener = _dispatchListeners$i.listener;
+              for (var i2 = dispatchListeners.length - 1; i2 >= 0; i2--) {
+                var _dispatchListeners$i = dispatchListeners[i2], instance = _dispatchListeners$i.instance, currentTarget = _dispatchListeners$i.currentTarget, listener = _dispatchListeners$i.listener;
                 if (instance !== previousInstance && event.isPropagationStopped()) {
                   return;
                 }
@@ -8946,8 +8950,8 @@
           }
           function processDispatchQueue(dispatchQueue, eventSystemFlags) {
             var inCapturePhase = (eventSystemFlags & IS_CAPTURE_PHASE) !== 0;
-            for (var i = 0; i < dispatchQueue.length; i++) {
-              var _dispatchQueue$i = dispatchQueue[i], event = _dispatchQueue$i.event, listeners = _dispatchQueue$i.listeners;
+            for (var i2 = 0; i2 < dispatchQueue.length; i2++) {
+              var _dispatchQueue$i = dispatchQueue[i2], event = _dispatchQueue$i.event, listeners = _dispatchQueue$i.listeners;
               processDispatchQueueItemsInOrder(event, listeners, inCapturePhase);
             }
             rethrowCaughtError();
@@ -9375,9 +9379,9 @@
             }
           }
           function updateDOMProperties(domElement, updatePayload, wasCustomComponentTag, isCustomComponentTag) {
-            for (var i = 0; i < updatePayload.length; i += 2) {
-              var propKey = updatePayload[i];
-              var propValue = updatePayload[i + 1];
+            for (var i2 = 0; i2 < updatePayload.length; i2 += 2) {
+              var propKey = updatePayload[i2];
+              var propValue = updatePayload[i2 + 1];
               if (propKey === STYLE) {
                 setValueForStyles(domElement, propValue);
               } else if (propKey === DANGEROUSLY_SET_INNER_HTML) {
@@ -9460,8 +9464,8 @@
                 break;
               case "video":
               case "audio":
-                for (var i = 0; i < mediaEventTypes.length; i++) {
-                  listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
+                for (var i2 = 0; i2 < mediaEventTypes.length; i2++) {
+                  listenToNonDelegatedEvent(mediaEventTypes[i2], domElement);
                 }
                 props = rawProps;
                 break;
@@ -9712,8 +9716,8 @@
                 break;
               case "video":
               case "audio":
-                for (var i = 0; i < mediaEventTypes.length; i++) {
-                  listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
+                for (var i2 = 0; i2 < mediaEventTypes.length; i2++) {
+                  listenToNonDelegatedEvent(mediaEventTypes[i2], domElement);
                 }
                 break;
               case "source":
@@ -10774,7 +10778,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values, location2, componentName, element) {
             {
               var has2 = Function.call.bind(hasOwnProperty);
               for (var typeSpecName in typeSpecs) {
@@ -10782,23 +10786,23 @@
                   var error$1 = void 0;
                   try {
                     if (typeof typeSpecs[typeSpecName] !== "function") {
-                      var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                      var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location2, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
                   if (error$1 && !(error$1 instanceof Error)) {
                     setCurrentlyValidatingElement(element);
-                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location, typeSpecName, typeof error$1);
+                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location2, typeSpecName, typeof error$1);
                     setCurrentlyValidatingElement(null);
                   }
                   if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error("Failed %s type: %s", location, error$1.message);
+                    error("Failed %s type: %s", location2, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -10835,13 +10839,13 @@
             }
             index--;
           }
-          function push(cursor, value, fiber) {
+          function push(cursor, value2, fiber) {
             index++;
             valueStack[index] = cursor.current;
             {
               fiberStack[index] = fiber;
             }
-            cursor.current = value;
+            cursor.current = value2;
           }
           var warnedAboutMissingGetChildContext;
           {
@@ -11029,14 +11033,14 @@
           function flushSyncCallbacks() {
             if (!isFlushingSyncQueue && syncQueue !== null) {
               isFlushingSyncQueue = true;
-              var i = 0;
+              var i2 = 0;
               var previousUpdatePriority = getCurrentUpdatePriority();
               try {
                 var isSync = true;
                 var queue = syncQueue;
                 setCurrentUpdatePriority(DiscreteEventPriority);
-                for (; i < queue.length; i++) {
-                  var callback = queue[i];
+                for (; i2 < queue.length; i2++) {
+                  var callback = queue[i2];
                   do {
                     callback = callback(isSync);
                   } while (callback !== null);
@@ -11045,7 +11049,7 @@
                 includesLegacySyncCallbacks = false;
               } catch (error2) {
                 if (syncQueue !== null) {
-                  syncQueue = syncQueue.slice(i + 1);
+                  syncQueue = syncQueue.slice(i2 + 1);
                 }
                 scheduleCallback(ImmediatePriority, flushSyncCallbacks);
                 throw error2;
@@ -11097,8 +11101,8 @@
             var baseLength = getBitLength(baseIdWithLeadingBit) - 1;
             var baseId = baseIdWithLeadingBit & ~(1 << baseLength);
             var slot = index2 + 1;
-            var length = getBitLength(totalChildren) + baseLength;
-            if (length > 30) {
+            var length2 = getBitLength(totalChildren) + baseLength;
+            if (length2 > 30) {
               var numberOfOverflowBits = baseLength - baseLength % 5;
               var newOverflowBits = (1 << numberOfOverflowBits) - 1;
               var newOverflow = (baseId & newOverflowBits).toString(32);
@@ -11114,7 +11118,7 @@
               var newBits = slot << baseLength;
               var _id = newBits | baseId;
               var _overflow = baseOverflow;
-              treeContextId = 1 << length | _id;
+              treeContextId = 1 << length2 | _id;
               treeContextOverflow = _overflow;
             }
           }
@@ -11596,8 +11600,8 @@
             };
             var setToSortedString = function(set2) {
               var array = [];
-              set2.forEach(function(value) {
-                array.push(value);
+              set2.forEach(function(value2) {
+                array.push(value2);
               });
               return array.sort().join(", ");
             };
@@ -11949,13 +11953,13 @@
                 error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().");
               }
             }
-            var value = context._currentValue;
+            var value2 = context._currentValue;
             if (lastFullyObservedContext === context)
               ;
             else {
               var contextItem = {
                 context,
-                memoizedValue: value,
+                memoizedValue: value2,
                 next: null
               };
               if (lastContextDependency === null) {
@@ -11971,7 +11975,7 @@
                 lastContextDependency = lastContextDependency.next = contextItem;
               }
             }
-            return value;
+            return value2;
           }
           var concurrentQueues = null;
           function pushConcurrentUpdateQueue(queue) {
@@ -11983,8 +11987,8 @@
           }
           function finishQueueingConcurrentUpdates() {
             if (concurrentQueues !== null) {
-              for (var i = 0; i < concurrentQueues.length; i++) {
-                var queue = concurrentQueues[i];
+              for (var i2 = 0; i2 < concurrentQueues.length; i2++) {
+                var queue = concurrentQueues[i2];
                 var lastInterleavedUpdate = queue.interleaved;
                 if (lastInterleavedUpdate !== null) {
                   queue.interleaved = null;
@@ -12426,8 +12430,8 @@
             var effects = finishedQueue.effects;
             finishedQueue.effects = null;
             if (effects !== null) {
-              for (var i = 0; i < effects.length; i++) {
-                var effect = effects[i];
+              for (var i2 = 0; i2 < effects.length; i2++) {
+                var effect = effects[i2];
                 var callback = effect.callback;
                 if (callback !== null) {
                   effect.callback = null;
@@ -12437,7 +12441,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React17.Component().refs;
+          var emptyRefsObject = new React19.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -13099,15 +13103,15 @@
                 if (current2 !== null && current2.ref !== null && typeof current2.ref === "function" && current2.ref._stringRef === stringRef) {
                   return current2.ref;
                 }
-                var ref = function(value) {
+                var ref = function(value2) {
                   var refs = resolvedInst.refs;
                   if (refs === emptyRefsObject) {
                     refs = resolvedInst.refs = {};
                   }
-                  if (value === null) {
+                  if (value2 === null) {
                     delete refs[stringRef];
                   } else {
-                    refs[stringRef] = value;
+                    refs[stringRef] = value2;
                   }
                 };
                 ref._stringRef = stringRef;
@@ -13424,8 +13428,8 @@
             function reconcileChildrenArray(returnFiber, currentFirstChild, newChildren, lanes) {
               {
                 var knownKeys = null;
-                for (var i = 0; i < newChildren.length; i++) {
-                  var child = newChildren[i];
+                for (var i2 = 0; i2 < newChildren.length; i2++) {
+                  var child = newChildren[i2];
                   knownKeys = warnOnInvalidKey(child, knownKeys, returnFiber);
                 }
               }
@@ -13939,8 +13943,8 @@
           );
           var workInProgressSources = [];
           function resetWorkInProgressVersions() {
-            for (var i = 0; i < workInProgressSources.length; i++) {
-              var mutableSource = workInProgressSources[i];
+            for (var i2 = 0; i2 < workInProgressSources.length; i2++) {
+              var mutableSource = workInProgressSources[i2];
               {
                 mutableSource._workInProgressVersionPrimary = null;
               }
@@ -14011,10 +14015,10 @@
                 if (hookTypesDev !== null) {
                   var table = "";
                   var secondColumnStart = 30;
-                  for (var i = 0; i <= hookTypesUpdateIndexDev; i++) {
-                    var oldHookName = hookTypesDev[i];
-                    var newHookName = i === hookTypesUpdateIndexDev ? currentHookName : oldHookName;
-                    var row = i + 1 + ". " + oldHookName;
+                  for (var i2 = 0; i2 <= hookTypesUpdateIndexDev; i2++) {
+                    var oldHookName = hookTypesDev[i2];
+                    var newHookName = i2 === hookTypesUpdateIndexDev ? currentHookName : oldHookName;
+                    var row = i2 + 1 + ". " + oldHookName;
                     while (row.length < secondColumnStart) {
                       row += " ";
                     }
@@ -14046,8 +14050,8 @@
                 error("The final argument passed to %s changed size between renders. The order and size of this array must remain constant.\n\nPrevious: %s\nIncoming: %s", currentHookNameInDev, "[" + prevDeps.join(", ") + "]", "[" + nextDeps.join(", ") + "]");
               }
             }
-            for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
-              if (objectIs(nextDeps[i], prevDeps[i])) {
+            for (var i2 = 0; i2 < prevDeps.length && i2 < nextDeps.length; i2++) {
+              if (objectIs(nextDeps[i2], prevDeps[i2])) {
                 continue;
               }
               return false;
@@ -14693,7 +14697,7 @@
             var effectDeps = deps !== null && deps !== void 0 ? deps.concat([ref]) : null;
             return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
           }
-          function mountDebugValue(value, formatterFn) {
+          function mountDebugValue(value2, formatterFn) {
           }
           var updateDebugValue = mountDebugValue;
           function mountCallback(callback, deps) {
@@ -14740,31 +14744,31 @@
             hook.memoizedState = [nextValue, nextDeps];
             return nextValue;
           }
-          function mountDeferredValue(value) {
+          function mountDeferredValue(value2) {
             var hook = mountWorkInProgressHook();
-            hook.memoizedState = value;
-            return value;
+            hook.memoizedState = value2;
+            return value2;
           }
-          function updateDeferredValue(value) {
+          function updateDeferredValue(value2) {
             var hook = updateWorkInProgressHook();
             var resolvedCurrentHook = currentHook;
             var prevValue = resolvedCurrentHook.memoizedState;
-            return updateDeferredValueImpl(hook, prevValue, value);
+            return updateDeferredValueImpl(hook, prevValue, value2);
           }
-          function rerenderDeferredValue(value) {
+          function rerenderDeferredValue(value2) {
             var hook = updateWorkInProgressHook();
             if (currentHook === null) {
-              hook.memoizedState = value;
-              return value;
+              hook.memoizedState = value2;
+              return value2;
             } else {
               var prevValue = currentHook.memoizedState;
-              return updateDeferredValueImpl(hook, prevValue, value);
+              return updateDeferredValueImpl(hook, prevValue, value2);
             }
           }
-          function updateDeferredValueImpl(hook, prevValue, value) {
+          function updateDeferredValueImpl(hook, prevValue, value2) {
             var shouldDeferValue = !includesOnlyNonUrgentLanes(renderLanes);
             if (shouldDeferValue) {
-              if (!objectIs(value, prevValue)) {
+              if (!objectIs(value2, prevValue)) {
                 var deferredLane = claimNextTransitionLane();
                 currentlyRenderingFiber$1.lanes = mergeLanes(currentlyRenderingFiber$1.lanes, deferredLane);
                 markSkippedUpdateLanes(deferredLane);
@@ -14776,8 +14780,8 @@
                 hook.baseState = false;
                 markWorkInProgressReceivedUpdate();
               }
-              hook.memoizedState = value;
-              return value;
+              hook.memoizedState = value2;
+              return value2;
             }
           }
           function startTransition(setPending, callback, options2) {
@@ -15076,15 +15080,15 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 mountHookTypesDev();
                 return mountDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 mountHookTypesDev();
-                return mountDeferredValue(value);
+                return mountDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15180,15 +15184,15 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 updateHookTypesDev();
                 return mountDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 updateHookTypesDev();
-                return mountDeferredValue(value);
+                return mountDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15284,15 +15288,15 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 updateHookTypesDev();
                 return updateDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 updateHookTypesDev();
-                return updateDeferredValue(value);
+                return updateDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15388,15 +15392,15 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 updateHookTypesDev();
                 return updateDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 updateHookTypesDev();
-                return rerenderDeferredValue(value);
+                return rerenderDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15503,17 +15507,17 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
                 return mountDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
-                return mountDeferredValue(value);
+                return mountDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15624,17 +15628,17 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 return updateDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateDeferredValue(value);
+                return updateDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15745,17 +15749,17 @@
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useDebugValue: function(value, formatterFn) {
+              useDebugValue: function(value2, formatterFn) {
                 currentHookNameInDev = "useDebugValue";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 return updateDebugValue();
               },
-              useDeferredValue: function(value) {
+              useDeferredValue: function(value2) {
                 currentHookNameInDev = "useDeferredValue";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return rerenderDeferredValue(value);
+                return rerenderDeferredValue(value2);
               },
               useTransition: function() {
                 currentHookNameInDev = "useTransition";
@@ -15893,17 +15897,17 @@
               child = child.sibling;
             }
           }
-          function createCapturedValueAtFiber(value, source) {
+          function createCapturedValueAtFiber(value2, source) {
             return {
-              value,
+              value: value2,
               source,
               stack: getStackByFiberInDevAndProd(source),
               digest: null
             };
           }
-          function createCapturedValue(value, digest, stack) {
+          function createCapturedValue(value2, digest, stack) {
             return {
-              value,
+              value: value2,
               source: null,
               stack: stack != null ? stack : null,
               digest: digest != null ? digest : null
@@ -16090,15 +16094,15 @@
             suspenseBoundary.lanes = rootRenderLanes;
             return suspenseBoundary;
           }
-          function throwException(root2, returnFiber, sourceFiber, value, rootRenderLanes) {
+          function throwException(root2, returnFiber, sourceFiber, value2, rootRenderLanes) {
             sourceFiber.flags |= Incomplete;
             {
               if (isDevToolsPresent) {
                 restorePendingUpdaters(root2, rootRenderLanes);
               }
             }
-            if (value !== null && typeof value === "object" && typeof value.then === "function") {
-              var wakeable = value;
+            if (value2 !== null && typeof value2 === "object" && typeof value2.then === "function") {
+              var wakeable = value2;
               resetSuspendedComponent(sourceFiber);
               {
                 if (getIsHydrating() && sourceFiber.mode & ConcurrentMode) {
@@ -16121,7 +16125,7 @@
                   return;
                 }
                 var uncaughtSuspenseError = new Error("A component suspended while responding to synchronous input. This will cause the UI to be replaced with a loading indicator. To fix, updates that suspend should be wrapped with startTransition.");
-                value = uncaughtSuspenseError;
+                value2 = uncaughtSuspenseError;
               }
             } else {
               if (getIsHydrating() && sourceFiber.mode & ConcurrentMode) {
@@ -16132,18 +16136,18 @@
                     _suspenseBoundary.flags |= ForceClientRender;
                   }
                   markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes);
-                  queueHydrationError(createCapturedValueAtFiber(value, sourceFiber));
+                  queueHydrationError(createCapturedValueAtFiber(value2, sourceFiber));
                   return;
                 }
               }
             }
-            value = createCapturedValueAtFiber(value, sourceFiber);
-            renderDidError(value);
+            value2 = createCapturedValueAtFiber(value2, sourceFiber);
+            renderDidError(value2);
             var workInProgress2 = returnFiber;
             do {
               switch (workInProgress2.tag) {
                 case HostRoot: {
-                  var _errorInfo = value;
+                  var _errorInfo = value2;
                   workInProgress2.flags |= ShouldCapture;
                   var lane = pickArbitraryLane(rootRenderLanes);
                   workInProgress2.lanes = mergeLanes(workInProgress2.lanes, lane);
@@ -16152,7 +16156,7 @@
                   return;
                 }
                 case ClassComponent:
-                  var errorInfo = value;
+                  var errorInfo = value2;
                   var ctor = workInProgress2.type;
                   var instance = workInProgress2.stateNode;
                   if ((workInProgress2.flags & DidCapture) === NoFlags && (typeof ctor.getDerivedStateFromError === "function" || instance !== null && typeof instance.componentDidCatch === "function" && !isAlreadyFailedLegacyErrorBoundary(instance))) {
@@ -16806,7 +16810,7 @@
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            var value;
+            var value2;
             var hasId;
             {
               markComponentRenderStarted(workInProgress2);
@@ -16824,7 +16828,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
+              value2 = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16833,7 +16837,7 @@
             }
             workInProgress2.flags |= PerformedWork;
             {
-              if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
+              if (typeof value2 === "object" && value2 !== null && typeof value2.render === "function" && value2.$$typeof === void 0) {
                 var _componentName = getComponentNameFromType(Component2) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
@@ -16844,7 +16848,7 @@
             if (
               // Run these checks in production only if the flag is off.
               // Eventually we'll delete this branch altogether.
-              typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0
+              typeof value2 === "object" && value2 !== null && typeof value2.render === "function" && value2.$$typeof === void 0
             ) {
               {
                 var _componentName2 = getComponentNameFromType(Component2) || "Unknown";
@@ -16863,9 +16867,9 @@
               } else {
                 hasContext = false;
               }
-              workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
+              workInProgress2.memoizedState = value2.state !== null && value2.state !== void 0 ? value2.state : null;
               initializeUpdateQueue(workInProgress2);
-              adoptClassInstance(workInProgress2, value);
+              adoptClassInstance(workInProgress2, value2);
               mountClassInstance(workInProgress2, Component2, props, renderLanes2);
               return finishClassComponent(null, workInProgress2, Component2, true, hasContext, renderLanes2);
             } else {
@@ -16874,7 +16878,7 @@
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
+                    value2 = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -16884,7 +16888,7 @@
               if (getIsHydrating() && hasId) {
                 pushMaterializedTreeId(workInProgress2);
               }
-              reconcileChildren(null, workInProgress2, value, renderLanes2);
+              reconcileChildren(null, workInProgress2, value2, renderLanes2);
               {
                 validateFunctionComponentInDev(workInProgress2, Component2);
               }
@@ -17375,8 +17379,8 @@
             {
               if ((revealOrder === "forwards" || revealOrder === "backwards") && children !== void 0 && children !== null && children !== false) {
                 if (isArray(children)) {
-                  for (var i = 0; i < children.length; i++) {
-                    if (!validateSuspenseListNestedChild(children[i], i)) {
+                  for (var i2 = 0; i2 < children.length; i2++) {
+                    if (!validateSuspenseListNestedChild(children[i2], i2)) {
                       return;
                     }
                   }
@@ -19570,8 +19574,8 @@
           function recursivelyTraverseMutationEffects(root2, parentFiber, lanes) {
             var deletions = parentFiber.deletions;
             if (deletions !== null) {
-              for (var i = 0; i < deletions.length; i++) {
-                var childToDelete = deletions[i];
+              for (var i2 = 0; i2 < deletions.length; i2++) {
+                var childToDelete = deletions[i2];
                 try {
                   commitDeletionEffects(root2, parentFiber, childToDelete);
                 } catch (error2) {
@@ -20077,8 +20081,8 @@
               if ((nextEffect.flags & ChildDeletion) !== NoFlags) {
                 var deletions = fiber.deletions;
                 if (deletions !== null) {
-                  for (var i = 0; i < deletions.length; i++) {
-                    var fiberToDelete = deletions[i];
+                  for (var i2 = 0; i2 < deletions.length; i2++) {
+                    var fiberToDelete = deletions[i2];
                     nextEffect = fiberToDelete;
                     commitPassiveUnmountEffectsInsideOfDeletedTree_begin(fiberToDelete, fiber);
                   }
@@ -20720,8 +20724,8 @@
                 if (updateQueue !== null) {
                   var checks = updateQueue.stores;
                   if (checks !== null) {
-                    for (var i = 0; i < checks.length; i++) {
-                      var check = checks[i];
+                    for (var i2 = 0; i2 < checks.length; i2++) {
+                      var check = checks[i2];
                       var getSnapshot = check.getSnapshot;
                       var renderedValue = check.value;
                       try {
@@ -21298,8 +21302,8 @@
             ensureRootIsScheduled(root2, now());
             if (recoverableErrors !== null) {
               var onRecoverableError = root2.onRecoverableError;
-              for (var i = 0; i < recoverableErrors.length; i++) {
-                var recoverableError = recoverableErrors[i];
+              for (var i2 = 0; i2 < recoverableErrors.length; i2++) {
+                var recoverableError = recoverableErrors[i2];
                 var componentStack = recoverableError.stack;
                 var digest = recoverableError.digest;
                 onRecoverableError(recoverableError.value, {
@@ -21393,8 +21397,8 @@
             {
               var profilerEffects = pendingPassiveProfilerEffects;
               pendingPassiveProfilerEffects = [];
-              for (var i = 0; i < profilerEffects.length; i++) {
-                var _fiber = profilerEffects[i];
+              for (var i2 = 0; i2 < profilerEffects.length; i2++) {
+                var _fiber = profilerEffects[i2];
                 commitPassiveEffectDurations(root2, _fiber);
               }
             }
@@ -22827,8 +22831,8 @@
                 warn("copyWithRename() expects paths of the same length");
                 return;
               } else {
-                for (var i = 0; i < newPath.length - 1; i++) {
-                  if (oldPath[i] !== newPath[i]) {
+                for (var i2 = 0; i2 < newPath.length - 1; i2++) {
+                  if (oldPath[i2] !== newPath[i2]) {
                     warn("copyWithRename() expects paths to be the same except for the deepest key");
                     return;
                   }
@@ -22836,17 +22840,17 @@
               }
               return copyWithRenameImpl(obj, oldPath, newPath, 0);
             };
-            var copyWithSetImpl = function(obj, path, index2, value) {
+            var copyWithSetImpl = function(obj, path, index2, value2) {
               if (index2 >= path.length) {
-                return value;
+                return value2;
               }
               var key = path[index2];
               var updated = isArray(obj) ? obj.slice() : assign({}, obj);
-              updated[key] = copyWithSetImpl(obj[key], path, index2 + 1, value);
+              updated[key] = copyWithSetImpl(obj[key], path, index2 + 1, value2);
               return updated;
             };
-            var copyWithSet = function(obj, path, value) {
-              return copyWithSetImpl(obj, path, 0, value);
+            var copyWithSet = function(obj, path, value2) {
+              return copyWithSetImpl(obj, path, 0, value2);
             };
             var findHook = function(fiber, id) {
               var currentHook2 = fiber.memoizedState;
@@ -22856,10 +22860,10 @@
               }
               return currentHook2;
             };
-            overrideHookState = function(fiber, id, path, value) {
+            overrideHookState = function(fiber, id, path, value2) {
               var hook = findHook(fiber, id);
               if (hook !== null) {
-                var newState = copyWithSet(hook.memoizedState, path, value);
+                var newState = copyWithSet(hook.memoizedState, path, value2);
                 hook.memoizedState = newState;
                 hook.baseState = newState;
                 fiber.memoizedProps = assign({}, fiber.memoizedProps);
@@ -22895,8 +22899,8 @@
                 }
               }
             };
-            overrideProps = function(fiber, path, value) {
-              fiber.pendingProps = copyWithSet(fiber.memoizedProps, path, value);
+            overrideProps = function(fiber, path, value2) {
+              fiber.pendingProps = copyWithSet(fiber.memoizedProps, path, value2);
               if (fiber.alternate) {
                 fiber.alternate.pendingProps = fiber.pendingProps;
               }
@@ -23118,8 +23122,8 @@
             markContainerAsRoot(root2.current, container);
             listenToAllSupportedEvents(container);
             if (mutableSources) {
-              for (var i = 0; i < mutableSources.length; i++) {
-                var mutableSource = mutableSources[i];
+              for (var i2 = 0; i2 < mutableSources.length; i2++) {
+                var mutableSource = mutableSources[i2];
                 registerMutableSourceForHydration(root2, mutableSource);
               }
             }
@@ -23437,9 +23441,9 @@
           {
             if (!foundDevTools && canUseDOM && window.top === window.self) {
               if (navigator.userAgent.indexOf("Chrome") > -1 && navigator.userAgent.indexOf("Edge") === -1 || navigator.userAgent.indexOf("Firefox") > -1) {
-                var protocol = window.location.protocol;
-                if (/^(https?|file):$/.test(protocol)) {
-                  console.info("%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools" + (protocol === "file:" ? "\nYou might need to use a local HTTP server (instead of file://): https://reactjs.org/link/react-devtools-faq" : ""), "font-weight:bold");
+                var protocol4 = window.location.protocol;
+                if (/^(https?|file):$/.test(protocol4)) {
+                  console.info("%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools" + (protocol4 === "file:" ? "\nYou might need to use a local HTTP server (instead of file://): https://reactjs.org/link/react-devtools-faq" : ""), "font-weight:bold");
                 }
               }
             }
@@ -23486,30 +23490,30 @@
         exports.createRoot = m.createRoot;
         exports.hydrateRoot = m.hydrateRoot;
       } else {
-        i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        i2 = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         exports.createRoot = function(c, o) {
-          i.usingClientEntryPoint = true;
+          i2.usingClientEntryPoint = true;
           try {
             return m.createRoot(c, o);
           } finally {
-            i.usingClientEntryPoint = false;
+            i2.usingClientEntryPoint = false;
           }
         };
         exports.hydrateRoot = function(c, h, o) {
-          i.usingClientEntryPoint = true;
+          i2.usingClientEntryPoint = true;
           try {
             return m.hydrateRoot(c, h, o);
           } finally {
-            i.usingClientEntryPoint = false;
+            i2.usingClientEntryPoint = false;
           }
         };
       }
-      var i;
+      var i2;
     }
   });
 
   // frontend/app.tsx
-  var import_react12 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/react-router-dom/dist/index.js
@@ -23521,8 +23525,8 @@
   // node_modules/@remix-run/router/dist/router.js
   function _extends() {
     _extends = Object.assign ? Object.assign.bind() : function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
         for (var key in source) {
           if (Object.prototype.hasOwnProperty.call(source, key)) {
             target[key] = source[key];
@@ -23567,8 +23571,8 @@
     }
     return getUrlBasedHistory(createBrowserLocation, createBrowserHref, null, options);
   }
-  function invariant(value, message) {
-    if (value === false || value === null || typeof value === "undefined") {
+  function invariant(value2, message) {
+    if (value2 === false || value2 === null || typeof value2 === "undefined") {
       throw new Error(message);
     }
   }
@@ -23585,10 +23589,10 @@
   function createKey() {
     return Math.random().toString(36).substr(2, 8);
   }
-  function getHistoryState(location, index) {
+  function getHistoryState(location2, index) {
     return {
-      usr: location.state,
-      key: location.key,
+      usr: location2.state,
+      key: location2.key,
       idx: index
     };
   }
@@ -23596,7 +23600,7 @@
     if (state === void 0) {
       state = null;
     }
-    let location = _extends({
+    let location2 = _extends({
       pathname: typeof current === "string" ? current : current.pathname,
       search: "",
       hash: ""
@@ -23608,7 +23612,7 @@
       // keep as is for the time being and just let any incoming keys take precedence
       key: to && to.key || key || createKey()
     });
-    return location;
+    return location2;
   }
   function createPath(_ref) {
     let {
@@ -23680,19 +23684,19 @@
     }
     function push(to, state) {
       action = Action.Push;
-      let location = createLocation(history.location, to, state);
+      let location2 = createLocation(history.location, to, state);
       if (validateLocation)
-        validateLocation(location, to);
+        validateLocation(location2, to);
       index = getIndex() + 1;
-      let historyState = getHistoryState(location, index);
-      let url = history.createHref(location);
+      let historyState = getHistoryState(location2, index);
+      let url2 = history.createHref(location2);
       try {
-        globalHistory.pushState(historyState, "", url);
+        globalHistory.pushState(historyState, "", url2);
       } catch (error) {
         if (error instanceof DOMException && error.name === "DataCloneError") {
           throw error;
         }
-        window2.location.assign(url);
+        window2.location.assign(url2);
       }
       if (v5Compat && listener) {
         listener({
@@ -23704,13 +23708,13 @@
     }
     function replace(to, state) {
       action = Action.Replace;
-      let location = createLocation(history.location, to, state);
+      let location2 = createLocation(history.location, to, state);
       if (validateLocation)
-        validateLocation(location, to);
+        validateLocation(location2, to);
       index = getIndex();
-      let historyState = getHistoryState(location, index);
-      let url = history.createHref(location);
-      globalHistory.replaceState(historyState, "", url);
+      let historyState = getHistoryState(location2, index);
+      let url2 = history.createHref(location2);
+      globalHistory.replaceState(historyState, "", url2);
       if (v5Compat && listener) {
         listener({
           action,
@@ -23748,11 +23752,11 @@
       },
       createURL,
       encodeLocation(to) {
-        let url = createURL(to);
+        let url2 = createURL(to);
         return {
-          pathname: url.pathname,
-          search: url.search,
-          hash: url.hash
+          pathname: url2.pathname,
+          search: url2.search,
+          hash: url2.hash
         };
       },
       push,
@@ -23809,17 +23813,17 @@
     if (basename === void 0) {
       basename = "/";
     }
-    let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
-    let pathname = stripBasename(location.pathname || "/", basename);
+    let location2 = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+    let pathname = stripBasename(location2.pathname || "/", basename);
     if (pathname == null) {
       return null;
     }
     let branches = flattenRoutes(routes);
     rankRouteBranches(branches);
     let matches = null;
-    for (let i = 0; matches == null && i < branches.length; ++i) {
+    for (let i2 = 0; matches == null && i2 < branches.length; ++i2) {
       matches = matchRouteBranch(
-        branches[i],
+        branches[i2],
         // Incoming pathnames are generally encoded from either window.location
         // or from router.navigate, but we want to match against the unencoded
         // paths in the route definitions.  Memory router locations won't be
@@ -23938,7 +23942,7 @@
     return segments.filter((s) => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
   }
   function compareIndexes(a, b) {
-    let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+    let siblings = a.length === b.length && a.slice(0, -1).every((n, i2) => n === b[i2]);
     return siblings ? (
       // If two routes are siblings, we should try to match the earlier sibling
       // first. This allows people to have fine-grained control over the matching
@@ -23958,9 +23962,9 @@
     let matchedParams = {};
     let matchedPathname = "/";
     let matches = [];
-    for (let i = 0; i < routesMeta.length; ++i) {
-      let meta = routesMeta[i];
-      let end = i === routesMeta.length - 1;
+    for (let i2 = 0; i2 < routesMeta.length; ++i2) {
+      let meta = routesMeta[i2];
+      let end = i2 === routesMeta.length - 1;
       let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
       let match = matchPath({
         path: meta.relativePath,
@@ -23999,7 +24003,7 @@
     let matchedPathname = match[0];
     let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
     let captureGroups = match.slice(1);
-    let params = compiledParams.reduce((memo, _ref, index) => {
+    let params = compiledParams.reduce((memo2, _ref, index) => {
       let {
         paramName,
         isOptional
@@ -24008,13 +24012,13 @@
         let splatValue = captureGroups[index] || "";
         pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
       }
-      const value = captureGroups[index];
-      if (isOptional && !value) {
-        memo[paramName] = void 0;
+      const value2 = captureGroups[index];
+      if (isOptional && !value2) {
+        memo2[paramName] = void 0;
       } else {
-        memo[paramName] = safelyDecodeURIComponent(value || "", paramName);
+        memo2[paramName] = safelyDecodeURIComponent(value2 || "", paramName);
       }
-      return memo;
+      return memo2;
     }, {});
     return {
       params,
@@ -24053,20 +24057,20 @@
     let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
     return [matcher, params];
   }
-  function safelyDecodeURI(value) {
+  function safelyDecodeURI(value2) {
     try {
-      return decodeURI(value);
+      return decodeURI(value2);
     } catch (error) {
-      warning(false, 'The URL path "' + value + '" could not be decoded because it is is a malformed URL segment. This is probably due to a bad percent ' + ("encoding (" + error + ")."));
-      return value;
+      warning(false, 'The URL path "' + value2 + '" could not be decoded because it is is a malformed URL segment. This is probably due to a bad percent ' + ("encoding (" + error + ")."));
+      return value2;
     }
   }
-  function safelyDecodeURIComponent(value, paramName) {
+  function safelyDecodeURIComponent(value2, paramName) {
     try {
-      return decodeURIComponent(value);
+      return decodeURIComponent(value2);
     } catch (error) {
-      warning(false, 'The value for the URL param "' + paramName + '" will not be decoded because' + (' the string "' + value + '" is a malformed URL segment. This is probably') + (" due to a bad percent encoding (" + error + ")."));
-      return value;
+      warning(false, 'The value for the URL param "' + paramName + '" will not be decoded because' + (' the string "' + value2 + '" is a malformed URL segment. This is probably') + (" due to a bad percent encoding (" + error + ")."));
+      return value2;
     }
   }
   function stripBasename(pathname, basename) {
@@ -24309,7 +24313,7 @@
       unlistenHistory = init.history.listen((_ref) => {
         let {
           action: historyAction,
-          location,
+          location: location2,
           delta
         } = _ref;
         if (ignoreNextHistoryUpdate) {
@@ -24319,7 +24323,7 @@
         warning(blockerFunctions.size === 0 || delta != null, "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.");
         let blockerKey = shouldBlockNavigation({
           currentLocation: state.location,
-          nextLocation: location,
+          nextLocation: location2,
           historyAction
         });
         if (blockerKey && delta != null) {
@@ -24327,13 +24331,13 @@
           init.history.go(delta * -1);
           updateBlocker(blockerKey, {
             state: "blocked",
-            location,
+            location: location2,
             proceed() {
               updateBlocker(blockerKey, {
                 state: "proceeding",
                 proceed: void 0,
                 reset: void 0,
-                location
+                location: location2
               });
               init.history.go(delta);
             },
@@ -24347,7 +24351,7 @@
           });
           return;
         }
-        return startNavigation(historyAction, location);
+        return startNavigation(historyAction, location2);
       });
       if (isBrowser2) {
         restoreAppliedTransitions(routerWindow, appliedViewTransitions);
@@ -24400,9 +24404,9 @@
         deletedFetchersKeys.forEach((key) => deleteFetcher(key));
       }
     }
-    function completeNavigation(location, newState) {
+    function completeNavigation(location2, newState) {
       var _location$state, _location$state2;
-      let isActionReload = state.actionData != null && state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && state.navigation.state === "loading" && ((_location$state = location.state) == null ? void 0 : _location$state._isRedirect) !== true;
+      let isActionReload = state.actionData != null && state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && state.navigation.state === "loading" && ((_location$state = location2.state) == null ? void 0 : _location$state._isRedirect) !== true;
       let actionData;
       if (newState.actionData) {
         if (Object.keys(newState.actionData).length > 0) {
@@ -24421,7 +24425,7 @@
         blockers = new Map(blockers);
         blockers.forEach((_, k) => blockers.set(k, IDLE_BLOCKER));
       }
-      let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && ((_location$state2 = location.state) == null ? void 0 : _location$state2._isRedirect) !== true;
+      let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && ((_location$state2 = location2.state) == null ? void 0 : _location$state2._isRedirect) !== true;
       if (inFlightDataRoutes) {
         dataRoutes = inFlightDataRoutes;
         inFlightDataRoutes = void 0;
@@ -24431,46 +24435,46 @@
       else if (pendingAction === Action.Pop)
         ;
       else if (pendingAction === Action.Push) {
-        init.history.push(location, location.state);
+        init.history.push(location2, location2.state);
       } else if (pendingAction === Action.Replace) {
-        init.history.replace(location, location.state);
+        init.history.replace(location2, location2.state);
       }
       let viewTransitionOpts;
       if (pendingAction === Action.Pop) {
         let priorPaths = appliedViewTransitions.get(state.location.pathname);
-        if (priorPaths && priorPaths.has(location.pathname)) {
+        if (priorPaths && priorPaths.has(location2.pathname)) {
           viewTransitionOpts = {
             currentLocation: state.location,
-            nextLocation: location
+            nextLocation: location2
           };
-        } else if (appliedViewTransitions.has(location.pathname)) {
+        } else if (appliedViewTransitions.has(location2.pathname)) {
           viewTransitionOpts = {
-            currentLocation: location,
+            currentLocation: location2,
             nextLocation: state.location
           };
         }
       } else if (pendingViewTransitionEnabled) {
         let toPaths = appliedViewTransitions.get(state.location.pathname);
         if (toPaths) {
-          toPaths.add(location.pathname);
+          toPaths.add(location2.pathname);
         } else {
-          toPaths = /* @__PURE__ */ new Set([location.pathname]);
+          toPaths = /* @__PURE__ */ new Set([location2.pathname]);
           appliedViewTransitions.set(state.location.pathname, toPaths);
         }
         viewTransitionOpts = {
           currentLocation: state.location,
-          nextLocation: location
+          nextLocation: location2
         };
       }
       updateState(_extends({}, newState, {
         actionData,
         loaderData,
         historyAction: pendingAction,
-        location,
+        location: location2,
         initialized: true,
         navigation: IDLE_NAVIGATION,
         revalidation: "idle",
-        restoreScrollPosition: getSavedScrollPosition(location, newState.matches || state.matches),
+        restoreScrollPosition: getSavedScrollPosition(location2, newState.matches || state.matches),
         preventScrollReset,
         blockers
       }), viewTransitionOpts);
@@ -24562,7 +24566,7 @@
         overrideNavigation: state.navigation
       });
     }
-    async function startNavigation(historyAction, location, opts) {
+    async function startNavigation(historyAction, location2, opts) {
       pendingNavigationController && pendingNavigationController.abort();
       pendingNavigationController = null;
       pendingAction = historyAction;
@@ -24572,17 +24576,17 @@
       pendingViewTransitionEnabled = (opts && opts.enableViewTransition) === true;
       let routesToUse = inFlightDataRoutes || dataRoutes;
       let loadingNavigation = opts && opts.overrideNavigation;
-      let matches = matchRoutes(routesToUse, location, basename);
+      let matches = matchRoutes(routesToUse, location2, basename);
       if (!matches) {
         let error = getInternalRouterError(404, {
-          pathname: location.pathname
+          pathname: location2.pathname
         });
         let {
           matches: notFoundMatches,
           route
         } = getShortCircuitMatches(routesToUse);
         cancelActiveDeferreds();
-        completeNavigation(location, {
+        completeNavigation(location2, {
           matches: notFoundMatches,
           loaderData: {},
           errors: {
@@ -24591,14 +24595,14 @@
         });
         return;
       }
-      if (state.initialized && !isRevalidationRequired && isHashChangeOnly(state.location, location) && !(opts && opts.submission && isMutationMethod(opts.submission.formMethod))) {
-        completeNavigation(location, {
+      if (state.initialized && !isRevalidationRequired && isHashChangeOnly(state.location, location2) && !(opts && opts.submission && isMutationMethod(opts.submission.formMethod))) {
+        completeNavigation(location2, {
           matches
         });
         return;
       }
       pendingNavigationController = new AbortController();
-      let request2 = createClientSideRequest(init.history, location, pendingNavigationController.signal, opts && opts.submission);
+      let request2 = createClientSideRequest(init.history, location2, pendingNavigationController.signal, opts && opts.submission);
       let pendingActionData;
       let pendingError;
       if (opts && opts.pendingError) {
@@ -24606,7 +24610,7 @@
           [findNearestBoundary(matches).route.id]: opts.pendingError
         };
       } else if (opts && opts.submission && isMutationMethod(opts.submission.formMethod)) {
-        let actionOutput = await handleAction(request2, location, opts.submission, matches, {
+        let actionOutput = await handleAction(request2, location2, opts.submission, matches, {
           replace: opts.replace
         });
         if (actionOutput.shortCircuited) {
@@ -24614,7 +24618,7 @@
         }
         pendingActionData = actionOutput.pendingActionData;
         pendingError = actionOutput.pendingActionError;
-        loadingNavigation = getLoadingNavigation(location, opts.submission);
+        loadingNavigation = getLoadingNavigation(location2, opts.submission);
         request2 = new Request(request2.url, {
           signal: request2.signal
         });
@@ -24623,12 +24627,12 @@
         shortCircuited,
         loaderData,
         errors
-      } = await handleLoaders(request2, location, matches, loadingNavigation, opts && opts.submission, opts && opts.fetcherSubmission, opts && opts.replace, pendingActionData, pendingError);
+      } = await handleLoaders(request2, location2, matches, loadingNavigation, opts && opts.submission, opts && opts.fetcherSubmission, opts && opts.replace, pendingActionData, pendingError);
       if (shortCircuited) {
         return;
       }
       pendingNavigationController = null;
-      completeNavigation(location, _extends({
+      completeNavigation(location2, _extends({
         matches
       }, pendingActionData ? {
         actionData: pendingActionData
@@ -24637,23 +24641,23 @@
         errors
       }));
     }
-    async function handleAction(request2, location, submission, matches, opts) {
+    async function handleAction(request2, location2, submission, matches, opts) {
       if (opts === void 0) {
         opts = {};
       }
       interruptActiveLoads();
-      let navigation = getSubmittingNavigation(location, submission);
+      let navigation = getSubmittingNavigation(location2, submission);
       updateState({
         navigation
       });
       let result;
-      let actionMatch = getTargetMatch(matches, location);
+      let actionMatch = getTargetMatch(matches, location2);
       if (!actionMatch.route.action && !actionMatch.route.lazy) {
         result = {
           type: ResultType.error,
           error: getInternalRouterError(405, {
             method: request2.method,
-            pathname: location.pathname,
+            pathname: location2.pathname,
             routeId: actionMatch.route.id
           })
         };
@@ -24704,16 +24708,16 @@
         }
       };
     }
-    async function handleLoaders(request2, location, matches, overrideNavigation, submission, fetcherSubmission, replace, pendingActionData, pendingError) {
-      let loadingNavigation = overrideNavigation || getLoadingNavigation(location, submission);
+    async function handleLoaders(request2, location2, matches, overrideNavigation, submission, fetcherSubmission, replace, pendingActionData, pendingError) {
+      let loadingNavigation = overrideNavigation || getLoadingNavigation(location2, submission);
       let activeSubmission = submission || fetcherSubmission || getSubmissionFromNavigation(loadingNavigation);
       let routesToUse = inFlightDataRoutes || dataRoutes;
-      let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init.history, state, matches, activeSubmission, location, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionData, pendingError);
+      let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init.history, state, matches, activeSubmission, location2, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionData, pendingError);
       cancelActiveDeferreds((routeId) => !(matches && matches.some((m) => m.route.id === routeId)) || matchesToLoad && matchesToLoad.some((m) => m.route.id === routeId));
       pendingNavigationLoadId = ++incrementingLoadId;
       if (matchesToLoad.length === 0 && revalidatingFetchers.length === 0) {
         let updatedFetchers2 = markFetchRedirectsDone();
-        completeNavigation(location, _extends({
+        completeNavigation(location2, _extends({
           matches,
           loaderData: {},
           // Commit pending error if we're short circuiting
@@ -25078,10 +25082,10 @@
         if (redirect2.reloadDocument) {
           isDocumentReload = true;
         } else if (ABSOLUTE_URL_REGEX.test(redirect2.location)) {
-          const url = init.history.createURL(redirect2.location);
+          const url2 = init.history.createURL(redirect2.location);
           isDocumentReload = // Hard reload if it's an absolute URL to a new origin
-          url.origin !== routerWindow.location.origin || // Hard reload if it's an absolute URL that does not match our basename
-          stripBasename(url.pathname, basename) == null;
+          url2.origin !== routerWindow.location.origin || // Hard reload if it's an absolute URL that does not match our basename
+          stripBasename(url2.pathname, basename) == null;
         }
         if (isDocumentReload) {
           if (replace) {
@@ -25312,22 +25316,22 @@
         getScrollRestorationKey = null;
       };
     }
-    function getScrollKey(location, matches) {
+    function getScrollKey(location2, matches) {
       if (getScrollRestorationKey) {
-        let key = getScrollRestorationKey(location, matches.map((m) => convertRouteMatchToUiMatch(m, state.loaderData)));
-        return key || location.key;
+        let key = getScrollRestorationKey(location2, matches.map((m) => convertRouteMatchToUiMatch(m, state.loaderData)));
+        return key || location2.key;
       }
-      return location.key;
+      return location2.key;
     }
-    function saveScrollPosition(location, matches) {
+    function saveScrollPosition(location2, matches) {
       if (savedScrollPositions2 && getScrollPosition) {
-        let key = getScrollKey(location, matches);
+        let key = getScrollKey(location2, matches);
         savedScrollPositions2[key] = getScrollPosition();
       }
     }
-    function getSavedScrollPosition(location, matches) {
+    function getSavedScrollPosition(location2, matches) {
       if (savedScrollPositions2) {
-        let key = getScrollKey(location, matches);
+        let key = getScrollKey(location2, matches);
         let y = savedScrollPositions2[key];
         if (typeof y === "number") {
           return y;
@@ -25379,7 +25383,7 @@
   function isSubmissionNavigation(opts) {
     return opts != null && ("formData" in opts && opts.formData != null || "body" in opts && opts.body !== void 0);
   }
-  function normalizeTo(location, matches, basename, prependBasename, to, fromRouteId, relative) {
+  function normalizeTo(location2, matches, basename, prependBasename, to, fromRouteId, relative) {
     let contextualMatches;
     let activeRouteMatch;
     if (fromRouteId != null && relative !== "path") {
@@ -25395,10 +25399,10 @@
       contextualMatches = matches;
       activeRouteMatch = matches[matches.length - 1];
     }
-    let path = resolveTo(to ? to : ".", getPathContributingMatches(contextualMatches).map((m) => m.pathnameBase), stripBasename(location.pathname, basename) || location.pathname, relative === "path");
+    let path = resolveTo(to ? to : ".", getPathContributingMatches(contextualMatches).map((m) => m.pathnameBase), stripBasename(location2.pathname, basename) || location2.pathname, relative === "path");
     if (to == null) {
-      path.search = location.search;
-      path.hash = location.hash;
+      path.search = location2.search;
+      path.hash = location2.hash;
     }
     if ((to == null || to === "" || to === ".") && activeRouteMatch && activeRouteMatch.route.index && !hasNakedIndexQuery(path.search)) {
       path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
@@ -25439,8 +25443,8 @@
         let text = typeof opts.body === "string" ? opts.body : opts.body instanceof FormData || opts.body instanceof URLSearchParams ? (
           // https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#plain-text-form-data
           Array.from(opts.body.entries()).reduce((acc, _ref3) => {
-            let [name, value] = _ref3;
-            return "" + acc + name + "=" + value + "\n";
+            let [name, value2] = _ref3;
+            return "" + acc + name + "=" + value2 + "\n";
           }, "")
         ) : String(opts.body);
         return {
@@ -25533,10 +25537,10 @@
     }
     return boundaryMatches;
   }
-  function getMatchesToLoad(history, state, matches, submission, location, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionData, pendingError) {
+  function getMatchesToLoad(history, state, matches, submission, location2, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionData, pendingError) {
     let actionResult = pendingError ? Object.values(pendingError)[0] : pendingActionData ? Object.values(pendingActionData)[0] : void 0;
     let currentUrl = history.createURL(state.location);
-    let nextUrl = history.createURL(location);
+    let nextUrl = history.createURL(location2);
     let boundaryId = pendingError ? Object.keys(pendingError)[0] : void 0;
     let boundaryMatches = getLoaderMatchesUntilBoundary(matches, boundaryId);
     let navigationMatches = boundaryMatches.filter((match, index) => {
@@ -25711,8 +25715,8 @@
           if (handler) {
             result = await runHandler(handler);
           } else if (type === "action") {
-            let url = new URL(request2.url);
-            let pathname = url.pathname + url.search;
+            let url2 = new URL(request2.url);
+            let pathname = url2.pathname + url2.search;
             throw getInternalRouterError(405, {
               method: request2.method,
               pathname,
@@ -25726,8 +25730,8 @@
           }
         }
       } else if (!handler) {
-        let url = new URL(request2.url);
-        let pathname = url.pathname + url.search;
+        let url2 = new URL(request2.url);
+        let pathname = url2.pathname + url2.search;
         throw getInternalRouterError(404, {
           pathname
         });
@@ -25746,26 +25750,26 @@
     if (isResponse(result)) {
       let status = result.status;
       if (redirectStatusCodes.has(status)) {
-        let location = result.headers.get("Location");
-        invariant(location, "Redirects returned/thrown from loaders/actions must have a Location header");
-        if (!ABSOLUTE_URL_REGEX.test(location)) {
-          location = normalizeTo(new URL(request2.url), matches.slice(0, matches.indexOf(match) + 1), basename, true, location);
+        let location2 = result.headers.get("Location");
+        invariant(location2, "Redirects returned/thrown from loaders/actions must have a Location header");
+        if (!ABSOLUTE_URL_REGEX.test(location2)) {
+          location2 = normalizeTo(new URL(request2.url), matches.slice(0, matches.indexOf(match) + 1), basename, true, location2);
         } else if (!opts.isStaticRequest) {
           let currentUrl = new URL(request2.url);
-          let url = location.startsWith("//") ? new URL(currentUrl.protocol + location) : new URL(location);
-          let isSameBasename = stripBasename(url.pathname, basename) != null;
-          if (url.origin === currentUrl.origin && isSameBasename) {
-            location = url.pathname + url.search + url.hash;
+          let url2 = location2.startsWith("//") ? new URL(currentUrl.protocol + location2) : new URL(location2);
+          let isSameBasename = stripBasename(url2.pathname, basename) != null;
+          if (url2.origin === currentUrl.origin && isSameBasename) {
+            location2 = url2.pathname + url2.search + url2.hash;
           }
         }
         if (opts.isStaticRequest) {
-          result.headers.set("Location", location);
+          result.headers.set("Location", location2);
           throw result;
         }
         return {
           type: ResultType.redirect,
           status,
-          location,
+          location: location2,
           revalidate: result.headers.get("X-Remix-Revalidate") !== null,
           reloadDocument: result.headers.get("X-Remix-Reload-Document") !== null
         };
@@ -25818,8 +25822,8 @@
       data: result
     };
   }
-  function createClientSideRequest(history, location, signal, submission) {
-    let url = history.createURL(stripHashFromPath(location)).toString();
+  function createClientSideRequest(history, location2, signal, submission) {
+    let url2 = history.createURL(stripHashFromPath(location2)).toString();
     let init = {
       signal
     };
@@ -25842,19 +25846,19 @@
         init.body = submission.formData;
       }
     }
-    return new Request(url, init);
+    return new Request(url2, init);
   }
   function convertFormDataToSearchParams(formData) {
     let searchParams = new URLSearchParams();
-    for (let [key, value] of formData.entries()) {
-      searchParams.append(key, typeof value === "string" ? value : value.name);
+    for (let [key, value2] of formData.entries()) {
+      searchParams.append(key, typeof value2 === "string" ? value2 : value2.name);
     }
     return searchParams;
   }
   function convertSearchParamsToFormData(searchParams) {
     let formData = new FormData();
-    for (let [key, value] of searchParams.entries()) {
-      formData.append(key, value);
+    for (let [key, value2] of searchParams.entries()) {
+      formData.append(key, value2);
     }
     return formData;
   }
@@ -26019,12 +26023,12 @@
     return new ErrorResponseImpl(status || 500, statusText, new Error(errorMessage), true);
   }
   function findRedirect(results) {
-    for (let i = results.length - 1; i >= 0; i--) {
-      let result = results[i];
+    for (let i2 = results.length - 1; i2 >= 0; i2--) {
+      let result = results[i2];
       if (isRedirectResult(result)) {
         return {
           result,
-          idx: i
+          idx: i2
         };
       }
     }
@@ -26057,12 +26061,12 @@
   function isRedirectResult(result) {
     return (result && result.type) === ResultType.redirect;
   }
-  function isDeferredData(value) {
-    let deferred = value;
+  function isDeferredData(value2) {
+    let deferred = value2;
     return deferred && typeof deferred === "object" && typeof deferred.data === "object" && typeof deferred.subscribe === "function" && typeof deferred.cancel === "function" && typeof deferred.resolveData === "function";
   }
-  function isResponse(value) {
-    return value != null && typeof value.status === "number" && typeof value.statusText === "string" && typeof value.headers === "object" && typeof value.body !== "undefined";
+  function isResponse(value2) {
+    return value2 != null && typeof value2.status === "number" && typeof value2.statusText === "string" && typeof value2.headers === "object" && typeof value2.body !== "undefined";
   }
   function isValidMethod(method) {
     return validRequestMethods.has(method.toLowerCase());
@@ -26119,8 +26123,8 @@
   function hasNakedIndexQuery(search) {
     return new URLSearchParams(search).getAll("index").some((v) => v === "");
   }
-  function getTargetMatch(matches, location) {
-    let search = typeof location === "string" ? parsePath(location).search : location.search;
+  function getTargetMatch(matches, location2) {
+    let search = typeof location2 === "string" ? parsePath(location2).search : location2.search;
     if (matches[matches.length - 1].route.index && hasNakedIndexQuery(search || "")) {
       return matches[matches.length - 1];
     }
@@ -26168,11 +26172,11 @@
       };
     }
   }
-  function getLoadingNavigation(location, submission) {
+  function getLoadingNavigation(location2, submission) {
     if (submission) {
       let navigation = {
         state: "loading",
-        location,
+        location: location2,
         formMethod: submission.formMethod,
         formAction: submission.formAction,
         formEncType: submission.formEncType,
@@ -26184,7 +26188,7 @@
     } else {
       let navigation = {
         state: "loading",
-        location,
+        location: location2,
         formMethod: void 0,
         formAction: void 0,
         formEncType: void 0,
@@ -26195,10 +26199,10 @@
       return navigation;
     }
   }
-  function getSubmittingNavigation(location, submission) {
+  function getSubmittingNavigation(location2, submission) {
     let navigation = {
       state: "submitting",
-      location,
+      location: location2,
       formMethod: submission.formMethod,
       formAction: submission.formAction,
       formEncType: submission.formEncType,
@@ -26292,8 +26296,8 @@
   // node_modules/react-router/dist/index.js
   function _extends2() {
     _extends2 = Object.assign ? Object.assign.bind() : function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
         for (var key in source) {
           if (Object.prototype.hasOwnProperty.call(source, key)) {
             target[key] = source[key];
@@ -26472,23 +26476,23 @@
 ` + ('Please change the parent <Route path="' + parentPath + '"> to <Route ') + ('path="' + (parentPath === "/" ? "*" : parentPath + "/*") + '">.'));
     }
     let locationFromContext = useLocation();
-    let location;
+    let location2;
     if (locationArg) {
       var _parsedLocationArg$pa;
       let parsedLocationArg = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
       !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? true ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, the location pathname must begin with the portion of the URL pathname that was " + ('matched by all parent routes. The current pathname base is "' + parentPathnameBase + '" ') + ('but pathname "' + parsedLocationArg.pathname + '" was given in the `location` prop.')) : invariant(false) : void 0;
-      location = parsedLocationArg;
+      location2 = parsedLocationArg;
     } else {
-      location = locationFromContext;
+      location2 = locationFromContext;
     }
-    let pathname = location.pathname || "/";
+    let pathname = location2.pathname || "/";
     let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
     let matches = matchRoutes(routes, {
       pathname: remainingPathname
     });
     if (true) {
-      true ? warning(parentRoute || matches != null, 'No routes matched location "' + location.pathname + location.search + location.hash + '" ') : void 0;
-      true ? warning(matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0, 'Matched leaf route at location "' + location.pathname + location.search + location.hash + '" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.') : void 0;
+      true ? warning(parentRoute || matches != null, 'No routes matched location "' + location2.pathname + location2.search + location2.hash + '" ') : void 0;
+      true ? warning(matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0, 'Matched leaf route at location "' + location2.pathname + location2.search + location2.hash + '" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.') : void 0;
     }
     let renderedMatches = _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
       params: Object.assign({}, parentParams, match.params),
@@ -26512,7 +26516,7 @@
             hash: "",
             state: null,
             key: "default"
-          }, location),
+          }, location2),
           navigationType: Action.Pop
         }
       }, renderedMatches);
@@ -26860,8 +26864,8 @@
   // node_modules/react-router-dom/dist/index.js
   function _extends3() {
     _extends3 = Object.assign ? Object.assign.bind() : function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
         for (var key in source) {
           if (Object.prototype.hasOwnProperty.call(source, key)) {
             target[key] = source[key];
@@ -26877,9 +26881,9 @@
       return {};
     var target = {};
     var sourceKeys = Object.keys(source);
-    var key, i;
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i];
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
       if (excluded.indexOf(key) >= 0)
         continue;
       target[key] = source[key];
@@ -26958,14 +26962,14 @@
         let {
           name,
           type,
-          value
+          value: value2
         } = target;
         if (type === "image") {
           let prefix = name ? name + "." : "";
           formData.append(prefix + "x", "0");
           formData.append(prefix + "y", "0");
         } else if (name) {
-          formData.append(name, value);
+          formData.append(name, value2);
         }
       }
     } else if (isHtmlElement(target)) {
@@ -27070,10 +27074,10 @@
     constructor() {
       this.status = "pending";
       this.promise = new Promise((resolve, reject) => {
-        this.resolve = (value) => {
+        this.resolve = (value2) => {
           if (this.status === "pending") {
             this.status = "resolved";
-            resolve(value);
+            resolve(value2);
           }
         };
         this.reject = (reason) => {
@@ -27339,7 +27343,7 @@
     let path = useResolvedPath(to, {
       relative: rest.relative
     });
-    let location = useLocation();
+    let location2 = useLocation();
     let routerState = React2.useContext(DataRouterStateContext);
     let {
       navigator: navigator2
@@ -27348,7 +27352,7 @@
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useViewTransitionState(path) && unstable_viewTransition === true;
     let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
-    let locationPathname = location.pathname;
+    let locationPathname = location2.pathname;
     let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
     if (!caseSensitive) {
       locationPathname = locationPathname.toLowerCase();
@@ -27480,14 +27484,14 @@
       unstable_viewTransition
     } = _temp === void 0 ? {} : _temp;
     let navigate = useNavigate();
-    let location = useLocation();
+    let location2 = useLocation();
     let path = useResolvedPath(to, {
       relative
     });
     return React2.useCallback((event) => {
       if (shouldProcessLinkClick(event, target)) {
         event.preventDefault();
-        let replace = replaceProp !== void 0 ? replaceProp : createPath(location) === createPath(path);
+        let replace = replaceProp !== void 0 ? replaceProp : createPath(location2) === createPath(path);
         navigate(to, {
           replace,
           state,
@@ -27496,7 +27500,7 @@
           unstable_viewTransition
         });
       }
-    }, [location, navigate, path, replaceProp, state, target, to, preventScrollReset, relative, unstable_viewTransition]);
+    }, [location2, navigate, path, replaceProp, state, target, to, preventScrollReset, relative, unstable_viewTransition]);
   }
   function validateClientSideSubmission() {
     if (typeof document === "undefined") {
@@ -27562,9 +27566,9 @@
     let path = _extends3({}, useResolvedPath(action ? action : ".", {
       relative
     }));
-    let location = useLocation();
+    let location2 = useLocation();
     if (action == null) {
-      path.search = location.search;
+      path.search = location2.search;
       if (match.route.index) {
         let params = new URLSearchParams(path.search);
         params.delete("index");
@@ -27596,7 +27600,7 @@
     let {
       basename
     } = React2.useContext(NavigationContext);
-    let location = useLocation();
+    let location2 = useLocation();
     let matches = useMatches();
     let navigation = useNavigation();
     React2.useEffect(() => {
@@ -27607,7 +27611,7 @@
     }, []);
     usePageHide(React2.useCallback(() => {
       if (navigation.state === "idle") {
-        let key = (getKey ? getKey(location, matches) : null) || location.key;
+        let key = (getKey ? getKey(location2, matches) : null) || location2.key;
         savedScrollPositions[key] = window.scrollY;
       }
       try {
@@ -27616,7 +27620,7 @@
         true ? warning(false, "Failed to save scroll positions in sessionStorage, <ScrollRestoration /> will not work properly (" + error + ").") : void 0;
       }
       window.history.scrollRestoration = "auto";
-    }, [storageKey, getKey, navigation.state, location, matches]));
+    }, [storageKey, getKey, navigation.state, location2, matches]));
     if (typeof document !== "undefined") {
       React2.useLayoutEffect(() => {
         try {
@@ -27628,10 +27632,10 @@
         }
       }, [storageKey]);
       React2.useLayoutEffect(() => {
-        let getKeyWithoutBasename = getKey && basename !== "/" ? (location2, matches2) => getKey(
+        let getKeyWithoutBasename = getKey && basename !== "/" ? (location3, matches2) => getKey(
           // Strip the basename to match useLocation()
-          _extends3({}, location2, {
-            pathname: stripBasename(location2.pathname, basename) || location2.pathname
+          _extends3({}, location3, {
+            pathname: stripBasename(location3.pathname, basename) || location3.pathname
           }),
           matches2
         ) : getKey;
@@ -27646,8 +27650,8 @@
           window.scrollTo(0, restoreScrollPosition);
           return;
         }
-        if (location.hash) {
-          let el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (location2.hash) {
+          let el = document.getElementById(decodeURIComponent(location2.hash.slice(1)));
           if (el) {
             el.scrollIntoView();
             return;
@@ -27657,7 +27661,7 @@
           return;
         }
         window.scrollTo(0, 0);
-      }, [location, restoreScrollPosition, preventScrollReset]);
+      }, [location2, restoreScrollPosition, preventScrollReset]);
     }
   }
   function usePageHide(callback, options) {
@@ -27710,11 +27714,13 @@
   var CLOSE_PORTAL = "close-portal";
   var ADD_CONTACT = "add-contact";
   var ADD_CHAT = "add-chat";
+  var SET_CHATROOM = "set-chat";
+  var CLOSE_CHATROOM = "close-chatroom";
 
   // frontend/service/request.ts
-  async function request(url, options) {
+  async function request(url2, options) {
     try {
-      const res = await fetch(url, options);
+      const res = await fetch(url2, options);
       const data = res.json();
       return data;
     } catch (err) {
@@ -27726,6 +27732,3320 @@
     }
   }
   var request_default = request;
+
+  // node_modules/engine.io-parser/build/esm/commons.js
+  var PACKET_TYPES = /* @__PURE__ */ Object.create(null);
+  PACKET_TYPES["open"] = "0";
+  PACKET_TYPES["close"] = "1";
+  PACKET_TYPES["ping"] = "2";
+  PACKET_TYPES["pong"] = "3";
+  PACKET_TYPES["message"] = "4";
+  PACKET_TYPES["upgrade"] = "5";
+  PACKET_TYPES["noop"] = "6";
+  var PACKET_TYPES_REVERSE = /* @__PURE__ */ Object.create(null);
+  Object.keys(PACKET_TYPES).forEach((key) => {
+    PACKET_TYPES_REVERSE[PACKET_TYPES[key]] = key;
+  });
+  var ERROR_PACKET = { type: "error", data: "parser error" };
+
+  // node_modules/engine.io-parser/build/esm/encodePacket.browser.js
+  var withNativeBlob = typeof Blob === "function" || typeof Blob !== "undefined" && Object.prototype.toString.call(Blob) === "[object BlobConstructor]";
+  var withNativeArrayBuffer = typeof ArrayBuffer === "function";
+  var isView = (obj) => {
+    return typeof ArrayBuffer.isView === "function" ? ArrayBuffer.isView(obj) : obj && obj.buffer instanceof ArrayBuffer;
+  };
+  var encodePacket = ({ type, data }, supportsBinary, callback) => {
+    if (withNativeBlob && data instanceof Blob) {
+      if (supportsBinary) {
+        return callback(data);
+      } else {
+        return encodeBlobAsBase64(data, callback);
+      }
+    } else if (withNativeArrayBuffer && (data instanceof ArrayBuffer || isView(data))) {
+      if (supportsBinary) {
+        return callback(data);
+      } else {
+        return encodeBlobAsBase64(new Blob([data]), callback);
+      }
+    }
+    return callback(PACKET_TYPES[type] + (data || ""));
+  };
+  var encodeBlobAsBase64 = (data, callback) => {
+    const fileReader = new FileReader();
+    fileReader.onload = function() {
+      const content = fileReader.result.split(",")[1];
+      callback("b" + (content || ""));
+    };
+    return fileReader.readAsDataURL(data);
+  };
+  function toArray(data) {
+    if (data instanceof Uint8Array) {
+      return data;
+    } else if (data instanceof ArrayBuffer) {
+      return new Uint8Array(data);
+    } else {
+      return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+    }
+  }
+  var TEXT_ENCODER;
+  function encodePacketToBinary(packet, callback) {
+    if (withNativeBlob && packet.data instanceof Blob) {
+      return packet.data.arrayBuffer().then(toArray).then(callback);
+    } else if (withNativeArrayBuffer && (packet.data instanceof ArrayBuffer || isView(packet.data))) {
+      return callback(toArray(packet.data));
+    }
+    encodePacket(packet, false, (encoded) => {
+      if (!TEXT_ENCODER) {
+        TEXT_ENCODER = new TextEncoder();
+      }
+      callback(TEXT_ENCODER.encode(encoded));
+    });
+  }
+
+  // node_modules/engine.io-parser/build/esm/contrib/base64-arraybuffer.js
+  var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  var lookup = typeof Uint8Array === "undefined" ? [] : new Uint8Array(256);
+  for (let i2 = 0; i2 < chars.length; i2++) {
+    lookup[chars.charCodeAt(i2)] = i2;
+  }
+  var decode = (base64) => {
+    let bufferLength = base64.length * 0.75, len = base64.length, i2, p = 0, encoded1, encoded2, encoded3, encoded4;
+    if (base64[base64.length - 1] === "=") {
+      bufferLength--;
+      if (base64[base64.length - 2] === "=") {
+        bufferLength--;
+      }
+    }
+    const arraybuffer = new ArrayBuffer(bufferLength), bytes = new Uint8Array(arraybuffer);
+    for (i2 = 0; i2 < len; i2 += 4) {
+      encoded1 = lookup[base64.charCodeAt(i2)];
+      encoded2 = lookup[base64.charCodeAt(i2 + 1)];
+      encoded3 = lookup[base64.charCodeAt(i2 + 2)];
+      encoded4 = lookup[base64.charCodeAt(i2 + 3)];
+      bytes[p++] = encoded1 << 2 | encoded2 >> 4;
+      bytes[p++] = (encoded2 & 15) << 4 | encoded3 >> 2;
+      bytes[p++] = (encoded3 & 3) << 6 | encoded4 & 63;
+    }
+    return arraybuffer;
+  };
+
+  // node_modules/engine.io-parser/build/esm/decodePacket.browser.js
+  var withNativeArrayBuffer2 = typeof ArrayBuffer === "function";
+  var decodePacket = (encodedPacket, binaryType) => {
+    if (typeof encodedPacket !== "string") {
+      return {
+        type: "message",
+        data: mapBinary(encodedPacket, binaryType)
+      };
+    }
+    const type = encodedPacket.charAt(0);
+    if (type === "b") {
+      return {
+        type: "message",
+        data: decodeBase64Packet(encodedPacket.substring(1), binaryType)
+      };
+    }
+    const packetType = PACKET_TYPES_REVERSE[type];
+    if (!packetType) {
+      return ERROR_PACKET;
+    }
+    return encodedPacket.length > 1 ? {
+      type: PACKET_TYPES_REVERSE[type],
+      data: encodedPacket.substring(1)
+    } : {
+      type: PACKET_TYPES_REVERSE[type]
+    };
+  };
+  var decodeBase64Packet = (data, binaryType) => {
+    if (withNativeArrayBuffer2) {
+      const decoded = decode(data);
+      return mapBinary(decoded, binaryType);
+    } else {
+      return { base64: true, data };
+    }
+  };
+  var mapBinary = (data, binaryType) => {
+    switch (binaryType) {
+      case "blob":
+        if (data instanceof Blob) {
+          return data;
+        } else {
+          return new Blob([data]);
+        }
+      case "arraybuffer":
+      default:
+        if (data instanceof ArrayBuffer) {
+          return data;
+        } else {
+          return data.buffer;
+        }
+    }
+  };
+
+  // node_modules/engine.io-parser/build/esm/index.js
+  var SEPARATOR = String.fromCharCode(30);
+  var encodePayload = (packets, callback) => {
+    const length2 = packets.length;
+    const encodedPackets = new Array(length2);
+    let count = 0;
+    packets.forEach((packet, i2) => {
+      encodePacket(packet, false, (encodedPacket) => {
+        encodedPackets[i2] = encodedPacket;
+        if (++count === length2) {
+          callback(encodedPackets.join(SEPARATOR));
+        }
+      });
+    });
+  };
+  var decodePayload = (encodedPayload, binaryType) => {
+    const encodedPackets = encodedPayload.split(SEPARATOR);
+    const packets = [];
+    for (let i2 = 0; i2 < encodedPackets.length; i2++) {
+      const decodedPacket = decodePacket(encodedPackets[i2], binaryType);
+      packets.push(decodedPacket);
+      if (decodedPacket.type === "error") {
+        break;
+      }
+    }
+    return packets;
+  };
+  function createPacketEncoderStream() {
+    return new TransformStream({
+      transform(packet, controller) {
+        encodePacketToBinary(packet, (encodedPacket) => {
+          const payloadLength = encodedPacket.length;
+          let header;
+          if (payloadLength < 126) {
+            header = new Uint8Array(1);
+            new DataView(header.buffer).setUint8(0, payloadLength);
+          } else if (payloadLength < 65536) {
+            header = new Uint8Array(3);
+            const view = new DataView(header.buffer);
+            view.setUint8(0, 126);
+            view.setUint16(1, payloadLength);
+          } else {
+            header = new Uint8Array(9);
+            const view = new DataView(header.buffer);
+            view.setUint8(0, 127);
+            view.setBigUint64(1, BigInt(payloadLength));
+          }
+          if (packet.data && typeof packet.data !== "string") {
+            header[0] |= 128;
+          }
+          controller.enqueue(header);
+          controller.enqueue(encodedPacket);
+        });
+      }
+    });
+  }
+  var TEXT_DECODER;
+  function totalLength(chunks) {
+    return chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+  }
+  function concatChunks(chunks, size) {
+    if (chunks[0].length === size) {
+      return chunks.shift();
+    }
+    const buffer = new Uint8Array(size);
+    let j = 0;
+    for (let i2 = 0; i2 < size; i2++) {
+      buffer[i2] = chunks[0][j++];
+      if (j === chunks[0].length) {
+        chunks.shift();
+        j = 0;
+      }
+    }
+    if (chunks.length && j < chunks[0].length) {
+      chunks[0] = chunks[0].slice(j);
+    }
+    return buffer;
+  }
+  function createPacketDecoderStream(maxPayload, binaryType) {
+    if (!TEXT_DECODER) {
+      TEXT_DECODER = new TextDecoder();
+    }
+    const chunks = [];
+    let state = 0;
+    let expectedLength = -1;
+    let isBinary2 = false;
+    return new TransformStream({
+      transform(chunk, controller) {
+        chunks.push(chunk);
+        while (true) {
+          if (state === 0) {
+            if (totalLength(chunks) < 1) {
+              break;
+            }
+            const header = concatChunks(chunks, 1);
+            isBinary2 = (header[0] & 128) === 128;
+            expectedLength = header[0] & 127;
+            if (expectedLength < 126) {
+              state = 3;
+            } else if (expectedLength === 126) {
+              state = 1;
+            } else {
+              state = 2;
+            }
+          } else if (state === 1) {
+            if (totalLength(chunks) < 2) {
+              break;
+            }
+            const headerArray = concatChunks(chunks, 2);
+            expectedLength = new DataView(headerArray.buffer, headerArray.byteOffset, headerArray.length).getUint16(0);
+            state = 3;
+          } else if (state === 2) {
+            if (totalLength(chunks) < 8) {
+              break;
+            }
+            const headerArray = concatChunks(chunks, 8);
+            const view = new DataView(headerArray.buffer, headerArray.byteOffset, headerArray.length);
+            const n = view.getUint32(0);
+            if (n > Math.pow(2, 53 - 32) - 1) {
+              controller.enqueue(ERROR_PACKET);
+              break;
+            }
+            expectedLength = n * Math.pow(2, 32) + view.getUint32(4);
+            state = 3;
+          } else {
+            if (totalLength(chunks) < expectedLength) {
+              break;
+            }
+            const data = concatChunks(chunks, expectedLength);
+            controller.enqueue(decodePacket(isBinary2 ? data : TEXT_DECODER.decode(data), binaryType));
+            state = 0;
+          }
+          if (expectedLength === 0 || expectedLength > maxPayload) {
+            controller.enqueue(ERROR_PACKET);
+            break;
+          }
+        }
+      }
+    });
+  }
+  var protocol = 4;
+
+  // node_modules/@socket.io/component-emitter/index.mjs
+  function Emitter(obj) {
+    if (obj)
+      return mixin(obj);
+  }
+  function mixin(obj) {
+    for (var key in Emitter.prototype) {
+      obj[key] = Emitter.prototype[key];
+    }
+    return obj;
+  }
+  Emitter.prototype.on = Emitter.prototype.addEventListener = function(event, fn) {
+    this._callbacks = this._callbacks || {};
+    (this._callbacks["$" + event] = this._callbacks["$" + event] || []).push(fn);
+    return this;
+  };
+  Emitter.prototype.once = function(event, fn) {
+    function on2() {
+      this.off(event, on2);
+      fn.apply(this, arguments);
+    }
+    on2.fn = fn;
+    this.on(event, on2);
+    return this;
+  };
+  Emitter.prototype.off = Emitter.prototype.removeListener = Emitter.prototype.removeAllListeners = Emitter.prototype.removeEventListener = function(event, fn) {
+    this._callbacks = this._callbacks || {};
+    if (0 == arguments.length) {
+      this._callbacks = {};
+      return this;
+    }
+    var callbacks = this._callbacks["$" + event];
+    if (!callbacks)
+      return this;
+    if (1 == arguments.length) {
+      delete this._callbacks["$" + event];
+      return this;
+    }
+    var cb;
+    for (var i2 = 0; i2 < callbacks.length; i2++) {
+      cb = callbacks[i2];
+      if (cb === fn || cb.fn === fn) {
+        callbacks.splice(i2, 1);
+        break;
+      }
+    }
+    if (callbacks.length === 0) {
+      delete this._callbacks["$" + event];
+    }
+    return this;
+  };
+  Emitter.prototype.emit = function(event) {
+    this._callbacks = this._callbacks || {};
+    var args = new Array(arguments.length - 1), callbacks = this._callbacks["$" + event];
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      args[i2 - 1] = arguments[i2];
+    }
+    if (callbacks) {
+      callbacks = callbacks.slice(0);
+      for (var i2 = 0, len = callbacks.length; i2 < len; ++i2) {
+        callbacks[i2].apply(this, args);
+      }
+    }
+    return this;
+  };
+  Emitter.prototype.emitReserved = Emitter.prototype.emit;
+  Emitter.prototype.listeners = function(event) {
+    this._callbacks = this._callbacks || {};
+    return this._callbacks["$" + event] || [];
+  };
+  Emitter.prototype.hasListeners = function(event) {
+    return !!this.listeners(event).length;
+  };
+
+  // node_modules/engine.io-client/build/esm/globalThis.browser.js
+  var globalThisShim = (() => {
+    if (typeof self !== "undefined") {
+      return self;
+    } else if (typeof window !== "undefined") {
+      return window;
+    } else {
+      return Function("return this")();
+    }
+  })();
+
+  // node_modules/engine.io-client/build/esm/util.js
+  function pick(obj, ...attr) {
+    return attr.reduce((acc, k) => {
+      if (obj.hasOwnProperty(k)) {
+        acc[k] = obj[k];
+      }
+      return acc;
+    }, {});
+  }
+  var NATIVE_SET_TIMEOUT = globalThisShim.setTimeout;
+  var NATIVE_CLEAR_TIMEOUT = globalThisShim.clearTimeout;
+  function installTimerFunctions(obj, opts) {
+    if (opts.useNativeTimers) {
+      obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThisShim);
+      obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThisShim);
+    } else {
+      obj.setTimeoutFn = globalThisShim.setTimeout.bind(globalThisShim);
+      obj.clearTimeoutFn = globalThisShim.clearTimeout.bind(globalThisShim);
+    }
+  }
+  var BASE64_OVERHEAD = 1.33;
+  function byteLength(obj) {
+    if (typeof obj === "string") {
+      return utf8Length(obj);
+    }
+    return Math.ceil((obj.byteLength || obj.size) * BASE64_OVERHEAD);
+  }
+  function utf8Length(str) {
+    let c = 0, length2 = 0;
+    for (let i2 = 0, l = str.length; i2 < l; i2++) {
+      c = str.charCodeAt(i2);
+      if (c < 128) {
+        length2 += 1;
+      } else if (c < 2048) {
+        length2 += 2;
+      } else if (c < 55296 || c >= 57344) {
+        length2 += 3;
+      } else {
+        i2++;
+        length2 += 4;
+      }
+    }
+    return length2;
+  }
+
+  // node_modules/engine.io-client/build/esm/contrib/parseqs.js
+  function encode(obj) {
+    let str = "";
+    for (let i2 in obj) {
+      if (obj.hasOwnProperty(i2)) {
+        if (str.length)
+          str += "&";
+        str += encodeURIComponent(i2) + "=" + encodeURIComponent(obj[i2]);
+      }
+    }
+    return str;
+  }
+  function decode2(qs) {
+    let qry = {};
+    let pairs = qs.split("&");
+    for (let i2 = 0, l = pairs.length; i2 < l; i2++) {
+      let pair = pairs[i2].split("=");
+      qry[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+    }
+    return qry;
+  }
+
+  // node_modules/engine.io-client/build/esm/transport.js
+  var TransportError = class extends Error {
+    constructor(reason, description, context) {
+      super(reason);
+      this.description = description;
+      this.context = context;
+      this.type = "TransportError";
+    }
+  };
+  var Transport = class extends Emitter {
+    /**
+     * Transport abstract constructor.
+     *
+     * @param {Object} opts - options
+     * @protected
+     */
+    constructor(opts) {
+      super();
+      this.writable = false;
+      installTimerFunctions(this, opts);
+      this.opts = opts;
+      this.query = opts.query;
+      this.socket = opts.socket;
+    }
+    /**
+     * Emits an error.
+     *
+     * @param {String} reason
+     * @param description
+     * @param context - the error context
+     * @return {Transport} for chaining
+     * @protected
+     */
+    onError(reason, description, context) {
+      super.emitReserved("error", new TransportError(reason, description, context));
+      return this;
+    }
+    /**
+     * Opens the transport.
+     */
+    open() {
+      this.readyState = "opening";
+      this.doOpen();
+      return this;
+    }
+    /**
+     * Closes the transport.
+     */
+    close() {
+      if (this.readyState === "opening" || this.readyState === "open") {
+        this.doClose();
+        this.onClose();
+      }
+      return this;
+    }
+    /**
+     * Sends multiple packets.
+     *
+     * @param {Array} packets
+     */
+    send(packets) {
+      if (this.readyState === "open") {
+        this.write(packets);
+      } else {
+      }
+    }
+    /**
+     * Called upon open
+     *
+     * @protected
+     */
+    onOpen() {
+      this.readyState = "open";
+      this.writable = true;
+      super.emitReserved("open");
+    }
+    /**
+     * Called with data.
+     *
+     * @param {String} data
+     * @protected
+     */
+    onData(data) {
+      const packet = decodePacket(data, this.socket.binaryType);
+      this.onPacket(packet);
+    }
+    /**
+     * Called with a decoded packet.
+     *
+     * @protected
+     */
+    onPacket(packet) {
+      super.emitReserved("packet", packet);
+    }
+    /**
+     * Called upon close.
+     *
+     * @protected
+     */
+    onClose(details) {
+      this.readyState = "closed";
+      super.emitReserved("close", details);
+    }
+    /**
+     * Pauses the transport, in order not to lose packets during an upgrade.
+     *
+     * @param onPause
+     */
+    pause(onPause) {
+    }
+    createUri(schema, query = {}) {
+      return schema + "://" + this._hostname() + this._port() + this.opts.path + this._query(query);
+    }
+    _hostname() {
+      const hostname = this.opts.hostname;
+      return hostname.indexOf(":") === -1 ? hostname : "[" + hostname + "]";
+    }
+    _port() {
+      if (this.opts.port && (this.opts.secure && Number(this.opts.port !== 443) || !this.opts.secure && Number(this.opts.port) !== 80)) {
+        return ":" + this.opts.port;
+      } else {
+        return "";
+      }
+    }
+    _query(query) {
+      const encodedQuery = encode(query);
+      return encodedQuery.length ? "?" + encodedQuery : "";
+    }
+  };
+
+  // node_modules/engine.io-client/build/esm/contrib/yeast.js
+  var alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".split("");
+  var length = 64;
+  var map = {};
+  var seed = 0;
+  var i = 0;
+  var prev;
+  function encode2(num) {
+    let encoded = "";
+    do {
+      encoded = alphabet[num % length] + encoded;
+      num = Math.floor(num / length);
+    } while (num > 0);
+    return encoded;
+  }
+  function yeast() {
+    const now = encode2(+/* @__PURE__ */ new Date());
+    if (now !== prev)
+      return seed = 0, prev = now;
+    return now + "." + encode2(seed++);
+  }
+  for (; i < length; i++)
+    map[alphabet[i]] = i;
+
+  // node_modules/engine.io-client/build/esm/contrib/has-cors.js
+  var value = false;
+  try {
+    value = typeof XMLHttpRequest !== "undefined" && "withCredentials" in new XMLHttpRequest();
+  } catch (err) {
+  }
+  var hasCORS = value;
+
+  // node_modules/engine.io-client/build/esm/transports/xmlhttprequest.browser.js
+  function XHR(opts) {
+    const xdomain = opts.xdomain;
+    try {
+      if ("undefined" !== typeof XMLHttpRequest && (!xdomain || hasCORS)) {
+        return new XMLHttpRequest();
+      }
+    } catch (e) {
+    }
+    if (!xdomain) {
+      try {
+        return new globalThisShim[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
+      } catch (e) {
+      }
+    }
+  }
+  function createCookieJar() {
+  }
+
+  // node_modules/engine.io-client/build/esm/transports/polling.js
+  function empty() {
+  }
+  var hasXHR2 = function() {
+    const xhr = new XHR({
+      xdomain: false
+    });
+    return null != xhr.responseType;
+  }();
+  var Polling = class extends Transport {
+    /**
+     * XHR Polling constructor.
+     *
+     * @param {Object} opts
+     * @package
+     */
+    constructor(opts) {
+      super(opts);
+      this.polling = false;
+      if (typeof location !== "undefined") {
+        const isSSL = "https:" === location.protocol;
+        let port = location.port;
+        if (!port) {
+          port = isSSL ? "443" : "80";
+        }
+        this.xd = typeof location !== "undefined" && opts.hostname !== location.hostname || port !== opts.port;
+      }
+      const forceBase64 = opts && opts.forceBase64;
+      this.supportsBinary = hasXHR2 && !forceBase64;
+      if (this.opts.withCredentials) {
+        this.cookieJar = createCookieJar();
+      }
+    }
+    get name() {
+      return "polling";
+    }
+    /**
+     * Opens the socket (triggers polling). We write a PING message to determine
+     * when the transport is open.
+     *
+     * @protected
+     */
+    doOpen() {
+      this.poll();
+    }
+    /**
+     * Pauses polling.
+     *
+     * @param {Function} onPause - callback upon buffers are flushed and transport is paused
+     * @package
+     */
+    pause(onPause) {
+      this.readyState = "pausing";
+      const pause = () => {
+        this.readyState = "paused";
+        onPause();
+      };
+      if (this.polling || !this.writable) {
+        let total = 0;
+        if (this.polling) {
+          total++;
+          this.once("pollComplete", function() {
+            --total || pause();
+          });
+        }
+        if (!this.writable) {
+          total++;
+          this.once("drain", function() {
+            --total || pause();
+          });
+        }
+      } else {
+        pause();
+      }
+    }
+    /**
+     * Starts polling cycle.
+     *
+     * @private
+     */
+    poll() {
+      this.polling = true;
+      this.doPoll();
+      this.emitReserved("poll");
+    }
+    /**
+     * Overloads onData to detect payloads.
+     *
+     * @protected
+     */
+    onData(data) {
+      const callback = (packet) => {
+        if ("opening" === this.readyState && packet.type === "open") {
+          this.onOpen();
+        }
+        if ("close" === packet.type) {
+          this.onClose({ description: "transport closed by the server" });
+          return false;
+        }
+        this.onPacket(packet);
+      };
+      decodePayload(data, this.socket.binaryType).forEach(callback);
+      if ("closed" !== this.readyState) {
+        this.polling = false;
+        this.emitReserved("pollComplete");
+        if ("open" === this.readyState) {
+          this.poll();
+        } else {
+        }
+      }
+    }
+    /**
+     * For polling, send a close packet.
+     *
+     * @protected
+     */
+    doClose() {
+      const close = () => {
+        this.write([{ type: "close" }]);
+      };
+      if ("open" === this.readyState) {
+        close();
+      } else {
+        this.once("open", close);
+      }
+    }
+    /**
+     * Writes a packets payload.
+     *
+     * @param {Array} packets - data packets
+     * @protected
+     */
+    write(packets) {
+      this.writable = false;
+      encodePayload(packets, (data) => {
+        this.doWrite(data, () => {
+          this.writable = true;
+          this.emitReserved("drain");
+        });
+      });
+    }
+    /**
+     * Generates uri for connection.
+     *
+     * @private
+     */
+    uri() {
+      const schema = this.opts.secure ? "https" : "http";
+      const query = this.query || {};
+      if (false !== this.opts.timestampRequests) {
+        query[this.opts.timestampParam] = yeast();
+      }
+      if (!this.supportsBinary && !query.sid) {
+        query.b64 = 1;
+      }
+      return this.createUri(schema, query);
+    }
+    /**
+     * Creates a request.
+     *
+     * @param {String} method
+     * @private
+     */
+    request(opts = {}) {
+      Object.assign(opts, { xd: this.xd, cookieJar: this.cookieJar }, this.opts);
+      return new Request2(this.uri(), opts);
+    }
+    /**
+     * Sends data.
+     *
+     * @param {String} data to send.
+     * @param {Function} called upon flush.
+     * @private
+     */
+    doWrite(data, fn) {
+      const req = this.request({
+        method: "POST",
+        data
+      });
+      req.on("success", fn);
+      req.on("error", (xhrStatus, context) => {
+        this.onError("xhr post error", xhrStatus, context);
+      });
+    }
+    /**
+     * Starts a poll cycle.
+     *
+     * @private
+     */
+    doPoll() {
+      const req = this.request();
+      req.on("data", this.onData.bind(this));
+      req.on("error", (xhrStatus, context) => {
+        this.onError("xhr poll error", xhrStatus, context);
+      });
+      this.pollXhr = req;
+    }
+  };
+  var Request2 = class _Request extends Emitter {
+    /**
+     * Request constructor
+     *
+     * @param {Object} options
+     * @package
+     */
+    constructor(uri, opts) {
+      super();
+      installTimerFunctions(this, opts);
+      this.opts = opts;
+      this.method = opts.method || "GET";
+      this.uri = uri;
+      this.data = void 0 !== opts.data ? opts.data : null;
+      this.create();
+    }
+    /**
+     * Creates the XHR object and sends the request.
+     *
+     * @private
+     */
+    create() {
+      var _a;
+      const opts = pick(this.opts, "agent", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "autoUnref");
+      opts.xdomain = !!this.opts.xd;
+      const xhr = this.xhr = new XHR(opts);
+      try {
+        xhr.open(this.method, this.uri, true);
+        try {
+          if (this.opts.extraHeaders) {
+            xhr.setDisableHeaderCheck && xhr.setDisableHeaderCheck(true);
+            for (let i2 in this.opts.extraHeaders) {
+              if (this.opts.extraHeaders.hasOwnProperty(i2)) {
+                xhr.setRequestHeader(i2, this.opts.extraHeaders[i2]);
+              }
+            }
+          }
+        } catch (e) {
+        }
+        if ("POST" === this.method) {
+          try {
+            xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+          } catch (e) {
+          }
+        }
+        try {
+          xhr.setRequestHeader("Accept", "*/*");
+        } catch (e) {
+        }
+        (_a = this.opts.cookieJar) === null || _a === void 0 ? void 0 : _a.addCookies(xhr);
+        if ("withCredentials" in xhr) {
+          xhr.withCredentials = this.opts.withCredentials;
+        }
+        if (this.opts.requestTimeout) {
+          xhr.timeout = this.opts.requestTimeout;
+        }
+        xhr.onreadystatechange = () => {
+          var _a2;
+          if (xhr.readyState === 3) {
+            (_a2 = this.opts.cookieJar) === null || _a2 === void 0 ? void 0 : _a2.parseCookies(xhr);
+          }
+          if (4 !== xhr.readyState)
+            return;
+          if (200 === xhr.status || 1223 === xhr.status) {
+            this.onLoad();
+          } else {
+            this.setTimeoutFn(() => {
+              this.onError(typeof xhr.status === "number" ? xhr.status : 0);
+            }, 0);
+          }
+        };
+        xhr.send(this.data);
+      } catch (e) {
+        this.setTimeoutFn(() => {
+          this.onError(e);
+        }, 0);
+        return;
+      }
+      if (typeof document !== "undefined") {
+        this.index = _Request.requestsCount++;
+        _Request.requests[this.index] = this;
+      }
+    }
+    /**
+     * Called upon error.
+     *
+     * @private
+     */
+    onError(err) {
+      this.emitReserved("error", err, this.xhr);
+      this.cleanup(true);
+    }
+    /**
+     * Cleans up house.
+     *
+     * @private
+     */
+    cleanup(fromError) {
+      if ("undefined" === typeof this.xhr || null === this.xhr) {
+        return;
+      }
+      this.xhr.onreadystatechange = empty;
+      if (fromError) {
+        try {
+          this.xhr.abort();
+        } catch (e) {
+        }
+      }
+      if (typeof document !== "undefined") {
+        delete _Request.requests[this.index];
+      }
+      this.xhr = null;
+    }
+    /**
+     * Called upon load.
+     *
+     * @private
+     */
+    onLoad() {
+      const data = this.xhr.responseText;
+      if (data !== null) {
+        this.emitReserved("data", data);
+        this.emitReserved("success");
+        this.cleanup();
+      }
+    }
+    /**
+     * Aborts the request.
+     *
+     * @package
+     */
+    abort() {
+      this.cleanup();
+    }
+  };
+  Request2.requestsCount = 0;
+  Request2.requests = {};
+  if (typeof document !== "undefined") {
+    if (typeof attachEvent === "function") {
+      attachEvent("onunload", unloadHandler);
+    } else if (typeof addEventListener === "function") {
+      const terminationEvent = "onpagehide" in globalThisShim ? "pagehide" : "unload";
+      addEventListener(terminationEvent, unloadHandler, false);
+    }
+  }
+  function unloadHandler() {
+    for (let i2 in Request2.requests) {
+      if (Request2.requests.hasOwnProperty(i2)) {
+        Request2.requests[i2].abort();
+      }
+    }
+  }
+
+  // node_modules/engine.io-client/build/esm/transports/websocket-constructor.browser.js
+  var nextTick = (() => {
+    const isPromiseAvailable = typeof Promise === "function" && typeof Promise.resolve === "function";
+    if (isPromiseAvailable) {
+      return (cb) => Promise.resolve().then(cb);
+    } else {
+      return (cb, setTimeoutFn) => setTimeoutFn(cb, 0);
+    }
+  })();
+  var WebSocket = globalThisShim.WebSocket || globalThisShim.MozWebSocket;
+  var usingBrowserWebSocket = true;
+  var defaultBinaryType = "arraybuffer";
+
+  // node_modules/engine.io-client/build/esm/transports/websocket.js
+  var isReactNative = typeof navigator !== "undefined" && typeof navigator.product === "string" && navigator.product.toLowerCase() === "reactnative";
+  var WS = class extends Transport {
+    /**
+     * WebSocket transport constructor.
+     *
+     * @param {Object} opts - connection options
+     * @protected
+     */
+    constructor(opts) {
+      super(opts);
+      this.supportsBinary = !opts.forceBase64;
+    }
+    get name() {
+      return "websocket";
+    }
+    doOpen() {
+      if (!this.check()) {
+        return;
+      }
+      const uri = this.uri();
+      const protocols = this.opts.protocols;
+      const opts = isReactNative ? {} : pick(this.opts, "agent", "perMessageDeflate", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "localAddress", "protocolVersion", "origin", "maxPayload", "family", "checkServerIdentity");
+      if (this.opts.extraHeaders) {
+        opts.headers = this.opts.extraHeaders;
+      }
+      try {
+        this.ws = usingBrowserWebSocket && !isReactNative ? protocols ? new WebSocket(uri, protocols) : new WebSocket(uri) : new WebSocket(uri, protocols, opts);
+      } catch (err) {
+        return this.emitReserved("error", err);
+      }
+      this.ws.binaryType = this.socket.binaryType;
+      this.addEventListeners();
+    }
+    /**
+     * Adds event listeners to the socket
+     *
+     * @private
+     */
+    addEventListeners() {
+      this.ws.onopen = () => {
+        if (this.opts.autoUnref) {
+          this.ws._socket.unref();
+        }
+        this.onOpen();
+      };
+      this.ws.onclose = (closeEvent) => this.onClose({
+        description: "websocket connection closed",
+        context: closeEvent
+      });
+      this.ws.onmessage = (ev) => this.onData(ev.data);
+      this.ws.onerror = (e) => this.onError("websocket error", e);
+    }
+    write(packets) {
+      this.writable = false;
+      for (let i2 = 0; i2 < packets.length; i2++) {
+        const packet = packets[i2];
+        const lastPacket = i2 === packets.length - 1;
+        encodePacket(packet, this.supportsBinary, (data) => {
+          const opts = {};
+          if (!usingBrowserWebSocket) {
+            if (packet.options) {
+              opts.compress = packet.options.compress;
+            }
+            if (this.opts.perMessageDeflate) {
+              const len = (
+                // @ts-ignore
+                "string" === typeof data ? Buffer.byteLength(data) : data.length
+              );
+              if (len < this.opts.perMessageDeflate.threshold) {
+                opts.compress = false;
+              }
+            }
+          }
+          try {
+            if (usingBrowserWebSocket) {
+              this.ws.send(data);
+            } else {
+              this.ws.send(data, opts);
+            }
+          } catch (e) {
+          }
+          if (lastPacket) {
+            nextTick(() => {
+              this.writable = true;
+              this.emitReserved("drain");
+            }, this.setTimeoutFn);
+          }
+        });
+      }
+    }
+    doClose() {
+      if (typeof this.ws !== "undefined") {
+        this.ws.close();
+        this.ws = null;
+      }
+    }
+    /**
+     * Generates uri for connection.
+     *
+     * @private
+     */
+    uri() {
+      const schema = this.opts.secure ? "wss" : "ws";
+      const query = this.query || {};
+      if (this.opts.timestampRequests) {
+        query[this.opts.timestampParam] = yeast();
+      }
+      if (!this.supportsBinary) {
+        query.b64 = 1;
+      }
+      return this.createUri(schema, query);
+    }
+    /**
+     * Feature detection for WebSocket.
+     *
+     * @return {Boolean} whether this transport is available.
+     * @private
+     */
+    check() {
+      return !!WebSocket;
+    }
+  };
+
+  // node_modules/engine.io-client/build/esm/transports/webtransport.js
+  var WT = class extends Transport {
+    get name() {
+      return "webtransport";
+    }
+    doOpen() {
+      if (typeof WebTransport !== "function") {
+        return;
+      }
+      this.transport = new WebTransport(this.createUri("https"), this.opts.transportOptions[this.name]);
+      this.transport.closed.then(() => {
+        this.onClose();
+      }).catch((err) => {
+        this.onError("webtransport error", err);
+      });
+      this.transport.ready.then(() => {
+        this.transport.createBidirectionalStream().then((stream) => {
+          const decoderStream = createPacketDecoderStream(Number.MAX_SAFE_INTEGER, this.socket.binaryType);
+          const reader = stream.readable.pipeThrough(decoderStream).getReader();
+          const encoderStream = createPacketEncoderStream();
+          encoderStream.readable.pipeTo(stream.writable);
+          this.writer = encoderStream.writable.getWriter();
+          const read = () => {
+            reader.read().then(({ done, value: value2 }) => {
+              if (done) {
+                return;
+              }
+              this.onPacket(value2);
+              read();
+            }).catch((err) => {
+            });
+          };
+          read();
+          const packet = { type: "open" };
+          if (this.query.sid) {
+            packet.data = `{"sid":"${this.query.sid}"}`;
+          }
+          this.writer.write(packet).then(() => this.onOpen());
+        });
+      });
+    }
+    write(packets) {
+      this.writable = false;
+      for (let i2 = 0; i2 < packets.length; i2++) {
+        const packet = packets[i2];
+        const lastPacket = i2 === packets.length - 1;
+        this.writer.write(packet).then(() => {
+          if (lastPacket) {
+            nextTick(() => {
+              this.writable = true;
+              this.emitReserved("drain");
+            }, this.setTimeoutFn);
+          }
+        });
+      }
+    }
+    doClose() {
+      var _a;
+      (_a = this.transport) === null || _a === void 0 ? void 0 : _a.close();
+    }
+  };
+
+  // node_modules/engine.io-client/build/esm/transports/index.js
+  var transports = {
+    websocket: WS,
+    webtransport: WT,
+    polling: Polling
+  };
+
+  // node_modules/engine.io-client/build/esm/contrib/parseuri.js
+  var re = /^(?:(?![^:@\/?#]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@\/?#]*)(?::([^:@\/?#]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
+  var parts = [
+    "source",
+    "protocol",
+    "authority",
+    "userInfo",
+    "user",
+    "password",
+    "host",
+    "port",
+    "relative",
+    "path",
+    "directory",
+    "file",
+    "query",
+    "anchor"
+  ];
+  function parse(str) {
+    if (str.length > 2e3) {
+      throw "URI too long";
+    }
+    const src = str, b = str.indexOf("["), e = str.indexOf("]");
+    if (b != -1 && e != -1) {
+      str = str.substring(0, b) + str.substring(b, e).replace(/:/g, ";") + str.substring(e, str.length);
+    }
+    let m = re.exec(str || ""), uri = {}, i2 = 14;
+    while (i2--) {
+      uri[parts[i2]] = m[i2] || "";
+    }
+    if (b != -1 && e != -1) {
+      uri.source = src;
+      uri.host = uri.host.substring(1, uri.host.length - 1).replace(/;/g, ":");
+      uri.authority = uri.authority.replace("[", "").replace("]", "").replace(/;/g, ":");
+      uri.ipv6uri = true;
+    }
+    uri.pathNames = pathNames(uri, uri["path"]);
+    uri.queryKey = queryKey(uri, uri["query"]);
+    return uri;
+  }
+  function pathNames(obj, path) {
+    const regx = /\/{2,9}/g, names = path.replace(regx, "/").split("/");
+    if (path.slice(0, 1) == "/" || path.length === 0) {
+      names.splice(0, 1);
+    }
+    if (path.slice(-1) == "/") {
+      names.splice(names.length - 1, 1);
+    }
+    return names;
+  }
+  function queryKey(uri, query) {
+    const data = {};
+    query.replace(/(?:^|&)([^&=]*)=?([^&]*)/g, function($0, $1, $2) {
+      if ($1) {
+        data[$1] = $2;
+      }
+    });
+    return data;
+  }
+
+  // node_modules/engine.io-client/build/esm/socket.js
+  var Socket = class _Socket extends Emitter {
+    /**
+     * Socket constructor.
+     *
+     * @param {String|Object} uri - uri or options
+     * @param {Object} opts - options
+     */
+    constructor(uri, opts = {}) {
+      super();
+      this.binaryType = defaultBinaryType;
+      this.writeBuffer = [];
+      if (uri && "object" === typeof uri) {
+        opts = uri;
+        uri = null;
+      }
+      if (uri) {
+        uri = parse(uri);
+        opts.hostname = uri.host;
+        opts.secure = uri.protocol === "https" || uri.protocol === "wss";
+        opts.port = uri.port;
+        if (uri.query)
+          opts.query = uri.query;
+      } else if (opts.host) {
+        opts.hostname = parse(opts.host).host;
+      }
+      installTimerFunctions(this, opts);
+      this.secure = null != opts.secure ? opts.secure : typeof location !== "undefined" && "https:" === location.protocol;
+      if (opts.hostname && !opts.port) {
+        opts.port = this.secure ? "443" : "80";
+      }
+      this.hostname = opts.hostname || (typeof location !== "undefined" ? location.hostname : "localhost");
+      this.port = opts.port || (typeof location !== "undefined" && location.port ? location.port : this.secure ? "443" : "80");
+      this.transports = opts.transports || [
+        "polling",
+        "websocket",
+        "webtransport"
+      ];
+      this.writeBuffer = [];
+      this.prevBufferLen = 0;
+      this.opts = Object.assign({
+        path: "/engine.io",
+        agent: false,
+        withCredentials: false,
+        upgrade: true,
+        timestampParam: "t",
+        rememberUpgrade: false,
+        addTrailingSlash: true,
+        rejectUnauthorized: true,
+        perMessageDeflate: {
+          threshold: 1024
+        },
+        transportOptions: {},
+        closeOnBeforeunload: false
+      }, opts);
+      this.opts.path = this.opts.path.replace(/\/$/, "") + (this.opts.addTrailingSlash ? "/" : "");
+      if (typeof this.opts.query === "string") {
+        this.opts.query = decode2(this.opts.query);
+      }
+      this.id = null;
+      this.upgrades = null;
+      this.pingInterval = null;
+      this.pingTimeout = null;
+      this.pingTimeoutTimer = null;
+      if (typeof addEventListener === "function") {
+        if (this.opts.closeOnBeforeunload) {
+          this.beforeunloadEventListener = () => {
+            if (this.transport) {
+              this.transport.removeAllListeners();
+              this.transport.close();
+            }
+          };
+          addEventListener("beforeunload", this.beforeunloadEventListener, false);
+        }
+        if (this.hostname !== "localhost") {
+          this.offlineEventListener = () => {
+            this.onClose("transport close", {
+              description: "network connection lost"
+            });
+          };
+          addEventListener("offline", this.offlineEventListener, false);
+        }
+      }
+      this.open();
+    }
+    /**
+     * Creates transport of the given type.
+     *
+     * @param {String} name - transport name
+     * @return {Transport}
+     * @private
+     */
+    createTransport(name) {
+      const query = Object.assign({}, this.opts.query);
+      query.EIO = protocol;
+      query.transport = name;
+      if (this.id)
+        query.sid = this.id;
+      const opts = Object.assign({}, this.opts, {
+        query,
+        socket: this,
+        hostname: this.hostname,
+        secure: this.secure,
+        port: this.port
+      }, this.opts.transportOptions[name]);
+      return new transports[name](opts);
+    }
+    /**
+     * Initializes transport to use and starts probe.
+     *
+     * @private
+     */
+    open() {
+      let transport;
+      if (this.opts.rememberUpgrade && _Socket.priorWebsocketSuccess && this.transports.indexOf("websocket") !== -1) {
+        transport = "websocket";
+      } else if (0 === this.transports.length) {
+        this.setTimeoutFn(() => {
+          this.emitReserved("error", "No transports available");
+        }, 0);
+        return;
+      } else {
+        transport = this.transports[0];
+      }
+      this.readyState = "opening";
+      try {
+        transport = this.createTransport(transport);
+      } catch (e) {
+        this.transports.shift();
+        this.open();
+        return;
+      }
+      transport.open();
+      this.setTransport(transport);
+    }
+    /**
+     * Sets the current transport. Disables the existing one (if any).
+     *
+     * @private
+     */
+    setTransport(transport) {
+      if (this.transport) {
+        this.transport.removeAllListeners();
+      }
+      this.transport = transport;
+      transport.on("drain", this.onDrain.bind(this)).on("packet", this.onPacket.bind(this)).on("error", this.onError.bind(this)).on("close", (reason) => this.onClose("transport close", reason));
+    }
+    /**
+     * Probes a transport.
+     *
+     * @param {String} name - transport name
+     * @private
+     */
+    probe(name) {
+      let transport = this.createTransport(name);
+      let failed = false;
+      _Socket.priorWebsocketSuccess = false;
+      const onTransportOpen = () => {
+        if (failed)
+          return;
+        transport.send([{ type: "ping", data: "probe" }]);
+        transport.once("packet", (msg) => {
+          if (failed)
+            return;
+          if ("pong" === msg.type && "probe" === msg.data) {
+            this.upgrading = true;
+            this.emitReserved("upgrading", transport);
+            if (!transport)
+              return;
+            _Socket.priorWebsocketSuccess = "websocket" === transport.name;
+            this.transport.pause(() => {
+              if (failed)
+                return;
+              if ("closed" === this.readyState)
+                return;
+              cleanup();
+              this.setTransport(transport);
+              transport.send([{ type: "upgrade" }]);
+              this.emitReserved("upgrade", transport);
+              transport = null;
+              this.upgrading = false;
+              this.flush();
+            });
+          } else {
+            const err = new Error("probe error");
+            err.transport = transport.name;
+            this.emitReserved("upgradeError", err);
+          }
+        });
+      };
+      function freezeTransport() {
+        if (failed)
+          return;
+        failed = true;
+        cleanup();
+        transport.close();
+        transport = null;
+      }
+      const onerror = (err) => {
+        const error = new Error("probe error: " + err);
+        error.transport = transport.name;
+        freezeTransport();
+        this.emitReserved("upgradeError", error);
+      };
+      function onTransportClose() {
+        onerror("transport closed");
+      }
+      function onclose() {
+        onerror("socket closed");
+      }
+      function onupgrade(to) {
+        if (transport && to.name !== transport.name) {
+          freezeTransport();
+        }
+      }
+      const cleanup = () => {
+        transport.removeListener("open", onTransportOpen);
+        transport.removeListener("error", onerror);
+        transport.removeListener("close", onTransportClose);
+        this.off("close", onclose);
+        this.off("upgrading", onupgrade);
+      };
+      transport.once("open", onTransportOpen);
+      transport.once("error", onerror);
+      transport.once("close", onTransportClose);
+      this.once("close", onclose);
+      this.once("upgrading", onupgrade);
+      if (this.upgrades.indexOf("webtransport") !== -1 && name !== "webtransport") {
+        this.setTimeoutFn(() => {
+          if (!failed) {
+            transport.open();
+          }
+        }, 200);
+      } else {
+        transport.open();
+      }
+    }
+    /**
+     * Called when connection is deemed open.
+     *
+     * @private
+     */
+    onOpen() {
+      this.readyState = "open";
+      _Socket.priorWebsocketSuccess = "websocket" === this.transport.name;
+      this.emitReserved("open");
+      this.flush();
+      if ("open" === this.readyState && this.opts.upgrade) {
+        let i2 = 0;
+        const l = this.upgrades.length;
+        for (; i2 < l; i2++) {
+          this.probe(this.upgrades[i2]);
+        }
+      }
+    }
+    /**
+     * Handles a packet.
+     *
+     * @private
+     */
+    onPacket(packet) {
+      if ("opening" === this.readyState || "open" === this.readyState || "closing" === this.readyState) {
+        this.emitReserved("packet", packet);
+        this.emitReserved("heartbeat");
+        this.resetPingTimeout();
+        switch (packet.type) {
+          case "open":
+            this.onHandshake(JSON.parse(packet.data));
+            break;
+          case "ping":
+            this.sendPacket("pong");
+            this.emitReserved("ping");
+            this.emitReserved("pong");
+            break;
+          case "error":
+            const err = new Error("server error");
+            err.code = packet.data;
+            this.onError(err);
+            break;
+          case "message":
+            this.emitReserved("data", packet.data);
+            this.emitReserved("message", packet.data);
+            break;
+        }
+      } else {
+      }
+    }
+    /**
+     * Called upon handshake completion.
+     *
+     * @param {Object} data - handshake obj
+     * @private
+     */
+    onHandshake(data) {
+      this.emitReserved("handshake", data);
+      this.id = data.sid;
+      this.transport.query.sid = data.sid;
+      this.upgrades = this.filterUpgrades(data.upgrades);
+      this.pingInterval = data.pingInterval;
+      this.pingTimeout = data.pingTimeout;
+      this.maxPayload = data.maxPayload;
+      this.onOpen();
+      if ("closed" === this.readyState)
+        return;
+      this.resetPingTimeout();
+    }
+    /**
+     * Sets and resets ping timeout timer based on server pings.
+     *
+     * @private
+     */
+    resetPingTimeout() {
+      this.clearTimeoutFn(this.pingTimeoutTimer);
+      this.pingTimeoutTimer = this.setTimeoutFn(() => {
+        this.onClose("ping timeout");
+      }, this.pingInterval + this.pingTimeout);
+      if (this.opts.autoUnref) {
+        this.pingTimeoutTimer.unref();
+      }
+    }
+    /**
+     * Called on `drain` event
+     *
+     * @private
+     */
+    onDrain() {
+      this.writeBuffer.splice(0, this.prevBufferLen);
+      this.prevBufferLen = 0;
+      if (0 === this.writeBuffer.length) {
+        this.emitReserved("drain");
+      } else {
+        this.flush();
+      }
+    }
+    /**
+     * Flush write buffers.
+     *
+     * @private
+     */
+    flush() {
+      if ("closed" !== this.readyState && this.transport.writable && !this.upgrading && this.writeBuffer.length) {
+        const packets = this.getWritablePackets();
+        this.transport.send(packets);
+        this.prevBufferLen = packets.length;
+        this.emitReserved("flush");
+      }
+    }
+    /**
+     * Ensure the encoded size of the writeBuffer is below the maxPayload value sent by the server (only for HTTP
+     * long-polling)
+     *
+     * @private
+     */
+    getWritablePackets() {
+      const shouldCheckPayloadSize = this.maxPayload && this.transport.name === "polling" && this.writeBuffer.length > 1;
+      if (!shouldCheckPayloadSize) {
+        return this.writeBuffer;
+      }
+      let payloadSize = 1;
+      for (let i2 = 0; i2 < this.writeBuffer.length; i2++) {
+        const data = this.writeBuffer[i2].data;
+        if (data) {
+          payloadSize += byteLength(data);
+        }
+        if (i2 > 0 && payloadSize > this.maxPayload) {
+          return this.writeBuffer.slice(0, i2);
+        }
+        payloadSize += 2;
+      }
+      return this.writeBuffer;
+    }
+    /**
+     * Sends a message.
+     *
+     * @param {String} msg - message.
+     * @param {Object} options.
+     * @param {Function} callback function.
+     * @return {Socket} for chaining.
+     */
+    write(msg, options, fn) {
+      this.sendPacket("message", msg, options, fn);
+      return this;
+    }
+    send(msg, options, fn) {
+      this.sendPacket("message", msg, options, fn);
+      return this;
+    }
+    /**
+     * Sends a packet.
+     *
+     * @param {String} type: packet type.
+     * @param {String} data.
+     * @param {Object} options.
+     * @param {Function} fn - callback function.
+     * @private
+     */
+    sendPacket(type, data, options, fn) {
+      if ("function" === typeof data) {
+        fn = data;
+        data = void 0;
+      }
+      if ("function" === typeof options) {
+        fn = options;
+        options = null;
+      }
+      if ("closing" === this.readyState || "closed" === this.readyState) {
+        return;
+      }
+      options = options || {};
+      options.compress = false !== options.compress;
+      const packet = {
+        type,
+        data,
+        options
+      };
+      this.emitReserved("packetCreate", packet);
+      this.writeBuffer.push(packet);
+      if (fn)
+        this.once("flush", fn);
+      this.flush();
+    }
+    /**
+     * Closes the connection.
+     */
+    close() {
+      const close = () => {
+        this.onClose("forced close");
+        this.transport.close();
+      };
+      const cleanupAndClose = () => {
+        this.off("upgrade", cleanupAndClose);
+        this.off("upgradeError", cleanupAndClose);
+        close();
+      };
+      const waitForUpgrade = () => {
+        this.once("upgrade", cleanupAndClose);
+        this.once("upgradeError", cleanupAndClose);
+      };
+      if ("opening" === this.readyState || "open" === this.readyState) {
+        this.readyState = "closing";
+        if (this.writeBuffer.length) {
+          this.once("drain", () => {
+            if (this.upgrading) {
+              waitForUpgrade();
+            } else {
+              close();
+            }
+          });
+        } else if (this.upgrading) {
+          waitForUpgrade();
+        } else {
+          close();
+        }
+      }
+      return this;
+    }
+    /**
+     * Called upon transport error
+     *
+     * @private
+     */
+    onError(err) {
+      _Socket.priorWebsocketSuccess = false;
+      this.emitReserved("error", err);
+      this.onClose("transport error", err);
+    }
+    /**
+     * Called upon transport close.
+     *
+     * @private
+     */
+    onClose(reason, description) {
+      if ("opening" === this.readyState || "open" === this.readyState || "closing" === this.readyState) {
+        this.clearTimeoutFn(this.pingTimeoutTimer);
+        this.transport.removeAllListeners("close");
+        this.transport.close();
+        this.transport.removeAllListeners();
+        if (typeof removeEventListener === "function") {
+          removeEventListener("beforeunload", this.beforeunloadEventListener, false);
+          removeEventListener("offline", this.offlineEventListener, false);
+        }
+        this.readyState = "closed";
+        this.id = null;
+        this.emitReserved("close", reason, description);
+        this.writeBuffer = [];
+        this.prevBufferLen = 0;
+      }
+    }
+    /**
+     * Filters upgrades, returning only those matching client transports.
+     *
+     * @param {Array} upgrades - server upgrades
+     * @private
+     */
+    filterUpgrades(upgrades) {
+      const filteredUpgrades = [];
+      let i2 = 0;
+      const j = upgrades.length;
+      for (; i2 < j; i2++) {
+        if (~this.transports.indexOf(upgrades[i2]))
+          filteredUpgrades.push(upgrades[i2]);
+      }
+      return filteredUpgrades;
+    }
+  };
+  Socket.protocol = protocol;
+
+  // node_modules/engine.io-client/build/esm/index.js
+  var protocol2 = Socket.protocol;
+
+  // node_modules/socket.io-client/build/esm/url.js
+  function url(uri, path = "", loc) {
+    let obj = uri;
+    loc = loc || typeof location !== "undefined" && location;
+    if (null == uri)
+      uri = loc.protocol + "//" + loc.host;
+    if (typeof uri === "string") {
+      if ("/" === uri.charAt(0)) {
+        if ("/" === uri.charAt(1)) {
+          uri = loc.protocol + uri;
+        } else {
+          uri = loc.host + uri;
+        }
+      }
+      if (!/^(https?|wss?):\/\//.test(uri)) {
+        if ("undefined" !== typeof loc) {
+          uri = loc.protocol + "//" + uri;
+        } else {
+          uri = "https://" + uri;
+        }
+      }
+      obj = parse(uri);
+    }
+    if (!obj.port) {
+      if (/^(http|ws)$/.test(obj.protocol)) {
+        obj.port = "80";
+      } else if (/^(http|ws)s$/.test(obj.protocol)) {
+        obj.port = "443";
+      }
+    }
+    obj.path = obj.path || "/";
+    const ipv6 = obj.host.indexOf(":") !== -1;
+    const host = ipv6 ? "[" + obj.host + "]" : obj.host;
+    obj.id = obj.protocol + "://" + host + ":" + obj.port + path;
+    obj.href = obj.protocol + "://" + host + (loc && loc.port === obj.port ? "" : ":" + obj.port);
+    return obj;
+  }
+
+  // node_modules/socket.io-parser/build/esm/index.js
+  var esm_exports = {};
+  __export(esm_exports, {
+    Decoder: () => Decoder,
+    Encoder: () => Encoder,
+    PacketType: () => PacketType,
+    protocol: () => protocol3
+  });
+
+  // node_modules/socket.io-parser/build/esm/is-binary.js
+  var withNativeArrayBuffer3 = typeof ArrayBuffer === "function";
+  var isView2 = (obj) => {
+    return typeof ArrayBuffer.isView === "function" ? ArrayBuffer.isView(obj) : obj.buffer instanceof ArrayBuffer;
+  };
+  var toString = Object.prototype.toString;
+  var withNativeBlob2 = typeof Blob === "function" || typeof Blob !== "undefined" && toString.call(Blob) === "[object BlobConstructor]";
+  var withNativeFile = typeof File === "function" || typeof File !== "undefined" && toString.call(File) === "[object FileConstructor]";
+  function isBinary(obj) {
+    return withNativeArrayBuffer3 && (obj instanceof ArrayBuffer || isView2(obj)) || withNativeBlob2 && obj instanceof Blob || withNativeFile && obj instanceof File;
+  }
+  function hasBinary(obj, toJSON) {
+    if (!obj || typeof obj !== "object") {
+      return false;
+    }
+    if (Array.isArray(obj)) {
+      for (let i2 = 0, l = obj.length; i2 < l; i2++) {
+        if (hasBinary(obj[i2])) {
+          return true;
+        }
+      }
+      return false;
+    }
+    if (isBinary(obj)) {
+      return true;
+    }
+    if (obj.toJSON && typeof obj.toJSON === "function" && arguments.length === 1) {
+      return hasBinary(obj.toJSON(), true);
+    }
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key) && hasBinary(obj[key])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // node_modules/socket.io-parser/build/esm/binary.js
+  function deconstructPacket(packet) {
+    const buffers = [];
+    const packetData = packet.data;
+    const pack = packet;
+    pack.data = _deconstructPacket(packetData, buffers);
+    pack.attachments = buffers.length;
+    return { packet: pack, buffers };
+  }
+  function _deconstructPacket(data, buffers) {
+    if (!data)
+      return data;
+    if (isBinary(data)) {
+      const placeholder = { _placeholder: true, num: buffers.length };
+      buffers.push(data);
+      return placeholder;
+    } else if (Array.isArray(data)) {
+      const newData = new Array(data.length);
+      for (let i2 = 0; i2 < data.length; i2++) {
+        newData[i2] = _deconstructPacket(data[i2], buffers);
+      }
+      return newData;
+    } else if (typeof data === "object" && !(data instanceof Date)) {
+      const newData = {};
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          newData[key] = _deconstructPacket(data[key], buffers);
+        }
+      }
+      return newData;
+    }
+    return data;
+  }
+  function reconstructPacket(packet, buffers) {
+    packet.data = _reconstructPacket(packet.data, buffers);
+    delete packet.attachments;
+    return packet;
+  }
+  function _reconstructPacket(data, buffers) {
+    if (!data)
+      return data;
+    if (data && data._placeholder === true) {
+      const isIndexValid = typeof data.num === "number" && data.num >= 0 && data.num < buffers.length;
+      if (isIndexValid) {
+        return buffers[data.num];
+      } else {
+        throw new Error("illegal attachments");
+      }
+    } else if (Array.isArray(data)) {
+      for (let i2 = 0; i2 < data.length; i2++) {
+        data[i2] = _reconstructPacket(data[i2], buffers);
+      }
+    } else if (typeof data === "object") {
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          data[key] = _reconstructPacket(data[key], buffers);
+        }
+      }
+    }
+    return data;
+  }
+
+  // node_modules/socket.io-parser/build/esm/index.js
+  var RESERVED_EVENTS = [
+    "connect",
+    "connect_error",
+    "disconnect",
+    "disconnecting",
+    "newListener",
+    "removeListener"
+    // used by the Node.js EventEmitter
+  ];
+  var protocol3 = 5;
+  var PacketType;
+  (function(PacketType2) {
+    PacketType2[PacketType2["CONNECT"] = 0] = "CONNECT";
+    PacketType2[PacketType2["DISCONNECT"] = 1] = "DISCONNECT";
+    PacketType2[PacketType2["EVENT"] = 2] = "EVENT";
+    PacketType2[PacketType2["ACK"] = 3] = "ACK";
+    PacketType2[PacketType2["CONNECT_ERROR"] = 4] = "CONNECT_ERROR";
+    PacketType2[PacketType2["BINARY_EVENT"] = 5] = "BINARY_EVENT";
+    PacketType2[PacketType2["BINARY_ACK"] = 6] = "BINARY_ACK";
+  })(PacketType || (PacketType = {}));
+  var Encoder = class {
+    /**
+     * Encoder constructor
+     *
+     * @param {function} replacer - custom replacer to pass down to JSON.parse
+     */
+    constructor(replacer) {
+      this.replacer = replacer;
+    }
+    /**
+     * Encode a packet as a single string if non-binary, or as a
+     * buffer sequence, depending on packet type.
+     *
+     * @param {Object} obj - packet object
+     */
+    encode(obj) {
+      if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
+        if (hasBinary(obj)) {
+          return this.encodeAsBinary({
+            type: obj.type === PacketType.EVENT ? PacketType.BINARY_EVENT : PacketType.BINARY_ACK,
+            nsp: obj.nsp,
+            data: obj.data,
+            id: obj.id
+          });
+        }
+      }
+      return [this.encodeAsString(obj)];
+    }
+    /**
+     * Encode packet as string.
+     */
+    encodeAsString(obj) {
+      let str = "" + obj.type;
+      if (obj.type === PacketType.BINARY_EVENT || obj.type === PacketType.BINARY_ACK) {
+        str += obj.attachments + "-";
+      }
+      if (obj.nsp && "/" !== obj.nsp) {
+        str += obj.nsp + ",";
+      }
+      if (null != obj.id) {
+        str += obj.id;
+      }
+      if (null != obj.data) {
+        str += JSON.stringify(obj.data, this.replacer);
+      }
+      return str;
+    }
+    /**
+     * Encode packet as 'buffer sequence' by removing blobs, and
+     * deconstructing packet into object with placeholders and
+     * a list of buffers.
+     */
+    encodeAsBinary(obj) {
+      const deconstruction = deconstructPacket(obj);
+      const pack = this.encodeAsString(deconstruction.packet);
+      const buffers = deconstruction.buffers;
+      buffers.unshift(pack);
+      return buffers;
+    }
+  };
+  function isObject(value2) {
+    return Object.prototype.toString.call(value2) === "[object Object]";
+  }
+  var Decoder = class _Decoder extends Emitter {
+    /**
+     * Decoder constructor
+     *
+     * @param {function} reviver - custom reviver to pass down to JSON.stringify
+     */
+    constructor(reviver) {
+      super();
+      this.reviver = reviver;
+    }
+    /**
+     * Decodes an encoded packet string into packet JSON.
+     *
+     * @param {String} obj - encoded packet
+     */
+    add(obj) {
+      let packet;
+      if (typeof obj === "string") {
+        if (this.reconstructor) {
+          throw new Error("got plaintext data when reconstructing a packet");
+        }
+        packet = this.decodeString(obj);
+        const isBinaryEvent = packet.type === PacketType.BINARY_EVENT;
+        if (isBinaryEvent || packet.type === PacketType.BINARY_ACK) {
+          packet.type = isBinaryEvent ? PacketType.EVENT : PacketType.ACK;
+          this.reconstructor = new BinaryReconstructor(packet);
+          if (packet.attachments === 0) {
+            super.emitReserved("decoded", packet);
+          }
+        } else {
+          super.emitReserved("decoded", packet);
+        }
+      } else if (isBinary(obj) || obj.base64) {
+        if (!this.reconstructor) {
+          throw new Error("got binary data when not reconstructing a packet");
+        } else {
+          packet = this.reconstructor.takeBinaryData(obj);
+          if (packet) {
+            this.reconstructor = null;
+            super.emitReserved("decoded", packet);
+          }
+        }
+      } else {
+        throw new Error("Unknown type: " + obj);
+      }
+    }
+    /**
+     * Decode a packet String (JSON data)
+     *
+     * @param {String} str
+     * @return {Object} packet
+     */
+    decodeString(str) {
+      let i2 = 0;
+      const p = {
+        type: Number(str.charAt(0))
+      };
+      if (PacketType[p.type] === void 0) {
+        throw new Error("unknown packet type " + p.type);
+      }
+      if (p.type === PacketType.BINARY_EVENT || p.type === PacketType.BINARY_ACK) {
+        const start = i2 + 1;
+        while (str.charAt(++i2) !== "-" && i2 != str.length) {
+        }
+        const buf = str.substring(start, i2);
+        if (buf != Number(buf) || str.charAt(i2) !== "-") {
+          throw new Error("Illegal attachments");
+        }
+        p.attachments = Number(buf);
+      }
+      if ("/" === str.charAt(i2 + 1)) {
+        const start = i2 + 1;
+        while (++i2) {
+          const c = str.charAt(i2);
+          if ("," === c)
+            break;
+          if (i2 === str.length)
+            break;
+        }
+        p.nsp = str.substring(start, i2);
+      } else {
+        p.nsp = "/";
+      }
+      const next = str.charAt(i2 + 1);
+      if ("" !== next && Number(next) == next) {
+        const start = i2 + 1;
+        while (++i2) {
+          const c = str.charAt(i2);
+          if (null == c || Number(c) != c) {
+            --i2;
+            break;
+          }
+          if (i2 === str.length)
+            break;
+        }
+        p.id = Number(str.substring(start, i2 + 1));
+      }
+      if (str.charAt(++i2)) {
+        const payload = this.tryParse(str.substr(i2));
+        if (_Decoder.isPayloadValid(p.type, payload)) {
+          p.data = payload;
+        } else {
+          throw new Error("invalid payload");
+        }
+      }
+      return p;
+    }
+    tryParse(str) {
+      try {
+        return JSON.parse(str, this.reviver);
+      } catch (e) {
+        return false;
+      }
+    }
+    static isPayloadValid(type, payload) {
+      switch (type) {
+        case PacketType.CONNECT:
+          return isObject(payload);
+        case PacketType.DISCONNECT:
+          return payload === void 0;
+        case PacketType.CONNECT_ERROR:
+          return typeof payload === "string" || isObject(payload);
+        case PacketType.EVENT:
+        case PacketType.BINARY_EVENT:
+          return Array.isArray(payload) && (typeof payload[0] === "number" || typeof payload[0] === "string" && RESERVED_EVENTS.indexOf(payload[0]) === -1);
+        case PacketType.ACK:
+        case PacketType.BINARY_ACK:
+          return Array.isArray(payload);
+      }
+    }
+    /**
+     * Deallocates a parser's resources
+     */
+    destroy() {
+      if (this.reconstructor) {
+        this.reconstructor.finishedReconstruction();
+        this.reconstructor = null;
+      }
+    }
+  };
+  var BinaryReconstructor = class {
+    constructor(packet) {
+      this.packet = packet;
+      this.buffers = [];
+      this.reconPack = packet;
+    }
+    /**
+     * Method to be called when binary data received from connection
+     * after a BINARY_EVENT packet.
+     *
+     * @param {Buffer | ArrayBuffer} binData - the raw binary data received
+     * @return {null | Object} returns null if more binary data is expected or
+     *   a reconstructed packet object if all buffers have been received.
+     */
+    takeBinaryData(binData) {
+      this.buffers.push(binData);
+      if (this.buffers.length === this.reconPack.attachments) {
+        const packet = reconstructPacket(this.reconPack, this.buffers);
+        this.finishedReconstruction();
+        return packet;
+      }
+      return null;
+    }
+    /**
+     * Cleans up binary packet reconstruction variables.
+     */
+    finishedReconstruction() {
+      this.reconPack = null;
+      this.buffers = [];
+    }
+  };
+
+  // node_modules/socket.io-client/build/esm/on.js
+  function on(obj, ev, fn) {
+    obj.on(ev, fn);
+    return function subDestroy() {
+      obj.off(ev, fn);
+    };
+  }
+
+  // node_modules/socket.io-client/build/esm/socket.js
+  var RESERVED_EVENTS2 = Object.freeze({
+    connect: 1,
+    connect_error: 1,
+    disconnect: 1,
+    disconnecting: 1,
+    // EventEmitter reserved events: https://nodejs.org/api/events.html#events_event_newlistener
+    newListener: 1,
+    removeListener: 1
+  });
+  var Socket2 = class extends Emitter {
+    /**
+     * `Socket` constructor.
+     */
+    constructor(io, nsp, opts) {
+      super();
+      this.connected = false;
+      this.recovered = false;
+      this.receiveBuffer = [];
+      this.sendBuffer = [];
+      this._queue = [];
+      this._queueSeq = 0;
+      this.ids = 0;
+      this.acks = {};
+      this.flags = {};
+      this.io = io;
+      this.nsp = nsp;
+      if (opts && opts.auth) {
+        this.auth = opts.auth;
+      }
+      this._opts = Object.assign({}, opts);
+      if (this.io._autoConnect)
+        this.open();
+    }
+    /**
+     * Whether the socket is currently disconnected
+     *
+     * @example
+     * const socket = io();
+     *
+     * socket.on("connect", () => {
+     *   console.log(socket.disconnected); // false
+     * });
+     *
+     * socket.on("disconnect", () => {
+     *   console.log(socket.disconnected); // true
+     * });
+     */
+    get disconnected() {
+      return !this.connected;
+    }
+    /**
+     * Subscribe to open, close and packet events
+     *
+     * @private
+     */
+    subEvents() {
+      if (this.subs)
+        return;
+      const io = this.io;
+      this.subs = [
+        on(io, "open", this.onopen.bind(this)),
+        on(io, "packet", this.onpacket.bind(this)),
+        on(io, "error", this.onerror.bind(this)),
+        on(io, "close", this.onclose.bind(this))
+      ];
+    }
+    /**
+     * Whether the Socket will try to reconnect when its Manager connects or reconnects.
+     *
+     * @example
+     * const socket = io();
+     *
+     * console.log(socket.active); // true
+     *
+     * socket.on("disconnect", (reason) => {
+     *   if (reason === "io server disconnect") {
+     *     // the disconnection was initiated by the server, you need to manually reconnect
+     *     console.log(socket.active); // false
+     *   }
+     *   // else the socket will automatically try to reconnect
+     *   console.log(socket.active); // true
+     * });
+     */
+    get active() {
+      return !!this.subs;
+    }
+    /**
+     * "Opens" the socket.
+     *
+     * @example
+     * const socket = io({
+     *   autoConnect: false
+     * });
+     *
+     * socket.connect();
+     */
+    connect() {
+      if (this.connected)
+        return this;
+      this.subEvents();
+      if (!this.io["_reconnecting"])
+        this.io.open();
+      if ("open" === this.io._readyState)
+        this.onopen();
+      return this;
+    }
+    /**
+     * Alias for {@link connect()}.
+     */
+    open() {
+      return this.connect();
+    }
+    /**
+     * Sends a `message` event.
+     *
+     * This method mimics the WebSocket.send() method.
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send
+     *
+     * @example
+     * socket.send("hello");
+     *
+     * // this is equivalent to
+     * socket.emit("message", "hello");
+     *
+     * @return self
+     */
+    send(...args) {
+      args.unshift("message");
+      this.emit.apply(this, args);
+      return this;
+    }
+    /**
+     * Override `emit`.
+     * If the event is in `events`, it's emitted normally.
+     *
+     * @example
+     * socket.emit("hello", "world");
+     *
+     * // all serializable datastructures are supported (no need to call JSON.stringify)
+     * socket.emit("hello", 1, "2", { 3: ["4"], 5: Uint8Array.from([6]) });
+     *
+     * // with an acknowledgement from the server
+     * socket.emit("hello", "world", (val) => {
+     *   // ...
+     * });
+     *
+     * @return self
+     */
+    emit(ev, ...args) {
+      if (RESERVED_EVENTS2.hasOwnProperty(ev)) {
+        throw new Error('"' + ev.toString() + '" is a reserved event name');
+      }
+      args.unshift(ev);
+      if (this._opts.retries && !this.flags.fromQueue && !this.flags.volatile) {
+        this._addToQueue(args);
+        return this;
+      }
+      const packet = {
+        type: PacketType.EVENT,
+        data: args
+      };
+      packet.options = {};
+      packet.options.compress = this.flags.compress !== false;
+      if ("function" === typeof args[args.length - 1]) {
+        const id = this.ids++;
+        const ack = args.pop();
+        this._registerAckCallback(id, ack);
+        packet.id = id;
+      }
+      const isTransportWritable = this.io.engine && this.io.engine.transport && this.io.engine.transport.writable;
+      const discardPacket = this.flags.volatile && (!isTransportWritable || !this.connected);
+      if (discardPacket) {
+      } else if (this.connected) {
+        this.notifyOutgoingListeners(packet);
+        this.packet(packet);
+      } else {
+        this.sendBuffer.push(packet);
+      }
+      this.flags = {};
+      return this;
+    }
+    /**
+     * @private
+     */
+    _registerAckCallback(id, ack) {
+      var _a;
+      const timeout = (_a = this.flags.timeout) !== null && _a !== void 0 ? _a : this._opts.ackTimeout;
+      if (timeout === void 0) {
+        this.acks[id] = ack;
+        return;
+      }
+      const timer = this.io.setTimeoutFn(() => {
+        delete this.acks[id];
+        for (let i2 = 0; i2 < this.sendBuffer.length; i2++) {
+          if (this.sendBuffer[i2].id === id) {
+            this.sendBuffer.splice(i2, 1);
+          }
+        }
+        ack.call(this, new Error("operation has timed out"));
+      }, timeout);
+      this.acks[id] = (...args) => {
+        this.io.clearTimeoutFn(timer);
+        ack.apply(this, [null, ...args]);
+      };
+    }
+    /**
+     * Emits an event and waits for an acknowledgement
+     *
+     * @example
+     * // without timeout
+     * const response = await socket.emitWithAck("hello", "world");
+     *
+     * // with a specific timeout
+     * try {
+     *   const response = await socket.timeout(1000).emitWithAck("hello", "world");
+     * } catch (err) {
+     *   // the server did not acknowledge the event in the given delay
+     * }
+     *
+     * @return a Promise that will be fulfilled when the server acknowledges the event
+     */
+    emitWithAck(ev, ...args) {
+      const withErr = this.flags.timeout !== void 0 || this._opts.ackTimeout !== void 0;
+      return new Promise((resolve, reject) => {
+        args.push((arg1, arg2) => {
+          if (withErr) {
+            return arg1 ? reject(arg1) : resolve(arg2);
+          } else {
+            return resolve(arg1);
+          }
+        });
+        this.emit(ev, ...args);
+      });
+    }
+    /**
+     * Add the packet to the queue.
+     * @param args
+     * @private
+     */
+    _addToQueue(args) {
+      let ack;
+      if (typeof args[args.length - 1] === "function") {
+        ack = args.pop();
+      }
+      const packet = {
+        id: this._queueSeq++,
+        tryCount: 0,
+        pending: false,
+        args,
+        flags: Object.assign({ fromQueue: true }, this.flags)
+      };
+      args.push((err, ...responseArgs) => {
+        if (packet !== this._queue[0]) {
+          return;
+        }
+        const hasError = err !== null;
+        if (hasError) {
+          if (packet.tryCount > this._opts.retries) {
+            this._queue.shift();
+            if (ack) {
+              ack(err);
+            }
+          }
+        } else {
+          this._queue.shift();
+          if (ack) {
+            ack(null, ...responseArgs);
+          }
+        }
+        packet.pending = false;
+        return this._drainQueue();
+      });
+      this._queue.push(packet);
+      this._drainQueue();
+    }
+    /**
+     * Send the first packet of the queue, and wait for an acknowledgement from the server.
+     * @param force - whether to resend a packet that has not been acknowledged yet
+     *
+     * @private
+     */
+    _drainQueue(force = false) {
+      if (!this.connected || this._queue.length === 0) {
+        return;
+      }
+      const packet = this._queue[0];
+      if (packet.pending && !force) {
+        return;
+      }
+      packet.pending = true;
+      packet.tryCount++;
+      this.flags = packet.flags;
+      this.emit.apply(this, packet.args);
+    }
+    /**
+     * Sends a packet.
+     *
+     * @param packet
+     * @private
+     */
+    packet(packet) {
+      packet.nsp = this.nsp;
+      this.io._packet(packet);
+    }
+    /**
+     * Called upon engine `open`.
+     *
+     * @private
+     */
+    onopen() {
+      if (typeof this.auth == "function") {
+        this.auth((data) => {
+          this._sendConnectPacket(data);
+        });
+      } else {
+        this._sendConnectPacket(this.auth);
+      }
+    }
+    /**
+     * Sends a CONNECT packet to initiate the Socket.IO session.
+     *
+     * @param data
+     * @private
+     */
+    _sendConnectPacket(data) {
+      this.packet({
+        type: PacketType.CONNECT,
+        data: this._pid ? Object.assign({ pid: this._pid, offset: this._lastOffset }, data) : data
+      });
+    }
+    /**
+     * Called upon engine or manager `error`.
+     *
+     * @param err
+     * @private
+     */
+    onerror(err) {
+      if (!this.connected) {
+        this.emitReserved("connect_error", err);
+      }
+    }
+    /**
+     * Called upon engine `close`.
+     *
+     * @param reason
+     * @param description
+     * @private
+     */
+    onclose(reason, description) {
+      this.connected = false;
+      delete this.id;
+      this.emitReserved("disconnect", reason, description);
+    }
+    /**
+     * Called with socket packet.
+     *
+     * @param packet
+     * @private
+     */
+    onpacket(packet) {
+      const sameNamespace = packet.nsp === this.nsp;
+      if (!sameNamespace)
+        return;
+      switch (packet.type) {
+        case PacketType.CONNECT:
+          if (packet.data && packet.data.sid) {
+            this.onconnect(packet.data.sid, packet.data.pid);
+          } else {
+            this.emitReserved("connect_error", new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));
+          }
+          break;
+        case PacketType.EVENT:
+        case PacketType.BINARY_EVENT:
+          this.onevent(packet);
+          break;
+        case PacketType.ACK:
+        case PacketType.BINARY_ACK:
+          this.onack(packet);
+          break;
+        case PacketType.DISCONNECT:
+          this.ondisconnect();
+          break;
+        case PacketType.CONNECT_ERROR:
+          this.destroy();
+          const err = new Error(packet.data.message);
+          err.data = packet.data.data;
+          this.emitReserved("connect_error", err);
+          break;
+      }
+    }
+    /**
+     * Called upon a server event.
+     *
+     * @param packet
+     * @private
+     */
+    onevent(packet) {
+      const args = packet.data || [];
+      if (null != packet.id) {
+        args.push(this.ack(packet.id));
+      }
+      if (this.connected) {
+        this.emitEvent(args);
+      } else {
+        this.receiveBuffer.push(Object.freeze(args));
+      }
+    }
+    emitEvent(args) {
+      if (this._anyListeners && this._anyListeners.length) {
+        const listeners = this._anyListeners.slice();
+        for (const listener of listeners) {
+          listener.apply(this, args);
+        }
+      }
+      super.emit.apply(this, args);
+      if (this._pid && args.length && typeof args[args.length - 1] === "string") {
+        this._lastOffset = args[args.length - 1];
+      }
+    }
+    /**
+     * Produces an ack callback to emit with an event.
+     *
+     * @private
+     */
+    ack(id) {
+      const self2 = this;
+      let sent = false;
+      return function(...args) {
+        if (sent)
+          return;
+        sent = true;
+        self2.packet({
+          type: PacketType.ACK,
+          id,
+          data: args
+        });
+      };
+    }
+    /**
+     * Called upon a server acknowlegement.
+     *
+     * @param packet
+     * @private
+     */
+    onack(packet) {
+      const ack = this.acks[packet.id];
+      if ("function" === typeof ack) {
+        ack.apply(this, packet.data);
+        delete this.acks[packet.id];
+      } else {
+      }
+    }
+    /**
+     * Called upon server connect.
+     *
+     * @private
+     */
+    onconnect(id, pid) {
+      this.id = id;
+      this.recovered = pid && this._pid === pid;
+      this._pid = pid;
+      this.connected = true;
+      this.emitBuffered();
+      this.emitReserved("connect");
+      this._drainQueue(true);
+    }
+    /**
+     * Emit buffered events (received and emitted).
+     *
+     * @private
+     */
+    emitBuffered() {
+      this.receiveBuffer.forEach((args) => this.emitEvent(args));
+      this.receiveBuffer = [];
+      this.sendBuffer.forEach((packet) => {
+        this.notifyOutgoingListeners(packet);
+        this.packet(packet);
+      });
+      this.sendBuffer = [];
+    }
+    /**
+     * Called upon server disconnect.
+     *
+     * @private
+     */
+    ondisconnect() {
+      this.destroy();
+      this.onclose("io server disconnect");
+    }
+    /**
+     * Called upon forced client/server side disconnections,
+     * this method ensures the manager stops tracking us and
+     * that reconnections don't get triggered for this.
+     *
+     * @private
+     */
+    destroy() {
+      if (this.subs) {
+        this.subs.forEach((subDestroy) => subDestroy());
+        this.subs = void 0;
+      }
+      this.io["_destroy"](this);
+    }
+    /**
+     * Disconnects the socket manually. In that case, the socket will not try to reconnect.
+     *
+     * If this is the last active Socket instance of the {@link Manager}, the low-level connection will be closed.
+     *
+     * @example
+     * const socket = io();
+     *
+     * socket.on("disconnect", (reason) => {
+     *   // console.log(reason); prints "io client disconnect"
+     * });
+     *
+     * socket.disconnect();
+     *
+     * @return self
+     */
+    disconnect() {
+      if (this.connected) {
+        this.packet({ type: PacketType.DISCONNECT });
+      }
+      this.destroy();
+      if (this.connected) {
+        this.onclose("io client disconnect");
+      }
+      return this;
+    }
+    /**
+     * Alias for {@link disconnect()}.
+     *
+     * @return self
+     */
+    close() {
+      return this.disconnect();
+    }
+    /**
+     * Sets the compress flag.
+     *
+     * @example
+     * socket.compress(false).emit("hello");
+     *
+     * @param compress - if `true`, compresses the sending data
+     * @return self
+     */
+    compress(compress) {
+      this.flags.compress = compress;
+      return this;
+    }
+    /**
+     * Sets a modifier for a subsequent event emission that the event message will be dropped when this socket is not
+     * ready to send messages.
+     *
+     * @example
+     * socket.volatile.emit("hello"); // the server may or may not receive it
+     *
+     * @returns self
+     */
+    get volatile() {
+      this.flags.volatile = true;
+      return this;
+    }
+    /**
+     * Sets a modifier for a subsequent event emission that the callback will be called with an error when the
+     * given number of milliseconds have elapsed without an acknowledgement from the server:
+     *
+     * @example
+     * socket.timeout(5000).emit("my-event", (err) => {
+     *   if (err) {
+     *     // the server did not acknowledge the event in the given delay
+     *   }
+     * });
+     *
+     * @returns self
+     */
+    timeout(timeout) {
+      this.flags.timeout = timeout;
+      return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback.
+     *
+     * @example
+     * socket.onAny((event, ...args) => {
+     *   console.log(`got ${event}`);
+     * });
+     *
+     * @param listener
+     */
+    onAny(listener) {
+      this._anyListeners = this._anyListeners || [];
+      this._anyListeners.push(listener);
+      return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback. The listener is added to the beginning of the listeners array.
+     *
+     * @example
+     * socket.prependAny((event, ...args) => {
+     *   console.log(`got event ${event}`);
+     * });
+     *
+     * @param listener
+     */
+    prependAny(listener) {
+      this._anyListeners = this._anyListeners || [];
+      this._anyListeners.unshift(listener);
+      return this;
+    }
+    /**
+     * Removes the listener that will be fired when any event is emitted.
+     *
+     * @example
+     * const catchAllListener = (event, ...args) => {
+     *   console.log(`got event ${event}`);
+     * }
+     *
+     * socket.onAny(catchAllListener);
+     *
+     * // remove a specific listener
+     * socket.offAny(catchAllListener);
+     *
+     * // or remove all listeners
+     * socket.offAny();
+     *
+     * @param listener
+     */
+    offAny(listener) {
+      if (!this._anyListeners) {
+        return this;
+      }
+      if (listener) {
+        const listeners = this._anyListeners;
+        for (let i2 = 0; i2 < listeners.length; i2++) {
+          if (listener === listeners[i2]) {
+            listeners.splice(i2, 1);
+            return this;
+          }
+        }
+      } else {
+        this._anyListeners = [];
+      }
+      return this;
+    }
+    /**
+     * Returns an array of listeners that are listening for any event that is specified. This array can be manipulated,
+     * e.g. to remove listeners.
+     */
+    listenersAny() {
+      return this._anyListeners || [];
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback.
+     *
+     * Note: acknowledgements sent to the server are not included.
+     *
+     * @example
+     * socket.onAnyOutgoing((event, ...args) => {
+     *   console.log(`sent event ${event}`);
+     * });
+     *
+     * @param listener
+     */
+    onAnyOutgoing(listener) {
+      this._anyOutgoingListeners = this._anyOutgoingListeners || [];
+      this._anyOutgoingListeners.push(listener);
+      return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback. The listener is added to the beginning of the listeners array.
+     *
+     * Note: acknowledgements sent to the server are not included.
+     *
+     * @example
+     * socket.prependAnyOutgoing((event, ...args) => {
+     *   console.log(`sent event ${event}`);
+     * });
+     *
+     * @param listener
+     */
+    prependAnyOutgoing(listener) {
+      this._anyOutgoingListeners = this._anyOutgoingListeners || [];
+      this._anyOutgoingListeners.unshift(listener);
+      return this;
+    }
+    /**
+     * Removes the listener that will be fired when any event is emitted.
+     *
+     * @example
+     * const catchAllListener = (event, ...args) => {
+     *   console.log(`sent event ${event}`);
+     * }
+     *
+     * socket.onAnyOutgoing(catchAllListener);
+     *
+     * // remove a specific listener
+     * socket.offAnyOutgoing(catchAllListener);
+     *
+     * // or remove all listeners
+     * socket.offAnyOutgoing();
+     *
+     * @param [listener] - the catch-all listener (optional)
+     */
+    offAnyOutgoing(listener) {
+      if (!this._anyOutgoingListeners) {
+        return this;
+      }
+      if (listener) {
+        const listeners = this._anyOutgoingListeners;
+        for (let i2 = 0; i2 < listeners.length; i2++) {
+          if (listener === listeners[i2]) {
+            listeners.splice(i2, 1);
+            return this;
+          }
+        }
+      } else {
+        this._anyOutgoingListeners = [];
+      }
+      return this;
+    }
+    /**
+     * Returns an array of listeners that are listening for any event that is specified. This array can be manipulated,
+     * e.g. to remove listeners.
+     */
+    listenersAnyOutgoing() {
+      return this._anyOutgoingListeners || [];
+    }
+    /**
+     * Notify the listeners for each packet sent
+     *
+     * @param packet
+     *
+     * @private
+     */
+    notifyOutgoingListeners(packet) {
+      if (this._anyOutgoingListeners && this._anyOutgoingListeners.length) {
+        const listeners = this._anyOutgoingListeners.slice();
+        for (const listener of listeners) {
+          listener.apply(this, packet.data);
+        }
+      }
+    }
+  };
+
+  // node_modules/socket.io-client/build/esm/contrib/backo2.js
+  function Backoff(opts) {
+    opts = opts || {};
+    this.ms = opts.min || 100;
+    this.max = opts.max || 1e4;
+    this.factor = opts.factor || 2;
+    this.jitter = opts.jitter > 0 && opts.jitter <= 1 ? opts.jitter : 0;
+    this.attempts = 0;
+  }
+  Backoff.prototype.duration = function() {
+    var ms = this.ms * Math.pow(this.factor, this.attempts++);
+    if (this.jitter) {
+      var rand = Math.random();
+      var deviation = Math.floor(rand * this.jitter * ms);
+      ms = (Math.floor(rand * 10) & 1) == 0 ? ms - deviation : ms + deviation;
+    }
+    return Math.min(ms, this.max) | 0;
+  };
+  Backoff.prototype.reset = function() {
+    this.attempts = 0;
+  };
+  Backoff.prototype.setMin = function(min) {
+    this.ms = min;
+  };
+  Backoff.prototype.setMax = function(max) {
+    this.max = max;
+  };
+  Backoff.prototype.setJitter = function(jitter) {
+    this.jitter = jitter;
+  };
+
+  // node_modules/socket.io-client/build/esm/manager.js
+  var Manager = class extends Emitter {
+    constructor(uri, opts) {
+      var _a;
+      super();
+      this.nsps = {};
+      this.subs = [];
+      if (uri && "object" === typeof uri) {
+        opts = uri;
+        uri = void 0;
+      }
+      opts = opts || {};
+      opts.path = opts.path || "/socket.io";
+      this.opts = opts;
+      installTimerFunctions(this, opts);
+      this.reconnection(opts.reconnection !== false);
+      this.reconnectionAttempts(opts.reconnectionAttempts || Infinity);
+      this.reconnectionDelay(opts.reconnectionDelay || 1e3);
+      this.reconnectionDelayMax(opts.reconnectionDelayMax || 5e3);
+      this.randomizationFactor((_a = opts.randomizationFactor) !== null && _a !== void 0 ? _a : 0.5);
+      this.backoff = new Backoff({
+        min: this.reconnectionDelay(),
+        max: this.reconnectionDelayMax(),
+        jitter: this.randomizationFactor()
+      });
+      this.timeout(null == opts.timeout ? 2e4 : opts.timeout);
+      this._readyState = "closed";
+      this.uri = uri;
+      const _parser = opts.parser || esm_exports;
+      this.encoder = new _parser.Encoder();
+      this.decoder = new _parser.Decoder();
+      this._autoConnect = opts.autoConnect !== false;
+      if (this._autoConnect)
+        this.open();
+    }
+    reconnection(v) {
+      if (!arguments.length)
+        return this._reconnection;
+      this._reconnection = !!v;
+      return this;
+    }
+    reconnectionAttempts(v) {
+      if (v === void 0)
+        return this._reconnectionAttempts;
+      this._reconnectionAttempts = v;
+      return this;
+    }
+    reconnectionDelay(v) {
+      var _a;
+      if (v === void 0)
+        return this._reconnectionDelay;
+      this._reconnectionDelay = v;
+      (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMin(v);
+      return this;
+    }
+    randomizationFactor(v) {
+      var _a;
+      if (v === void 0)
+        return this._randomizationFactor;
+      this._randomizationFactor = v;
+      (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setJitter(v);
+      return this;
+    }
+    reconnectionDelayMax(v) {
+      var _a;
+      if (v === void 0)
+        return this._reconnectionDelayMax;
+      this._reconnectionDelayMax = v;
+      (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMax(v);
+      return this;
+    }
+    timeout(v) {
+      if (!arguments.length)
+        return this._timeout;
+      this._timeout = v;
+      return this;
+    }
+    /**
+     * Starts trying to reconnect if reconnection is enabled and we have not
+     * started reconnecting yet
+     *
+     * @private
+     */
+    maybeReconnectOnOpen() {
+      if (!this._reconnecting && this._reconnection && this.backoff.attempts === 0) {
+        this.reconnect();
+      }
+    }
+    /**
+     * Sets the current transport `socket`.
+     *
+     * @param {Function} fn - optional, callback
+     * @return self
+     * @public
+     */
+    open(fn) {
+      if (~this._readyState.indexOf("open"))
+        return this;
+      this.engine = new Socket(this.uri, this.opts);
+      const socket = this.engine;
+      const self2 = this;
+      this._readyState = "opening";
+      this.skipReconnect = false;
+      const openSubDestroy = on(socket, "open", function() {
+        self2.onopen();
+        fn && fn();
+      });
+      const onError = (err) => {
+        this.cleanup();
+        this._readyState = "closed";
+        this.emitReserved("error", err);
+        if (fn) {
+          fn(err);
+        } else {
+          this.maybeReconnectOnOpen();
+        }
+      };
+      const errorSub = on(socket, "error", onError);
+      if (false !== this._timeout) {
+        const timeout = this._timeout;
+        const timer = this.setTimeoutFn(() => {
+          openSubDestroy();
+          onError(new Error("timeout"));
+          socket.close();
+        }, timeout);
+        if (this.opts.autoUnref) {
+          timer.unref();
+        }
+        this.subs.push(() => {
+          this.clearTimeoutFn(timer);
+        });
+      }
+      this.subs.push(openSubDestroy);
+      this.subs.push(errorSub);
+      return this;
+    }
+    /**
+     * Alias for open()
+     *
+     * @return self
+     * @public
+     */
+    connect(fn) {
+      return this.open(fn);
+    }
+    /**
+     * Called upon transport open.
+     *
+     * @private
+     */
+    onopen() {
+      this.cleanup();
+      this._readyState = "open";
+      this.emitReserved("open");
+      const socket = this.engine;
+      this.subs.push(on(socket, "ping", this.onping.bind(this)), on(socket, "data", this.ondata.bind(this)), on(socket, "error", this.onerror.bind(this)), on(socket, "close", this.onclose.bind(this)), on(this.decoder, "decoded", this.ondecoded.bind(this)));
+    }
+    /**
+     * Called upon a ping.
+     *
+     * @private
+     */
+    onping() {
+      this.emitReserved("ping");
+    }
+    /**
+     * Called with data.
+     *
+     * @private
+     */
+    ondata(data) {
+      try {
+        this.decoder.add(data);
+      } catch (e) {
+        this.onclose("parse error", e);
+      }
+    }
+    /**
+     * Called when parser fully decodes a packet.
+     *
+     * @private
+     */
+    ondecoded(packet) {
+      nextTick(() => {
+        this.emitReserved("packet", packet);
+      }, this.setTimeoutFn);
+    }
+    /**
+     * Called upon socket error.
+     *
+     * @private
+     */
+    onerror(err) {
+      this.emitReserved("error", err);
+    }
+    /**
+     * Creates a new socket for the given `nsp`.
+     *
+     * @return {Socket}
+     * @public
+     */
+    socket(nsp, opts) {
+      let socket = this.nsps[nsp];
+      if (!socket) {
+        socket = new Socket2(this, nsp, opts);
+        this.nsps[nsp] = socket;
+      } else if (this._autoConnect && !socket.active) {
+        socket.connect();
+      }
+      return socket;
+    }
+    /**
+     * Called upon a socket close.
+     *
+     * @param socket
+     * @private
+     */
+    _destroy(socket) {
+      const nsps = Object.keys(this.nsps);
+      for (const nsp of nsps) {
+        const socket2 = this.nsps[nsp];
+        if (socket2.active) {
+          return;
+        }
+      }
+      this._close();
+    }
+    /**
+     * Writes a packet.
+     *
+     * @param packet
+     * @private
+     */
+    _packet(packet) {
+      const encodedPackets = this.encoder.encode(packet);
+      for (let i2 = 0; i2 < encodedPackets.length; i2++) {
+        this.engine.write(encodedPackets[i2], packet.options);
+      }
+    }
+    /**
+     * Clean up transport subscriptions and packet buffer.
+     *
+     * @private
+     */
+    cleanup() {
+      this.subs.forEach((subDestroy) => subDestroy());
+      this.subs.length = 0;
+      this.decoder.destroy();
+    }
+    /**
+     * Close the current socket.
+     *
+     * @private
+     */
+    _close() {
+      this.skipReconnect = true;
+      this._reconnecting = false;
+      this.onclose("forced close");
+      if (this.engine)
+        this.engine.close();
+    }
+    /**
+     * Alias for close()
+     *
+     * @private
+     */
+    disconnect() {
+      return this._close();
+    }
+    /**
+     * Called upon engine close.
+     *
+     * @private
+     */
+    onclose(reason, description) {
+      this.cleanup();
+      this.backoff.reset();
+      this._readyState = "closed";
+      this.emitReserved("close", reason, description);
+      if (this._reconnection && !this.skipReconnect) {
+        this.reconnect();
+      }
+    }
+    /**
+     * Attempt a reconnection.
+     *
+     * @private
+     */
+    reconnect() {
+      if (this._reconnecting || this.skipReconnect)
+        return this;
+      const self2 = this;
+      if (this.backoff.attempts >= this._reconnectionAttempts) {
+        this.backoff.reset();
+        this.emitReserved("reconnect_failed");
+        this._reconnecting = false;
+      } else {
+        const delay = this.backoff.duration();
+        this._reconnecting = true;
+        const timer = this.setTimeoutFn(() => {
+          if (self2.skipReconnect)
+            return;
+          this.emitReserved("reconnect_attempt", self2.backoff.attempts);
+          if (self2.skipReconnect)
+            return;
+          self2.open((err) => {
+            if (err) {
+              self2._reconnecting = false;
+              self2.reconnect();
+              this.emitReserved("reconnect_error", err);
+            } else {
+              self2.onreconnect();
+            }
+          });
+        }, delay);
+        if (this.opts.autoUnref) {
+          timer.unref();
+        }
+        this.subs.push(() => {
+          this.clearTimeoutFn(timer);
+        });
+      }
+    }
+    /**
+     * Called upon successful reconnect.
+     *
+     * @private
+     */
+    onreconnect() {
+      const attempt = this.backoff.attempts;
+      this._reconnecting = false;
+      this.backoff.reset();
+      this.emitReserved("reconnect", attempt);
+    }
+  };
+
+  // node_modules/socket.io-client/build/esm/index.js
+  var cache = {};
+  function lookup2(uri, opts) {
+    if (typeof uri === "object") {
+      opts = uri;
+      uri = void 0;
+    }
+    opts = opts || {};
+    const parsed = url(uri, opts.path || "/socket.io");
+    const source = parsed.source;
+    const id = parsed.id;
+    const path = parsed.path;
+    const sameNamespace = cache[id] && path in cache[id]["nsps"];
+    const newConnection = opts.forceNew || opts["force new connection"] || false === opts.multiplex || sameNamespace;
+    let io;
+    if (newConnection) {
+      io = new Manager(source, opts);
+    } else {
+      if (!cache[id]) {
+        cache[id] = new Manager(source, opts);
+      }
+      io = cache[id];
+    }
+    if (parsed.query && !opts.query) {
+      opts.query = parsed.queryKey;
+    }
+    return io.socket(parsed.path, opts);
+  }
+  Object.assign(lookup2, {
+    Manager,
+    Socket: Socket2,
+    io: lookup2,
+    connect: lookup2
+  });
 
   // frontend/context/index.tsx
   var initialState = {
@@ -27752,7 +31072,8 @@
           userPending: false,
           user: action.payload.user,
           chats: action.payload.chats,
-          contacts: action.payload.contacts
+          contacts: action.payload.contacts,
+          socket: action.payload.socket
         };
       case CHAT_PORTAL:
         return { ...state, addChat: true, addContact: false };
@@ -27764,6 +31085,10 @@
         return { ...state, contacts: [...state.contacts, action.payload] };
       case ADD_CHAT:
         return { ...state, chats: [...state.chats, action.payload] };
+      case SET_CHATROOM:
+        return { ...state, chatId: action.payload };
+      case CLOSE_CHATROOM:
+        return { ...state, chatId: null };
       default:
         return initialState;
     }
@@ -27784,7 +31109,8 @@
           payload: {
             user: profile.data.user,
             contacts: profile.data.contacts,
-            chats: profile.data.chats
+            chats: profile.data.chats,
+            socket: lookup2()
           }
         });
       } else {
@@ -27799,7 +31125,8 @@
 
   // frontend/components/Chat/index.tsx
   var Chat = ({ chat }) => {
-    return /* @__PURE__ */ import_react2.default.createElement("li", null, /* @__PURE__ */ import_react2.default.createElement("h3", null, chat.name));
+    const dispatch = useDispatch();
+    return /* @__PURE__ */ import_react2.default.createElement("li", { onClick: () => dispatch({ type: SET_CHATROOM, payload: chat.id }) }, /* @__PURE__ */ import_react2.default.createElement("h3", null, chat.name));
   };
   var Chats = () => {
     const chats = useAppState((state) => state.chats);
@@ -27892,7 +31219,7 @@
     const dispatch = useDispatch();
     const handleSubmit = async (event) => {
       event.preventDefault();
-      setState((prev) => ({ ...prev, disabled: true }));
+      setState((prev2) => ({ ...prev2, disabled: true }));
       const response = await request_default("/user/add_contact", {
         method: "put",
         body: JSON.stringify({
@@ -27914,8 +31241,8 @@
           payload: response.data.contact
         });
       } else {
-        setState((prev) => ({
-          ...prev,
+        setState((prev2) => ({
+          ...prev2,
           alertType: "error",
           message: response.error,
           disabled: false
@@ -27923,7 +31250,7 @@
       }
     };
     const handleChange = (event) => {
-      setState((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+      setState((prev2) => ({ ...prev2, [event.target.name]: event.target.value }));
     };
     return /* @__PURE__ */ import_react9.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react9.default.createElement(
       "button",
@@ -27963,7 +31290,7 @@
       {
         type: state.alertType,
         message: state.message,
-        clear: () => setState((prev) => ({ ...prev, alertType: "", message: "" }))
+        clear: () => setState((prev2) => ({ ...prev2, alertType: "", message: "" }))
       }
     ));
   };
@@ -28010,9 +31337,9 @@
     };
     const changeUsers = (id) => {
       if (userIds.includes(id)) {
-        setUserIds((prev) => prev.filter((item) => item !== id));
+        setUserIds((prev2) => prev2.filter((item) => item !== id));
       } else {
-        setUserIds((prev) => [...prev, id]);
+        setUserIds((prev2) => [...prev2, id]);
       }
     };
     return /* @__PURE__ */ import_react9.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react9.default.createElement(
@@ -28089,8 +31416,8 @@
     });
     const navigate = useNavigate();
     const handleChange = (event) => {
-      setState((prev) => ({
-        ...prev,
+      setState((prev2) => ({
+        ...prev2,
         [event.target.name]: event.target.value
       }));
     };
@@ -28111,8 +31438,8 @@
       if (response.success) {
         navigate("/");
       } else {
-        setState((prev) => ({
-          ...prev,
+        setState((prev2) => ({
+          ...prev2,
           error: response.error
         }));
       }
@@ -28161,7 +31488,7 @@
       {
         message: state.error,
         type: "error",
-        clear: () => setState((prev) => ({ ...prev, error: "" }))
+        clear: () => setState((prev2) => ({ ...prev2, error: "" }))
       }
     ));
   };
@@ -28178,8 +31505,8 @@
     });
     const navigate = useNavigate();
     const handleChange = (event) => {
-      setState((prev) => ({
-        ...prev,
+      setState((prev2) => ({
+        ...prev2,
         [event.target.name]: event.target.value
       }));
     };
@@ -28200,8 +31527,8 @@
       if (response.success) {
         navigate("/");
       } else {
-        setState((prev) => ({
-          ...prev,
+        setState((prev2) => ({
+          ...prev2,
           error: response.error
         }));
       }
@@ -28260,7 +31587,7 @@
       {
         message: state.error,
         type: "error",
-        clear: () => setState((prev) => ({ ...prev, error: "" }))
+        clear: () => setState((prev2) => ({ ...prev2, error: "" }))
       }
     ));
   };
@@ -28288,17 +31615,17 @@
   var Header = () => {
     const user = useAppState((state) => state.user);
     const [showInfo, setShowInfo] = (0, import_react11.useState)(false);
-    const url = user?.photo ?? "../assets/person.png";
+    const url2 = user?.photo ?? "../assets/person.png";
     return /* @__PURE__ */ import_react11.default.createElement("header", { className: "header" }, /* @__PURE__ */ import_react11.default.createElement("h1", null, "Chat App"), /* @__PURE__ */ import_react11.default.createElement(
       "div",
       {
-        onClick: () => setShowInfo((prev) => !prev),
+        onClick: () => setShowInfo((prev2) => !prev2),
         className: "avatar"
       },
       /* @__PURE__ */ import_react11.default.createElement(
         "img",
         {
-          src: url,
+          src: url2,
           alt: user?.name
         }
       ),
@@ -28307,31 +31634,97 @@
   };
   var Header_default = Header;
 
+  // frontend/components/ChatRoom/index.tsx
+  var import_react13 = __toESM(require_react());
+
+  // frontend/components/SendMessage/index.tsx
+  var import_react12 = __toESM(require_react());
+  var SendMessage = () => {
+    const [message, setMessage] = (0, import_react12.useState)({
+      content: ""
+    });
+    const handleSubmit = (event) => {
+    };
+    const handleChange = (event) => {
+    };
+    return /* @__PURE__ */ import_react12.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react12.default.createElement(
+      Input_default,
+      {
+        label: "",
+        options: {
+          type: "text",
+          name: "content",
+          placeholder: "Type your message",
+          value: message.content,
+          onChange: handleChange
+        }
+      }
+    ), /* @__PURE__ */ import_react12.default.createElement(
+      Input_default,
+      {
+        label: "",
+        options: {
+          type: "submit",
+          name: "submit",
+          placeholder: "",
+          value: "SignIn",
+          onChange: () => {
+          }
+        }
+      }
+    ));
+  };
+  var SendMessage_default = SendMessage;
+
+  // frontend/components/ChatRoom/index.tsx
+  var ChatRoom = ({ chatId, socket, close }) => {
+    return /* @__PURE__ */ import_react13.default.createElement("div", { className: "chatroom" }, /* @__PURE__ */ import_react13.default.createElement(
+      "img",
+      {
+        src: "../assets/close.png",
+        alt: "close chatroom",
+        onClick: close
+      }
+    ), /* @__PURE__ */ import_react13.default.createElement(SendMessage_default, null));
+  };
+  var ChatRoom_default = (0, import_react13.memo)(ChatRoom, () => true);
+
   // frontend/app.tsx
   var App = () => {
-    const { userPending } = useAppState(
-      (state) => state.userPending
-    );
+    const { userPending, chatId, socket } = useAppState((state) => ({
+      userPending: state.userPending,
+      chatId: state.chatId,
+      socket: state.socket
+    }));
+    const dispatch = useDispatch();
+    const closeChat = (0, import_react14.useCallback)(() => dispatch({ type: CLOSE_CHATROOM }), []);
     if (userPending)
-      return /* @__PURE__ */ import_react12.default.createElement("h1", null, "pending...");
-    return /* @__PURE__ */ import_react12.default.createElement("div", { className: "app" }, /* @__PURE__ */ import_react12.default.createElement(Header_default, null), /* @__PURE__ */ import_react12.default.createElement(Sidebar_default, null), /* @__PURE__ */ import_react12.default.createElement(Portal_default, null));
+      return /* @__PURE__ */ import_react14.default.createElement("h1", null, "pending...");
+    return /* @__PURE__ */ import_react14.default.createElement("div", { className: "app" }, /* @__PURE__ */ import_react14.default.createElement(Header_default, null), /* @__PURE__ */ import_react14.default.createElement(Sidebar_default, null), chatId && /* @__PURE__ */ import_react14.default.createElement(
+      ChatRoom_default,
+      {
+        chatId,
+        socket,
+        close: closeChat
+      }
+    ), /* @__PURE__ */ import_react14.default.createElement(Portal_default, null));
   };
   var router = createBrowserRouter([
     {
       path: "/",
-      element: /* @__PURE__ */ import_react12.default.createElement(StateProvider, null, /* @__PURE__ */ import_react12.default.createElement(App, null))
+      element: /* @__PURE__ */ import_react14.default.createElement(StateProvider, null, /* @__PURE__ */ import_react14.default.createElement(App, null))
     },
     {
       path: "/signin",
-      element: /* @__PURE__ */ import_react12.default.createElement(signin_default, null)
+      element: /* @__PURE__ */ import_react14.default.createElement(signin_default, null)
     },
     {
       path: "/signup",
-      element: /* @__PURE__ */ import_react12.default.createElement(signup_default, null)
+      element: /* @__PURE__ */ import_react14.default.createElement(signup_default, null)
     }
   ]);
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ import_react12.default.createElement(import_react12.default.StrictMode, null, /* @__PURE__ */ import_react12.default.createElement(RouterProvider, { router }))
+    /* @__PURE__ */ import_react14.default.createElement(import_react14.default.StrictMode, null, /* @__PURE__ */ import_react14.default.createElement(RouterProvider, { router }))
   );
 })();
 /*! Bundled license information:
