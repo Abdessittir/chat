@@ -24,5 +24,37 @@ const createChat = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+const getChat = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const chat = await prisma.chat.findUnique({
+            where: {
+                id: Number(id),
+            },
+            include: {
+                messages: true,
+            }
+        });
 
-export { createChat };
+        if(!chat) {
+            return res.status(404).send({
+                success: false,
+                error: 'Chat Not found',
+                data: null
+            });
+        }
+
+        res.status(200).send({
+            success: true,
+            error: null,
+            data: {
+                chat
+            }
+        });
+    } catch(err) {
+        next(err);
+    }
+};
+
+
+export { createChat, getChat };
