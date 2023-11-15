@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -7,16 +7,23 @@ import {
 
 import './app.css';
 import Sidebar from './components/Sidebar';
-import StateProvider, { useAppState } from './context';
+import StateProvider, { useAppState, useDispatch } from './context';
 import Portal from './components/Portal';
 import SignIn from './signin';
 import SignUp from './signup';
 import Header from './components/Header';
+import ChatRoom from './components/ChatRoom';
+import { CLOSE_CHATROOM } from './context/actionTypes';
 
 export const App = () => {
-  const {userPending} = useAppState(
-    state => state.userPending
-  );
+  const { userPending, chatId, socket } = useAppState(state => ({
+    userPending: state.userPending,
+    chatId: state.chatId,
+    socket: state.socket
+  }));
+  const dispatch = useDispatch();
+
+  const closeChat = useCallback(() => dispatch({ type: CLOSE_CHATROOM }), []);
 
   if(userPending) return <h1>pending...</h1>;
 
@@ -24,6 +31,12 @@ export const App = () => {
     <div className="app">
       <Header />
       <Sidebar />
+      {chatId && 
+      <ChatRoom
+        chatId={chatId}
+        socket={socket}
+        close={closeChat}
+      />}
       <Portal />
     </div>
   );

@@ -8,9 +8,13 @@ import {
     CLOSE_PORTAL,
     ADD_CONTACT,
     ADD_CHAT,
+    SET_CHATROOM,
+    CLOSE_CHATROOM,
 } from './actionTypes';
 import request from '../service/request';
 import { useNavigate } from 'react-router-dom';
+import { io, Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 
 export type UserType = {
@@ -53,7 +57,8 @@ type StateType = {
     user: UserType | null,
     addChat: boolean,
     addContact: boolean,
-    userPending: boolean
+    userPending: boolean,
+    socket?: Socket<DefaultEventsMap, DefaultEventsMap>
 };
 
 type Action = {
@@ -70,7 +75,7 @@ const initialState: StateType = {
     addChat: false,
     addContact: false,
     user: null,
-    userPending: true
+    userPending: true,
 };
 
 type AppState = {
@@ -98,7 +103,8 @@ function reducer(state: StateType, action: Action): StateType {
                 userPending: false,
                 user: action.payload.user,
                 chats: action.payload.chats,
-                contacts: action.payload.contacts
+                contacts: action.payload.contacts,
+                socket: action.payload.socket
             };
         case CHAT_PORTAL:
             return { ...state, addChat: true, addContact: false };
@@ -110,6 +116,10 @@ function reducer(state: StateType, action: Action): StateType {
             return { ...state, contacts: [...state.contacts, action.payload]};
         case ADD_CHAT:
             return { ...state, chats: [...state.chats, action.payload ]};
+        case SET_CHATROOM:
+            return { ...state, chatId: action.payload };
+        case CLOSE_CHATROOM:
+            return { ...state, chatId: null };
         default:
             return initialState;
     }
@@ -133,7 +143,8 @@ export default function StateProvider({ children }: { children: App }) {
                 payload: {
                     user: profile.data.user,
                     contacts: profile.data.contacts,
-                    chats: profile.data.chats
+                    chats: profile.data.chats,
+                    socket: io()
                 }
             });
         } else {

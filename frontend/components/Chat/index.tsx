@@ -1,10 +1,12 @@
 import React from 'react';
-import { ChatType, useAppState } from '../../context';
+import { ChatType, useAppState, useDispatch } from '../../context';
 import './index.css';
+import { SET_CHATROOM } from '../../context/actionTypes';
 
 const Chat = ({ chat }: { chat: ChatType }) => {
+    const dispatch = useDispatch();
     return (
-        <li>
+        <li onClick={() => dispatch({ type: SET_CHATROOM, payload: chat.id })}>
             <h3>{chat.name}</h3>
         </li>
     );
