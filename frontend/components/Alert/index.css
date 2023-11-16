@@ -5,7 +5,6 @@
     top: 15px;
     right: 15px;
     padding: 15px;
-    padding-top: 35px;
     width: 350px;
 }
 
@@ -19,14 +18,12 @@
     background-color: darkgreen;
 }
 
-.clear_alert {
-    border: none;
-    outline: none;
+.clear {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    position: absolute;
+    top: 5px;
+    right: 5px;
     cursor: pointer;
-    position: fixed;
-    top: 25px;
-    right: 25px;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: red;
 }

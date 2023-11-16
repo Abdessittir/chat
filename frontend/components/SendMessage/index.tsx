@@ -22,16 +22,7 @@ const SendMessage = () => {
                 onChange: handleChange
                }}
             />
-            <Input
-               label=""
-               options={{
-                type: 'submit',
-                name: 'submit',
-                placeholder: '',
-                value: 'SignIn',
-                onChange: () => {},
-               }}
-            />
+            <button type="submit">Send</button>
         </Form>
     );
 }

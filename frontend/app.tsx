@@ -16,9 +16,10 @@ import ChatRoom from './components/ChatRoom';
 import { CLOSE_CHATROOM } from './context/actionTypes';
 
 export const App = () => {
-  const { userPending, chatId, socket } = useAppState(state => ({
+  const { userPending, chatId, userId, socket } = useAppState(state => ({
     userPending: state.userPending,
     chatId: state.chatId,
+    userId: state.user?.id,
     socket: state.socket
   }));
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export const App = () => {
       {chatId && 
       <ChatRoom
         chatId={chatId}
+        userId={userId}
         socket={socket}
         close={closeChat}
       />}

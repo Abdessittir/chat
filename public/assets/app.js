@@ -1089,7 +1089,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState9(initialState2) {
+          function useState10(initialState2) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState2);
           }
@@ -1101,7 +1101,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect4(create, deps) {
+          function useEffect5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1883,7 +1883,7 @@
           exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect4;
+          exports.useEffect = useEffect5;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -1891,7 +1891,7 @@
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer2;
           exports.useRef = useRef3;
-          exports.useState = useState9;
+          exports.useState = useState10;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2387,9 +2387,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React19 = require_react();
+          var React20 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React20.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3994,7 +3994,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React19.Children.forEach(props.children, function(child) {
+                  React20.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12441,7 +12441,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React19.Component().refs;
+          var emptyRefsObject = new React20.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23513,7 +23513,7 @@
   });
 
   // frontend/app.tsx
-  var import_react14 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/react-router-dom/dist/index.js
@@ -31197,7 +31197,15 @@
   // frontend/components/Alert/index.tsx
   var import_react7 = __toESM(require_react());
   var Alert = ({ message, type, clear }) => {
-    return /* @__PURE__ */ import_react7.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react7.default.createElement("button", { className: "clear_alert", type: "button", onClick: clear }, "clear"));
+    return /* @__PURE__ */ import_react7.default.createElement("div", { className: type }, message, /* @__PURE__ */ import_react7.default.createElement(
+      "img",
+      {
+        onClick: clear,
+        className: "clear",
+        src: "../assets/close.png",
+        alt: "close button"
+      }
+    ));
   };
   var Alert_default = Alert;
 
@@ -31635,7 +31643,7 @@
   var Header_default = Header;
 
   // frontend/components/ChatRoom/index.tsx
-  var import_react13 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
 
   // frontend/components/SendMessage/index.tsx
   var import_react12 = __toESM(require_react());
@@ -31659,72 +31667,107 @@
           onChange: handleChange
         }
       }
-    ), /* @__PURE__ */ import_react12.default.createElement(
-      Input_default,
-      {
-        label: "",
-        options: {
-          type: "submit",
-          name: "submit",
-          placeholder: "",
-          value: "SignIn",
-          onChange: () => {
-          }
-        }
-      }
-    ));
+    ), /* @__PURE__ */ import_react12.default.createElement("button", { type: "submit" }, "Send"));
   };
   var SendMessage_default = SendMessage;
 
+  // frontend/components/Message/index.tsx
+  var import_react13 = __toESM(require_react());
+  var Message = ({ id, content, image_url, video_url, username, user_id }) => {
+    return /* @__PURE__ */ import_react13.default.createElement("div", null);
+  };
+  var Message_default = Message;
+
   // frontend/components/ChatRoom/index.tsx
-  var ChatRoom = ({ chatId, socket, close }) => {
-    return /* @__PURE__ */ import_react13.default.createElement("div", { className: "chatroom" }, /* @__PURE__ */ import_react13.default.createElement(
+  var ChatRoom = ({ chatId, userId, socket, close }) => {
+    const [chat, setChat] = (0, import_react14.useState)({
+      id: chatId,
+      name: "",
+      messages: []
+    });
+    async function fetchChat() {
+      try {
+        const response = await request_default(
+          `chat/${chatId}`,
+          {
+            method: "get"
+          }
+        );
+        if (response.success) {
+          setChat(response.data.chat);
+        } else {
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    (0, import_react14.useEffect)(() => {
+      fetchChat();
+      socket.emit("chat", { chatId, userId });
+      socket.on("server-message", (message) => {
+        console.log(message);
+      });
+    }, []);
+    return /* @__PURE__ */ import_react14.default.createElement("div", { className: "chatroom" }, /* @__PURE__ */ import_react14.default.createElement(
       "img",
       {
         src: "../assets/close.png",
         alt: "close chatroom",
         onClick: close
       }
-    ), /* @__PURE__ */ import_react13.default.createElement(SendMessage_default, null));
+    ), /* @__PURE__ */ import_react14.default.createElement("div", null, chat.messages.map((message) => /* @__PURE__ */ import_react14.default.createElement(
+      Message_default,
+      {
+        key: message.id,
+        id: message.id,
+        content: message.content,
+        image_url: message.image_url,
+        video_url: message.video_url,
+        username: message.username,
+        user_id: message.user_id
+      }
+    ))), /* @__PURE__ */ import_react14.default.createElement(SendMessage_default, null));
   };
-  var ChatRoom_default = (0, import_react13.memo)(ChatRoom, () => true);
+  var ChatRoom_default = (0, import_react14.memo)(ChatRoom, () => true);
 
   // frontend/app.tsx
   var App = () => {
-    const { userPending, chatId, socket } = useAppState((state) => ({
+    const { userPending, chatId, userId, socket } = useAppState((state) => ({
       userPending: state.userPending,
       chatId: state.chatId,
+      userId: state.user?.id,
       socket: state.socket
     }));
     const dispatch = useDispatch();
-    const closeChat = (0, import_react14.useCallback)(() => dispatch({ type: CLOSE_CHATROOM }), []);
+    const closeChat = (0, import_react15.useCallback)(() => dispatch({ type: CLOSE_CHATROOM }), []);
     if (userPending)
-      return /* @__PURE__ */ import_react14.default.createElement("h1", null, "pending...");
-    return /* @__PURE__ */ import_react14.default.createElement("div", { className: "app" }, /* @__PURE__ */ import_react14.default.createElement(Header_default, null), /* @__PURE__ */ import_react14.default.createElement(Sidebar_default, null), chatId && /* @__PURE__ */ import_react14.default.createElement(
+      return /* @__PURE__ */ import_react15.default.createElement("h1", null, "pending...");
+    return /* @__PURE__ */ import_react15.default.createElement("div", { className: "app" }, /* @__PURE__ */ import_react15.default.createElement(Header_default, null), /* @__PURE__ */ import_react15.default.createElement(Sidebar_default, null), chatId && /* @__PURE__ */ import_react15.default.createElement(
       ChatRoom_default,
       {
         chatId,
+        userId,
         socket,
         close: closeChat
       }
-    ), /* @__PURE__ */ import_react14.default.createElement(Portal_default, null));
+    ), /* @__PURE__ */ import_react15.default.createElement(Portal_default, null));
   };
   var router = createBrowserRouter([
     {
       path: "/",
-      element: /* @__PURE__ */ import_react14.default.createElement(StateProvider, null, /* @__PURE__ */ import_react14.default.createElement(App, null))
+      element: /* @__PURE__ */ import_react15.default.createElement(StateProvider, null, /* @__PURE__ */ import_react15.default.createElement(App, null))
     },
     {
       path: "/signin",
-      element: /* @__PURE__ */ import_react14.default.createElement(signin_default, null)
+      element: /* @__PURE__ */ import_react15.default.createElement(signin_default, null)
     },
     {
       path: "/signup",
-      element: /* @__PURE__ */ import_react14.default.createElement(signup_default, null)
+      element: /* @__PURE__ */ import_react15.default.createElement(signup_default, null)
     }
   ]);
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ import_react14.default.createElement(import_react14.default.StrictMode, null, /* @__PURE__ */ import_react14.default.createElement(RouterProvider, { router }))
+    /* @__PURE__ */ import_react15.default.createElement(import_react15.default.StrictMode, null, /* @__PURE__ */ import_react15.default.createElement(RouterProvider, { router }))
   );
 })();
 /*! Bundled license information:

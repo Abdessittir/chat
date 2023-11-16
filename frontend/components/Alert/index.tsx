@@ -8,9 +8,12 @@ const Alert = (
     return (
         <div className={type}>
             {message}
-            <button className="clear_alert" type="button" onClick={clear}>
-                clear
-            </button>
+            <img
+               onClick={clear}
+               className='clear'
+               src='../assets/close.png'
+               alt='close button'
+            />
         </div>
     );
 }

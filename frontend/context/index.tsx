@@ -24,7 +24,7 @@ export type UserType = {
     photo?: string,
 };
 
-export type Message = {
+export type MessageType = {
     id: number,
     content?: string,
     image_url?: string,
@@ -36,7 +36,7 @@ export type Message = {
 export type ChatMessagesType = {
     id: string | number,
     name: string,
-    messages: Message[]
+    messages: MessageType[]
 };
 
 export type ChatType = {
