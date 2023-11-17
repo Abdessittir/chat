@@ -36,7 +36,8 @@ export type MessageType = {
 export type ChatMessagesType = {
     id: string | number,
     name: string,
-    messages: MessageType[]
+    messages: MessageType[],
+    users: number[]
 };
 
 export type ChatType = {

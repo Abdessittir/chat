@@ -52,7 +52,7 @@ const getProfile = async (req: Request, res: Response, next: NextFunction) => {
                     email: user?.email,
                     photo: user?.photo
                 },
-                chats: user?.chats.map(chat => ({ id: chat.id, name: chat.name })),
+                chats: user?.chats.map(chat => ({id: chat.id, name: chat.name})),
                 contacts
             }
         });

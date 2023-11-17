@@ -9,6 +9,7 @@ import { join } from 'node:path';
 import authRouter from './routes/auth';
 import userRouter from './routes/user';
 import chatRouter from './routes/chat';
+import prisma from './prisma/db';
 
 
 const app = express();
@@ -30,9 +31,7 @@ io.on('connection', (socket) => {
 
         const nots = notifications.get(userId);
         if(nots) {
-            nots.forEach(notification => {
-                socket.to(userId).emit('initial-notifications', notification);
-            });
+            io.to(userId).emit('initial-notifications', nots);
         } else  {
             notifications.set(userId, []);
         }
@@ -42,13 +41,33 @@ io.on('connection', (socket) => {
         socket.join(chatId);
         const nots = notifications.get(userId) as Notification[];
         notifications.set(userId, nots?.filter(not => not.chatId !== chatId));
-        socket.to(userId).emit('clear-notification', chatId);
+        io.to(userId).emit('clear-notification', chatId);
     });
 
-    socket.on('client-message', ({ message, chatUsers, chatId }) => {
-        socket.to(chatId).emit('server-message', message);
-        chatUsers.forEach((userId: string) => {
-            socket.to(userId).emit('notification', chatId);
+    socket.on('client-message', async ({ message, users, chatId, userId }) => {
+        try {
+            const createdMessage = await prisma.message.create({
+                data: {
+                    ...message,
+                    chatId,
+                    userId
+                },
+            });
+            io.to(chatId).emit('server-message', createdMessage);
+        } catch(err) {
+            console.log(err);
+
+        }
+
+        users.forEach((userId: any) => {
+            const nots = notifications.get(userId);
+            if(!nots) return;
+
+            nots.forEach(notification => {
+                if(notification.chatId === chatId) {
+                    io.to(userId).emit('notification', chatId);
+                }
+            });
         });
     });
 });

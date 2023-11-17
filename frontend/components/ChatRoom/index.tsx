@@ -22,7 +22,8 @@ const ChatRoom = (
     const [chat, setChat] = useState<ChatMessagesType>({
         id: chatId,
         name: '',
-        messages: []
+        messages: [],
+        users: []
     });
 
     async function fetchChat() {
@@ -35,6 +36,7 @@ const ChatRoom = (
             );
 
             if(response.success) {
+                console.log(response.data.chat);
                 setChat(response.data.chat)
             } else {
 
@@ -74,7 +76,12 @@ const ChatRoom = (
                     ))
                 }
             </div>
-            <SendMessage />
+            <SendMessage
+              socket={socket}
+              chatId={chatId}
+              userId={userId}
+              users={chat.users}
+            />
         </div>
     );
 };

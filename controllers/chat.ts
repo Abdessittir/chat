@@ -33,6 +33,7 @@ const getChat = async (req: Request, res: Response, next: NextFunction) => {
             },
             include: {
                 messages: true,
+                users: true,
             }
         });
 
@@ -48,7 +49,10 @@ const getChat = async (req: Request, res: Response, next: NextFunction) => {
             success: true,
             error: null,
             data: {
-                chat
+                chat: {
+                    ...chat,
+                    users: chat.users.map(user => user.id)
+                }
             }
         });
     } catch(err) {

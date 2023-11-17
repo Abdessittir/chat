@@ -1101,7 +1101,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect5(create, deps) {
+          function useEffect6(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1883,7 +1883,7 @@
           exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect5;
+          exports.useEffect = useEffect6;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -31130,6 +31130,16 @@
   };
   var Chats = () => {
     const chats = useAppState((state) => state.chats);
+    const socket = useAppState((state) => state.socket);
+    (0, import_react2.useEffect)(() => {
+      socket.emit("get-notifications");
+      socket.on("initial-notifications", (notifications) => {
+        console.log(notifications);
+      });
+      socket.on("notification", (chatId) => {
+        console.log(chatId);
+      });
+    }, []);
     return /* @__PURE__ */ import_react2.default.createElement("ul", { className: "list" }, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { key: chat.id, chat })));
   };
   var Chat_default = Chats;
@@ -31647,13 +31657,24 @@
 
   // frontend/components/SendMessage/index.tsx
   var import_react12 = __toESM(require_react());
-  var SendMessage = () => {
+  var SendMessage = ({ socket, chatId, userId, users }) => {
     const [message, setMessage] = (0, import_react12.useState)({
       content: ""
     });
     const handleSubmit = (event) => {
+      event.preventDefault();
+      socket.emit("client-message", {
+        chatId,
+        userId,
+        message,
+        users
+      });
     };
     const handleChange = (event) => {
+      setMessage((prev2) => ({
+        ...prev2,
+        [event.target.name]: event.target.value
+      }));
     };
     return /* @__PURE__ */ import_react12.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react12.default.createElement(
       Input_default,
@@ -31683,7 +31704,8 @@
     const [chat, setChat] = (0, import_react14.useState)({
       id: chatId,
       name: "",
-      messages: []
+      messages: [],
+      users: []
     });
     async function fetchChat() {
       try {
@@ -31694,6 +31716,7 @@
           }
         );
         if (response.success) {
+          console.log(response.data.chat);
           setChat(response.data.chat);
         } else {
         }
@@ -31726,7 +31749,15 @@
         username: message.username,
         user_id: message.user_id
       }
-    ))), /* @__PURE__ */ import_react14.default.createElement(SendMessage_default, null));
+    ))), /* @__PURE__ */ import_react14.default.createElement(
+      SendMessage_default,
+      {
+        socket,
+        chatId,
+        userId,
+        users: chat.users
+      }
+    ));
   };
   var ChatRoom_default = (0, import_react14.memo)(ChatRoom, () => true);
 
