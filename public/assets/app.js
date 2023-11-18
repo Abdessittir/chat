@@ -1097,7 +1097,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer2, initialArg, init);
           }
-          function useRef3(initialValue) {
+          function useRef4(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1890,7 +1890,7 @@
           exports.useLayoutEffect = useLayoutEffect3;
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer2;
-          exports.useRef = useRef3;
+          exports.useRef = useRef4;
           exports.useState = useState10;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -31073,7 +31073,8 @@
           user: action.payload.user,
           chats: action.payload.chats,
           contacts: action.payload.contacts,
-          socket: action.payload.socket
+          socket: action.payload.socket,
+          chatId: action.payload.chatId
         };
       case CHAT_PORTAL:
         return { ...state, addChat: true, addContact: false };
@@ -31086,8 +31087,10 @@
       case ADD_CHAT:
         return { ...state, chats: [...state.chats, action.payload] };
       case SET_CHATROOM:
+        localStorage.setItem("chat", JSON.stringify(action.payload));
         return { ...state, chatId: action.payload };
       case CLOSE_CHATROOM:
+        localStorage.removeItem("chat");
         return { ...state, chatId: null };
       default:
         return initialState;
@@ -31110,7 +31113,8 @@
             user: profile.data.user,
             contacts: profile.data.contacts,
             chats: profile.data.chats,
-            socket: lookup2()
+            socket: lookup2(),
+            chatId: JSON.parse(localStorage.getItem("chat")) ?? null
           }
         });
       } else {
@@ -31126,7 +31130,7 @@
   // frontend/components/Chat/index.tsx
   var Chat = ({ chat }) => {
     const dispatch = useDispatch();
-    return /* @__PURE__ */ import_react2.default.createElement("li", { onClick: () => dispatch({ type: SET_CHATROOM, payload: chat.id }) }, /* @__PURE__ */ import_react2.default.createElement("h3", null, chat.name));
+    return /* @__PURE__ */ import_react2.default.createElement("li", { className: "chat_name", onClick: () => dispatch({ type: SET_CHATROOM, payload: chat.id }) }, chat.name);
   };
   var Chats = () => {
     const chats = useAppState((state) => state.chats);
@@ -31147,7 +31151,7 @@
   // frontend/components/Contact/index.tsx
   var import_react3 = __toESM(require_react());
   var Contact = ({ contact }) => {
-    return /* @__PURE__ */ import_react3.default.createElement("li", null, /* @__PURE__ */ import_react3.default.createElement("h3", null, contact.name), /* @__PURE__ */ import_react3.default.createElement("h4", null, contact.email));
+    return /* @__PURE__ */ import_react3.default.createElement("li", { className: "contact_name" }, /* @__PURE__ */ import_react3.default.createElement("h3", null, contact.name), /* @__PURE__ */ import_react3.default.createElement("h4", null, contact.email));
   };
   var Contacts = () => {
     const contacts = useAppState((state) => state.contacts);
@@ -31192,8 +31196,8 @@
 
   // frontend/components/Form/index.tsx
   var import_react5 = __toESM(require_react());
-  var Form2 = ({ children, handleSubmit }) => {
-    return /* @__PURE__ */ import_react5.default.createElement("form", { className: "form", onSubmit: handleSubmit }, children);
+  var Form2 = ({ children, handleSubmit, className }) => {
+    return /* @__PURE__ */ import_react5.default.createElement("form", { className, onSubmit: handleSubmit }, children);
   };
   var Form_default = Form2;
 
@@ -31669,6 +31673,9 @@
         message,
         users
       });
+      setMessage({
+        content: ""
+      });
     };
     const handleChange = (event) => {
       setMessage((prev2) => ({
@@ -31676,7 +31683,7 @@
         [event.target.name]: event.target.value
       }));
     };
-    return /* @__PURE__ */ import_react12.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react12.default.createElement(
+    return /* @__PURE__ */ import_react12.default.createElement(Form_default, { handleSubmit, className: "send_form" }, /* @__PURE__ */ import_react12.default.createElement(
       Input_default,
       {
         label: "",
@@ -31688,14 +31695,19 @@
           onChange: handleChange
         }
       }
-    ), /* @__PURE__ */ import_react12.default.createElement("button", { type: "submit" }, "Send"));
+    ), /* @__PURE__ */ import_react12.default.createElement("button", { className: "send_btn", type: "submit" }, "Send"));
   };
   var SendMessage_default = SendMessage;
 
   // frontend/components/Message/index.tsx
   var import_react13 = __toESM(require_react());
-  var Message = ({ id, content, image_url, video_url, username, user_id }) => {
-    return /* @__PURE__ */ import_react13.default.createElement("div", null);
+  var Message = ({ id, content, image_url, video_url, username, user_id, owner }) => {
+    return /* @__PURE__ */ import_react13.default.createElement("div", { className: "message_container", style: {
+      "justifyContent": owner ? "flex-end" : "flex-start"
+    } }, /* @__PURE__ */ import_react13.default.createElement("p", { className: "message_text", style: {
+      "backgroundColor": !owner ? "lightgray" : "rgb(7, 146, 7)",
+      "color": !owner ? "rgb(7, 146, 7)" : "white"
+    } }, content), /* @__PURE__ */ import_react13.default.createElement("p", { className: "message_user" }, username));
   };
   var Message_default = Message;
 
@@ -31707,6 +31719,7 @@
       messages: [],
       users: []
     });
+    const messages = (0, import_react14.useRef)(null);
     async function fetchChat() {
       try {
         const response = await request_default(
@@ -31716,8 +31729,22 @@
           }
         );
         if (response.success) {
-          console.log(response.data.chat);
-          setChat(response.data.chat);
+          const messages2 = response.data.chat.messages.map((message) => {
+            let data = message;
+            response.data.chat.users.forEach((user) => {
+              if (data.userId === user.id) {
+                data = {
+                  ...message,
+                  username: user.name
+                };
+              }
+            });
+            return data;
+          });
+          setChat({
+            ...response.data.chat,
+            messages: messages2
+          });
         } else {
         }
       } catch (err) {
@@ -31725,20 +31752,35 @@
       }
     }
     (0, import_react14.useEffect)(() => {
+      if (!messages.current)
+        return;
+      messages.current.scrollTo({
+        left: 0,
+        top: messages.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }, [chat.messages]);
+    (0, import_react14.useEffect)(() => {
       fetchChat();
       socket.emit("chat", { chatId, userId });
       socket.on("server-message", (message) => {
-        console.log(message);
+        setChat((prev2) => ({
+          ...chat,
+          messages: prev2.messages.concat(message)
+        }));
       });
+      return () => {
+        socket.off();
+      };
     }, []);
-    return /* @__PURE__ */ import_react14.default.createElement("div", { className: "chatroom" }, /* @__PURE__ */ import_react14.default.createElement(
+    return /* @__PURE__ */ import_react14.default.createElement("div", { className: "chatroom" }, /* @__PURE__ */ import_react14.default.createElement("div", { className: "chat_info" }, /* @__PURE__ */ import_react14.default.createElement("h1", null, chat.name), /* @__PURE__ */ import_react14.default.createElement(
       "img",
       {
         src: "../assets/close.png",
         alt: "close chatroom",
         onClick: close
       }
-    ), /* @__PURE__ */ import_react14.default.createElement("div", null, chat.messages.map((message) => /* @__PURE__ */ import_react14.default.createElement(
+    )), /* @__PURE__ */ import_react14.default.createElement("div", { className: "messages", ref: messages }, chat.messages.map((message) => /* @__PURE__ */ import_react14.default.createElement(
       Message_default,
       {
         key: message.id,
@@ -31747,7 +31789,8 @@
         image_url: message.image_url,
         video_url: message.video_url,
         username: message.username,
-        user_id: message.user_id
+        user_id: message.userId,
+        owner: message.userId === userId
       }
     ))), /* @__PURE__ */ import_react14.default.createElement(
       SendMessage_default,

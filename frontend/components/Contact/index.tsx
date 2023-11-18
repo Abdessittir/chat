@@ -1,10 +1,10 @@
 import React from 'react';
 import { ContactType, useAppState } from '../../context';
-import '../Chat/index.css';
+import './index.css';
 
 const Contact = ({ contact }:{ contact: ContactType}) => {
     return (
-        <li>
+        <li className="contact_name">
             <h3>{contact.name}</h3>
             <h4>{contact.email}</h4>
         </li>

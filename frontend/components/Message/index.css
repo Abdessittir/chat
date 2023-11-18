@@ -1,0 +1,19 @@
+.message_container {
+    padding: 20px;
+    padding-top: 25px;
+    position: relative;
+    display: flex;
+    margin-top: 15px;
+}
+
+.message_text {
+    border: 1px solid rgb(53, 206, 53);
+    width: fit-content;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.message_user {
+    position: absolute;
+    top: 2px;
+}

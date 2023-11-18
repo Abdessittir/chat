@@ -1,0 +1,5 @@
+.send_btn {
+    cursor: pointer;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+}

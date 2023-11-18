@@ -52,8 +52,14 @@ io.on('connection', (socket) => {
                     chatId,
                     userId
                 },
+                include: {
+                    user: true,
+                }
             });
-            io.to(chatId).emit('server-message', createdMessage);
+            io.to(chatId).emit('server-message', {
+                ...createdMessage,
+                username: createdMessage.user.name,
+            });
         } catch(err) {
             console.log(err);
 

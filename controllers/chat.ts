@@ -49,10 +49,8 @@ const getChat = async (req: Request, res: Response, next: NextFunction) => {
             success: true,
             error: null,
             data: {
-                chat: {
-                    ...chat,
-                    users: chat.users.map(user => user.id)
-                }
+                chat,
+                users: chat.users.map(user => ({ id: user.id, name:  user.name }))
             }
         });
     } catch(err) {

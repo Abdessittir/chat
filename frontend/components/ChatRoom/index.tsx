@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
@@ -25,6 +25,7 @@ const ChatRoom = (
         messages: [],
         users: []
     });
+    const messages = useRef<HTMLDivElement>(null);
 
     async function fetchChat() {
         try {
@@ -36,8 +37,22 @@ const ChatRoom = (
             );
 
             if(response.success) {
-                console.log(response.data.chat);
-                setChat(response.data.chat)
+                const messages = response.data.chat.messages.map(message => {
+                    let data = message;
+                    response.data.chat.users.forEach(user => {
+                        if(data.userId === user.id) {
+                            data = {
+                                ...message,
+                                username: user.name
+                            };
+                        }
+                    });
+                    return data;
+                });
+                setChat({
+                    ...response.data.chat,
+                    messages: messages
+                })
             } else {
 
             }
@@ -47,21 +62,39 @@ const ChatRoom = (
     }
 
     useEffect(() => {
+        if (!messages.current) return;
+    
+        messages.current.scrollTo({
+          left: 0,
+          top: messages.current.scrollHeight,
+          behavior: "smooth"
+        });
+    }, [chat.messages]);
+
+    useEffect(() => {
         fetchChat();
         socket.emit('chat', {chatId, userId});
         socket.on('server-message', (message) => {
-            console.log(message);
+            setChat(prev => ({
+                ...chat,
+                messages: prev.messages.concat(message)
+            }));
         });
+
+        return () => {socket.off()};
     }, []);
 
     return (
         <div className="chatroom">
-            <img
-               src='../assets/close.png'
-               alt='close chatroom'
-               onClick={close}
-            />
-            <div>
+            <div className="chat_info">
+                <h1>{chat.name}</h1>
+                <img
+                    src='../assets/close.png'
+                    alt='close chatroom'
+                    onClick={close}
+                />
+            </div>
+            <div className="messages" ref={messages}>
                 {
                     chat.messages.map((message: MessageType) => (
                         <Message
@@ -71,7 +104,8 @@ const ChatRoom = (
                            image_url={message.image_url}
                            video_url={message.video_url}
                            username={message.username}
-                           user_id={message.user_id}
+                           user_id={message.userId}
+                           owner={message.userId === userId}
                         />
                     ))
                 }

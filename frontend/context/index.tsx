@@ -30,7 +30,7 @@ export type MessageType = {
     image_url?: string,
     video_url?: string,
     username: string,
-    user_id: number,
+    userId: number,
 };
 
 export type ChatMessagesType = {
@@ -105,7 +105,8 @@ function reducer(state: StateType, action: Action): StateType {
                 user: action.payload.user,
                 chats: action.payload.chats,
                 contacts: action.payload.contacts,
-                socket: action.payload.socket
+                socket: action.payload.socket,
+                chatId: action.payload.chatId
             };
         case CHAT_PORTAL:
             return { ...state, addChat: true, addContact: false };
@@ -118,8 +119,10 @@ function reducer(state: StateType, action: Action): StateType {
         case ADD_CHAT:
             return { ...state, chats: [...state.chats, action.payload ]};
         case SET_CHATROOM:
+            localStorage.setItem('chat', JSON.stringify(action.payload));
             return { ...state, chatId: action.payload };
         case CLOSE_CHATROOM:
+            localStorage.removeItem('chat');
             return { ...state, chatId: null };
         default:
             return initialState;
@@ -145,7 +148,8 @@ export default function StateProvider({ children }: { children: App }) {
                     user: profile.data.user,
                     contacts: profile.data.contacts,
                     chats: profile.data.chats,
-                    socket: io()
+                    socket: io(),
+                    chatId: JSON.parse(localStorage.getItem('chat')as string) ?? null
                 }
             });
         } else {

@@ -6,11 +6,11 @@ import './index.css';
 type Inputs = React.ReactElement<any, React.JSXElementConstructor<typeof Input>>[];
 
 const Form = (
-    { children, handleSubmit }
-    : { children: Inputs, handleSubmit: (event: React.FormEvent) => void}
+    { children, handleSubmit, className }
+    : { children: Inputs, handleSubmit: (event: React.FormEvent) => void, className: string}
 ) => {
     return (
-        <form className="form" onSubmit={handleSubmit}>
+        <form className={className} onSubmit={handleSubmit}>
             {children}
         </form>
     );

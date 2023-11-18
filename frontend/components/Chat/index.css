@@ -1,3 +1,18 @@
 .list {
     flex: 1;
+    padding-left: 0;
+}
+
+.chat_name {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    list-style-type: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 24px;
+}
+
+.chat_name:hover {
+    background-color: rgba(211, 211, 211, 0.5) !important;
 }

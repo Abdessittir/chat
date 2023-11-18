@@ -6,8 +6,8 @@ import { SET_CHATROOM } from '../../context/actionTypes';
 const Chat = ({ chat }: { chat: ChatType }) => {
     const dispatch = useDispatch();
     return (
-        <li onClick={() => dispatch({ type: SET_CHATROOM, payload: chat.id })}>
-            <h3>{chat.name}</h3>
+        <li className="chat_name" onClick={() => dispatch({ type: SET_CHATROOM, payload: chat.id })}>
+            {chat.name}
         </li>
     );
 };

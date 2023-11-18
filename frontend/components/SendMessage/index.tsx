@@ -4,6 +4,7 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 import Form from  '../Form';
 import Input from '../Input';
+import './index.css';
 
 const SendMessage = (
     { socket, chatId, userId, users }
@@ -24,7 +25,10 @@ const SendMessage = (
             userId,
             message,
             users
-        })
+        });
+        setMessage({
+            content: ''
+        });
     };
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(prev => ({
@@ -34,7 +38,7 @@ const SendMessage = (
     };
 
     return (
-        <Form handleSubmit={handleSubmit}>
+        <Form handleSubmit={handleSubmit} className="send_form">
             <Input
                label=''
                options={{
@@ -45,7 +49,7 @@ const SendMessage = (
                 onChange: handleChange
                }}
             />
-            <button type="submit">Send</button>
+            <button className="send_btn" type="submit">Send</button>
         </Form>
     );
 }
