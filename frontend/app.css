@@ -13,3 +13,18 @@
     height: 100vh;
     position: relative;
 }
+
+.form_title,
+.form_link {
+    margin: 50px auto;
+    text-align: center;
+}
+
+.form {
+    margin: 50px auto;
+    max-width: 500px;
+}
+
+.form_link {
+    display: block;
+}
