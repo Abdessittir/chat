@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -23,6 +23,11 @@ export const App = () => {
     socket: state.socket
   }));
   const dispatch = useDispatch();
+  useEffect(() => { 
+    if(socket) {
+      socket.emit('initialaize-notifications', userId)
+    }
+  }, [socket]);
 
   const closeChat = useCallback(() => dispatch({ type: CLOSE_CHATROOM }), []);
 

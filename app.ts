@@ -16,31 +16,35 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-type Notification = {
+export type Notification = {
     chatId: number,
     count: number,
 };
 
 const notifications = new Map<number, Notification[]>();
 
+notifications.set(1, []);
+notifications.set(3, []);
+
 io.on('connection', (socket) => {
     console.log('user connected');
 
-    socket.on('get-notifications', (userId) => {
-        socket.join(userId);
-
-        const nots = notifications.get(userId);
-        if(nots) {
-            io.to(userId).emit('initial-notifications', nots);
-        } else  {
+    socket.on('initialaize-notifications', (userId) => {
+        if(!notifications.get(userId)) {
             notifications.set(userId, []);
         }
+    });
+
+    socket.on('get-notifications', (userId) => {
+        socket.join(userId);
+        const nots = notifications.get(userId);
+        io.to(userId).emit('initial-notifications', nots);
     });
 
     socket.on('chat', ({chatId, userId}) => {
         socket.join(chatId);
         const nots = notifications.get(userId) as Notification[];
-        notifications.set(userId, nots?.filter(not => not.chatId !== chatId));
+        notifications.set(userId, nots?.filter(noti => noti.chatId !== chatId));
         io.to(userId).emit('clear-notification', chatId);
     });
 
@@ -62,18 +66,31 @@ io.on('connection', (socket) => {
             });
         } catch(err) {
             console.log(err);
-
         }
 
-        users.forEach((userId: any) => {
-            const nots = notifications.get(userId);
-            if(!nots) return;
+        users.forEach((id: any) => {
 
-            nots.forEach(notification => {
-                if(notification.chatId === chatId) {
-                    io.to(userId).emit('notification', chatId);
+            if(id === userId) return;
+
+            const nots = notifications.get(id);
+            console.log('length', nots?.length, nots);
+            if(nots?.length as number < 1) {
+                notifications.set(id, [{chatId, count: 1}]);
+                return;
+            }
+
+            const updated = nots?.map(noti => {
+                if(noti.chatId === chatId) {
+                    return {
+                        ...noti,
+                        count: noti.count + 1
+                    };
                 }
+                return noti
             });
+
+            notifications.set(id, updated as Notification[]);
+            io.to(id).emit('notification', chatId);
         });
     });
 });

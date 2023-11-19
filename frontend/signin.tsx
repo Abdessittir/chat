@@ -52,8 +52,8 @@ const SignIn = () => {
 
   return (
     <div>
-      <h1>SignIn</h1>
-      <Form handleSubmit={handleSubmit}>
+      <h1 className="form_title">SignIn</h1>
+      <Form handleSubmit={handleSubmit} className="form">
         <Input
            label="email"
            options={{
@@ -87,7 +87,7 @@ const SignIn = () => {
            }}
         />
       </Form>
-      <a href="/signup">SignUp</a>
+      <a href="/signup" className="form_link">SignUp</a>
       {state.error && (
         <Alert
           message={state.error}

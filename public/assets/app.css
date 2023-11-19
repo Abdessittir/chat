@@ -13,6 +13,18 @@
   height: 100vh;
   position: relative;
 }
+.form_title,
+.form_link {
+  margin: 50px auto;
+  text-align: center;
+}
+.form {
+  margin: 50px auto;
+  max-width: 500px;
+}
+.form_link {
+  display: block;
+}
 
 /* frontend/components/Chat/index.css */
 .list {
@@ -27,9 +39,21 @@
   cursor: pointer;
   transition: 0.2s;
   font-size: 24px;
+  position: relative;
 }
 .chat_name:hover {
   background-color: rgba(211, 211, 211, 0.5) !important;
+}
+.notifications {
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgb(47, 168, 47);
 }
 
 /* frontend/components/Contact/index.css */
@@ -91,7 +115,7 @@
 .input_container {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin-top: 10px;
   width: 100%;
   position: relative;
   padding-left: 10px;
@@ -167,6 +191,7 @@
   top: 5px;
   right: 5px;
   cursor: pointer;
+  background-color: inherit;
 }
 
 /* frontend/components/CheckBox/index.css */

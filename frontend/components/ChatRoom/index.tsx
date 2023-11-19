@@ -51,7 +51,8 @@ const ChatRoom = (
                 });
                 setChat({
                     ...response.data.chat,
-                    messages: messages
+                    messages: messages,
+                    users: response.data.chat.users.map(user => user.id)
                 })
             } else {
 
@@ -76,8 +77,8 @@ const ChatRoom = (
         socket.emit('chat', {chatId, userId});
         socket.on('server-message', (message) => {
             setChat(prev => ({
-                ...chat,
-                messages: prev.messages.concat(message)
+                ...prev,
+                messages: [...prev.messages, message]
             }));
         });
 
@@ -120,4 +121,4 @@ const ChatRoom = (
     );
 };
 
-export default memo(ChatRoom, () => true); //props will never change for the lifetime of this component
+export default memo(ChatRoom, () => true); //props will never be changed for the lifetime of this component

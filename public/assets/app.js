@@ -1089,7 +1089,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState10(initialState2) {
+          function useState11(initialState2) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState2);
           }
@@ -1101,7 +1101,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect6(create, deps) {
+          function useEffect7(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1113,7 +1113,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback4(callback, deps) {
+          function useCallback5(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -1879,11 +1879,11 @@
           exports.memo = memo2;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback4;
+          exports.useCallback = useCallback5;
           exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect6;
+          exports.useEffect = useEffect7;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -1891,7 +1891,7 @@
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer2;
           exports.useRef = useRef4;
-          exports.useState = useState10;
+          exports.useState = useState11;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -31128,23 +31128,77 @@
   }
 
   // frontend/components/Chat/index.tsx
-  var Chat = ({ chat }) => {
+  var Chat = ({ chat, notificationCount }) => {
     const dispatch = useDispatch();
-    return /* @__PURE__ */ import_react2.default.createElement("li", { className: "chat_name", onClick: () => dispatch({ type: SET_CHATROOM, payload: chat.id }) }, chat.name);
+    return /* @__PURE__ */ import_react2.default.createElement(
+      "li",
+      {
+        className: "chat_name",
+        onClick: () => dispatch({ type: SET_CHATROOM, payload: chat.id })
+      },
+      chat.name,
+      notificationCount > 0 && /* @__PURE__ */ import_react2.default.createElement("div", { className: "notifications" }, notificationCount)
+    );
   };
   var Chats = () => {
     const chats = useAppState((state) => state.chats);
     const socket = useAppState((state) => state.socket);
+    const user = useAppState((state) => state.user);
+    const [notifications, setNotifications] = (0, import_react2.useState)([]);
+    const getNotificationCount = (0, import_react2.useCallback)((chatId, notis) => {
+      let count = 0;
+      notis.forEach((noti) => {
+        if (noti.chatId == chatId) {
+          count = noti.count;
+        }
+        ;
+      });
+      return count;
+    }, []);
     (0, import_react2.useEffect)(() => {
-      socket.emit("get-notifications");
-      socket.on("initial-notifications", (notifications) => {
-        console.log(notifications);
+      socket.emit("get-notifications", user.id);
+      socket.on("initial-notifications", (notifications2) => {
+        setNotifications(notifications2);
       });
       socket.on("notification", (chatId) => {
-        console.log(chatId);
+        setNotifications((prev2) => prev2.map((noti) => {
+          if (noti.chatId === chatId) {
+            return {
+              ...noti,
+              count: noti.count + 1
+            };
+          }
+          ;
+          return noti;
+        }));
       });
+      socket.on("clear-notification", (chatId) => {
+        console.log("clear-notification");
+        setNotifications((prev2) => prev2.map((noti) => {
+          if (noti.chatId === chatId) {
+            return {
+              ...noti,
+              count: 0
+            };
+          }
+          ;
+          return noti;
+        }));
+      });
+      return () => {
+        socket.off("initial-notifications");
+        socket.off("notification");
+        socket.off("clear-notification");
+      };
     }, []);
-    return /* @__PURE__ */ import_react2.default.createElement("ul", { className: "list" }, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(Chat, { key: chat.id, chat })));
+    return /* @__PURE__ */ import_react2.default.createElement("ul", { className: "list" }, chats.map((chat) => /* @__PURE__ */ import_react2.default.createElement(
+      Chat,
+      {
+        key: chat.id,
+        chat,
+        notificationCount: getNotificationCount(chat.id, notifications)
+      }
+    )));
   };
   var Chat_default = Chats;
 
@@ -31466,7 +31520,7 @@
         }));
       }
     };
-    return /* @__PURE__ */ React12.createElement("div", null, /* @__PURE__ */ React12.createElement("h1", null, "SignIn"), /* @__PURE__ */ React12.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React12.createElement(
+    return /* @__PURE__ */ React12.createElement("div", null, /* @__PURE__ */ React12.createElement("h1", { className: "form_title" }, "SignIn"), /* @__PURE__ */ React12.createElement(Form_default, { handleSubmit, className: "form" }, /* @__PURE__ */ React12.createElement(
       Input_default,
       {
         label: "email",
@@ -31505,7 +31559,7 @@
           }
         }
       }
-    )), /* @__PURE__ */ React12.createElement("a", { href: "/signup" }, "SignUp"), state.error && /* @__PURE__ */ React12.createElement(
+    )), /* @__PURE__ */ React12.createElement("a", { href: "/signup", className: "form_link" }, "SignUp"), state.error && /* @__PURE__ */ React12.createElement(
       Alert_default,
       {
         message: state.error,
@@ -31555,7 +31609,7 @@
         }));
       }
     };
-    return /* @__PURE__ */ React13.createElement("div", null, /* @__PURE__ */ React13.createElement("h1", null, "SignUp"), /* @__PURE__ */ React13.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ React13.createElement(
+    return /* @__PURE__ */ React13.createElement("div", null, /* @__PURE__ */ React13.createElement("h1", { className: "form_link" }, "SignUp"), /* @__PURE__ */ React13.createElement(Form_default, { handleSubmit, className: "form" }, /* @__PURE__ */ React13.createElement(
       Input_default,
       {
         label: "name",
@@ -31604,7 +31658,7 @@
           }
         }
       }
-    )), /* @__PURE__ */ React13.createElement("a", { href: "/signin" }, "SignIn"), state.error && /* @__PURE__ */ React13.createElement(
+    )), /* @__PURE__ */ React13.createElement("a", { href: "/signin", className: "form_link" }, "SignIn"), state.error && /* @__PURE__ */ React13.createElement(
       Alert_default,
       {
         message: state.error,
@@ -31743,7 +31797,8 @@
           });
           setChat({
             ...response.data.chat,
-            messages: messages2
+            messages: messages2,
+            users: response.data.chat.users.map((user) => user.id)
           });
         } else {
         }
@@ -31765,8 +31820,8 @@
       socket.emit("chat", { chatId, userId });
       socket.on("server-message", (message) => {
         setChat((prev2) => ({
-          ...chat,
-          messages: prev2.messages.concat(message)
+          ...prev2,
+          messages: [...prev2.messages, message]
         }));
       });
       return () => {
@@ -31813,6 +31868,11 @@
       socket: state.socket
     }));
     const dispatch = useDispatch();
+    (0, import_react15.useEffect)(() => {
+      if (socket) {
+        socket.emit("initialaize-notifications", userId);
+      }
+    }, [socket]);
     const closeChat = (0, import_react15.useCallback)(() => dispatch({ type: CLOSE_CHATROOM }), []);
     if (userPending)
       return /* @__PURE__ */ import_react15.default.createElement("h1", null, "pending...");

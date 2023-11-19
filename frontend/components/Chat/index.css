@@ -11,8 +11,21 @@
     cursor: pointer;
     transition: 0.2s;
     font-size: 24px;
+    position: relative;
 }
 
 .chat_name:hover {
     background-color: rgba(211, 211, 211, 0.5) !important;
+}
+
+.notifications {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(47, 168, 47);
 }
