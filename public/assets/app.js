@@ -31315,7 +31315,12 @@
       }
     };
     const handleChange = (event) => {
-      setState((prev2) => ({ ...prev2, [event.target.name]: event.target.value }));
+      setState((prev2) => ({
+        ...prev2,
+        [event.target.name]: event.target.value,
+        alertType: "",
+        message: ""
+      }));
     };
     return /* @__PURE__ */ import_react9.default.createElement("div", { className: "form_container" }, /* @__PURE__ */ import_react9.default.createElement(
       "button",
@@ -31324,7 +31329,7 @@
         onClick: () => dispatch({ type: CLOSE_PORTAL })
       },
       "close"
-    ), /* @__PURE__ */ import_react9.default.createElement("h2", null, "Add Contact"), /* @__PURE__ */ import_react9.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react9.default.createElement(
+    ), /* @__PURE__ */ import_react9.default.createElement("h2", null, "Add Contact"), /* @__PURE__ */ import_react9.default.createElement(Form_default, { handleSubmit, className: "add_contact_form" }, /* @__PURE__ */ import_react9.default.createElement(
       Input_default,
       {
         label: "Email",
@@ -31399,6 +31404,10 @@
     };
     const ChangeName = (event) => {
       setName(event.target.value);
+      setAlert({
+        type: "",
+        message: ""
+      });
     };
     const changeUsers = (id) => {
       if (userIds.includes(id)) {
@@ -31414,7 +31423,7 @@
         onClick: () => dispatch({ type: CLOSE_PORTAL })
       },
       "close"
-    ), /* @__PURE__ */ import_react9.default.createElement("h2", null, "Add Chat"), /* @__PURE__ */ import_react9.default.createElement(Form_default, { handleSubmit }, /* @__PURE__ */ import_react9.default.createElement(
+    ), /* @__PURE__ */ import_react9.default.createElement("h2", null, "Add Chat"), /* @__PURE__ */ import_react9.default.createElement(Form_default, { handleSubmit, className: "chat_form" }, /* @__PURE__ */ import_react9.default.createElement(
       Input_default,
       {
         label: "Chat",

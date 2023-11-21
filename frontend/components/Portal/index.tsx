@@ -52,7 +52,12 @@ const AddContact = () => {
         }
     };
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setState(prev => ({ ...prev, [event.target.name]: event.target.value }));
+        setState(prev => ({
+            ...prev,
+            [event.target.name]: event.target.value,
+            alertType: '',
+            message: ''
+        }));
     };
 
     return (
@@ -62,7 +67,7 @@ const AddContact = () => {
               onClick={() => dispatch({ type: CLOSE_PORTAL })}
             >close</button>
             <h2>Add Contact</h2>
-            <Form handleSubmit={handleSubmit}>
+            <Form handleSubmit={handleSubmit} className="add_contact_form">
                 <Input
                    label='Email'
                    options={{
@@ -140,6 +145,10 @@ const AddChat = () => {
 
     const ChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
+        setAlert({
+            type: '',
+            message: '',
+        });
     };
 
     const changeUsers = (id: number) => {
@@ -158,7 +167,7 @@ const AddChat = () => {
               onClick={() => dispatch({ type: CLOSE_PORTAL })}
             >close</button>
             <h2>Add Chat</h2>
-            <Form handleSubmit={handleSubmit}>
+            <Form handleSubmit={handleSubmit} className="chat_form">
                 <Input
                    label='Chat'
                    options={{
