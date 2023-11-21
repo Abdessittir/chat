@@ -105,7 +105,7 @@ function reducer(state: StateType, action: Action): StateType {
                 user: action.payload.user,
                 chats: action.payload.chats,
                 contacts: action.payload.contacts,
-                socket: action.payload.socket,
+                socket: io(),
                 chatId: action.payload.chatId
             };
         case CHAT_PORTAL:
@@ -148,7 +148,6 @@ export default function StateProvider({ children }: { children: App }) {
                     user: profile.data.user,
                     contacts: profile.data.contacts,
                     chats: profile.data.chats,
-                    socket: io(),
                     chatId: JSON.parse(localStorage.getItem('chat')as string) ?? null
                 }
             });

@@ -3,6 +3,7 @@ import { ChatType, useAppState, useDispatch } from '../../context';
 import './index.css';
 import { SET_CHATROOM } from '../../context/actionTypes';
 import { Notification } from '../../../app';
+import { resolveTypeReferenceDirective } from 'typescript';
 
 const Chat = (
     { chat, notificationCount }
@@ -40,20 +41,11 @@ const Chats = () => {
         socket.on('initial-notifications', (notifications: Notification[]) => {
             setNotifications(notifications);
         });
-        socket.on('notification', (chatId) => {
-            setNotifications(prev => prev.map(noti => {
-                if(noti.chatId === chatId) {
-                    return {
-                        ...noti,
-                        count: noti.count + 1
-                    };
-                };
-                return noti;
-            }));
+        socket.on('notification', (notis) => {
+            setNotifications(notis);
         });
 
         socket.on('clear-notification', (chatId) => {
-            console.log('clear-notification')
             setNotifications(prev => prev.map(noti => {
                 if(noti.chatId === chatId) {
                     return {

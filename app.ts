@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
     socket.on('chat', ({chatId, userId}) => {
         socket.join(chatId);
         const nots = notifications.get(userId) as Notification[];
-        notifications.set(userId, nots?.filter(noti => noti.chatId !== chatId));
+        notifications.set(userId, nots.filter(noti => noti.chatId !== chatId));
         io.to(userId).emit('clear-notification', chatId);
     });
 
@@ -68,14 +68,16 @@ io.on('connection', (socket) => {
             console.log(err);
         }
 
+
         users.forEach((id: any) => {
 
             if(id === userId) return;
 
             const nots = notifications.get(id);
-            console.log('length', nots?.length, nots);
+
             if(nots?.length as number < 1) {
                 notifications.set(id, [{chatId, count: 1}]);
+                io.to(id).emit('notification', notifications.get(id));
                 return;
             }
 
@@ -90,8 +92,16 @@ io.on('connection', (socket) => {
             });
 
             notifications.set(id, updated as Notification[]);
-            io.to(id).emit('notification', chatId);
+            io.to(id).emit('notification', notifications.get(id));
         });
+    });
+
+    socket.on('client-typing', ({chatId, user}) => {
+        io.to(chatId).emit('typing', user);
+    });
+
+    socket.on('client-typing-ended', (chatId) => {
+        io.to(chatId).emit('typing-ended');
     });
 });
 

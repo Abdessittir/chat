@@ -82,7 +82,7 @@ const ChatRoom = (
             }));
         });
 
-        return () => {socket.off()};
+        return () => {socket.off('server-message')};
     }, []);
 
     return (
@@ -114,7 +114,6 @@ const ChatRoom = (
             <SendMessage
               socket={socket}
               chatId={chatId}
-              userId={userId}
               users={chat.users}
             />
         </div>

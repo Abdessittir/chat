@@ -1101,7 +1101,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect7(create, deps) {
+          function useEffect8(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1883,7 +1883,7 @@
           exports.useContext = useContext4;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect7;
+          exports.useEffect = useEffect8;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -31073,7 +31073,7 @@
           user: action.payload.user,
           chats: action.payload.chats,
           contacts: action.payload.contacts,
-          socket: action.payload.socket,
+          socket: lookup2(),
           chatId: action.payload.chatId
         };
       case CHAT_PORTAL:
@@ -31113,7 +31113,6 @@
             user: profile.data.user,
             contacts: profile.data.contacts,
             chats: profile.data.chats,
-            socket: lookup2(),
             chatId: JSON.parse(localStorage.getItem("chat")) ?? null
           }
         });
@@ -31160,20 +31159,10 @@
       socket.on("initial-notifications", (notifications2) => {
         setNotifications(notifications2);
       });
-      socket.on("notification", (chatId) => {
-        setNotifications((prev2) => prev2.map((noti) => {
-          if (noti.chatId === chatId) {
-            return {
-              ...noti,
-              count: noti.count + 1
-            };
-          }
-          ;
-          return noti;
-        }));
+      socket.on("notification", (notis) => {
+        setNotifications(notis);
       });
       socket.on("clear-notification", (chatId) => {
-        console.log("clear-notification");
         setNotifications((prev2) => prev2.map((noti) => {
           if (noti.chatId === chatId) {
             return {
@@ -31715,17 +31704,22 @@
 
   // frontend/components/SendMessage/index.tsx
   var import_react12 = __toESM(require_react());
-  var SendMessage = ({ socket, chatId, userId, users }) => {
+  var SendMessage = ({ socket, chatId, users }) => {
     const [message, setMessage] = (0, import_react12.useState)({
       content: ""
     });
+    const [typing, setTyping] = (0, import_react12.useState)({
+      id: "",
+      name: ""
+    });
+    const user = useAppState((state) => state.user);
     const handleSubmit = (event) => {
       event.preventDefault();
       socket.emit("client-message", {
         chatId,
-        userId,
         message,
-        users
+        users,
+        userId: user.id
       });
       setMessage({
         content: ""
@@ -31737,7 +31731,29 @@
         [event.target.name]: event.target.value
       }));
     };
-    return /* @__PURE__ */ import_react12.default.createElement(Form_default, { handleSubmit, className: "send_form" }, /* @__PURE__ */ import_react12.default.createElement(
+    (0, import_react12.useEffect)(() => {
+      socket.on("typing", (user2) => {
+        setTyping(user2);
+      });
+      socket.on("typing-ended", () => {
+        setTyping({
+          id: "",
+          name: ""
+        });
+      });
+      () => {
+        socket.off("typing");
+        socket.off("typing-ended");
+      };
+    }, []);
+    (0, import_react12.useEffect)(() => {
+      if (message.content) {
+        socket.emit("client-typing", { chatId, user: { id: user.id, name: user.name } });
+      } else {
+        socket.emit("client-typing-ended", chatId);
+      }
+    }, [message.content]);
+    return /* @__PURE__ */ import_react12.default.createElement(Form_default, { handleSubmit, className: "send_form" }, /* @__PURE__ */ import_react12.default.createElement("p", { className: "typing" }, typing.id && typing.id !== user.id ? `${typing.name} is typing...` : ""), /* @__PURE__ */ import_react12.default.createElement(
       Input_default,
       {
         label: "",
@@ -31825,7 +31841,7 @@
         }));
       });
       return () => {
-        socket.off();
+        socket.off("server-message");
       };
     }, []);
     return /* @__PURE__ */ import_react14.default.createElement("div", { className: "chatroom" }, /* @__PURE__ */ import_react14.default.createElement("div", { className: "chat_info" }, /* @__PURE__ */ import_react14.default.createElement("h1", null, chat.name), /* @__PURE__ */ import_react14.default.createElement(
@@ -31852,7 +31868,6 @@
       {
         socket,
         chatId,
-        userId,
         users: chat.users
       }
     ));
@@ -31901,7 +31916,7 @@
     }
   ]);
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ import_react15.default.createElement(import_react15.default.StrictMode, null, /* @__PURE__ */ import_react15.default.createElement(RouterProvider, { router }))
+    /* @__PURE__ */ import_react15.default.createElement(RouterProvider, { router })
   );
 })();
 /*! Bundled license information:
